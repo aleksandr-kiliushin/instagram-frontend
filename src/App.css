@@ -6,14 +6,3 @@
   background-color: #fafafa;
   height: 100vh;
 }
-
-.app__header {
-  background-color: white;
-  border-bottom: 1px solid lightgray;
-  height: 54px;
-  object-fit: contain;
-}
-
-.app__headerImage {
-  padding: 12.5px;
-}

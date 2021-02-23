@@ -1,0 +1,30 @@
+.post {
+  background-color: white;
+  border: 1px solid lightgray;
+  margin-bottom: 45px;
+  max-width: 600px;
+}
+.post__avatar {
+  margin-right: 10px;
+}
+.post__bookmarkIcon {
+  float: right;
+  margin: 0 0 0 500px;
+}
+.post__caption {
+  font-weight: normal;
+  padding: 20px;
+}
+.post__footer {
+  display: flex;
+  width: 100%;
+}
+.post__image {
+  object-fit: contain;
+  width: 100%;
+}
+.post__header {
+  align-items: center;
+  display: flex;
+  padding: 20px;
+}
