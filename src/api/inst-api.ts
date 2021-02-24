@@ -10,4 +10,7 @@ export const instApi = {
 	async addComment(authorId: number, body: string, postId: number) {
 		await instance.post('comment/', {commentData: {authorId, body, postId}})
 	},
+	async deleteComment(commentId: number) {
+		await instance.delete(`comment/${commentId}`)
+	},
 }

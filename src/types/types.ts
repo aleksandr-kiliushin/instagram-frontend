@@ -1,14 +1,14 @@
 export interface User {
-  id: number,
+  id: number
   username: string
 }
 
 export interface Comment {
-  id:       number,
-  added_at: string,
-  body:     string,
-  author:   User,
-  post:     number,
+  id:       number
+  added_at: string
+  body:     string
+  author:   User
+  post:     number
 }
 
 export interface PostType {

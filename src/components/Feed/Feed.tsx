@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {LinearProgress} from '@material-ui/core'
+import {CircularProgress} from '@material-ui/core'
 import Post from './Post/Post'
 import {PostType} from './../../types/types'
 
@@ -7,10 +7,13 @@ interface PropsType {
   isInitializing: boolean
   posts: PostType[]
   addComment: (body: string, postId: number) => void
+  deleteComment: (commenId: number) => void
   initRequestAndSetPosts: () => void
 }
 
-const Feed: React.FC<PropsType> = ({isInitializing, posts, addComment, initRequestAndSetPosts}) => {
+const Feed: React.FC<PropsType> = ({
+  isInitializing, posts, addComment, deleteComment, initRequestAndSetPosts
+}) => {
 
   useEffect(() => initRequestAndSetPosts(), [initRequestAndSetPosts])
 
@@ -26,12 +29,13 @@ const Feed: React.FC<PropsType> = ({isInitializing, posts, addComment, initReque
           owner={post.owner}
           published_at={post.published_at}
           addComment={addComment}
+          deleteComment={deleteComment}
         />
       ))}
     </div>
   )
 
-  return isInitializing ? <LinearProgress /> : postsJsx
+  return isInitializing ? <CircularProgress /> : postsJsx
 }
 
 export default Feed

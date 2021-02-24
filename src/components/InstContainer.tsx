@@ -4,7 +4,7 @@ import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
 import { PostType } from '../types/types'
-import { addComment, initRequestAndSetPosts } from '../redux/inst-reducer'
+import { addComment, deleteComment, initRequestAndSetPosts } from '../redux/inst-reducer'
 
 
 type MapStatePropsType = {
@@ -13,11 +13,14 @@ type MapStatePropsType = {
 }
 type MapDispatchPropsType = {
   addComment: (body: string, postId: number) => void
+  deleteComment: (commentId: number) => void
   initRequestAndSetPosts: () => void
 }
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
-const InstContainer: React.FC<PropsType> = ({isInitializing, posts, addComment, initRequestAndSetPosts}) => {
+const InstContainer: React.FC<PropsType> = ({
+  isInitializing, posts, addComment, deleteComment, initRequestAndSetPosts
+}) => {
   return (
     <div>
       <Header />
@@ -26,6 +29,7 @@ const InstContainer: React.FC<PropsType> = ({isInitializing, posts, addComment, 
         posts={posts}
 
         addComment={addComment}
+        deleteComment={deleteComment}
         initRequestAndSetPosts={initRequestAndSetPosts}
       />
     </div>
@@ -41,6 +45,7 @@ const mapStateToProps = (state: RootState): MapStatePropsType => ({
 const mapDispatchToProps: MapDispatchPropsType = {
   // ...actions,
   addComment,
+  deleteComment,
   initRequestAndSetPosts,
 }
 

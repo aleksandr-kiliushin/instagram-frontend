@@ -13,7 +13,7 @@
 }
 .post__caption {
   font-weight: normal;
-  padding: 20px;
+  padding: 10px;
 }
 .post__footer {
   display: flex;
@@ -26,5 +26,8 @@
 .post__header {
   align-items: center;
   display: flex;
-  padding: 20px;
+  padding: 10px;
+}
+.post__comment {
+  display: flex;
 }

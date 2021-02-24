@@ -16,9 +16,12 @@ type PropsType = {
   owner: PostType['owner']
   published_at: PostType['published_at']
   addComment: (body: string, postId: number) => void
+  deleteComment: (commentId: number) => void
 }
 
-const Post: React.FC<PropsType> = ({caption, comments, id, imageUrl, owner, published_at, addComment}) => {
+const Post: React.FC<PropsType> = ({
+  caption, comments, id, imageUrl, owner, published_at, addComment, deleteComment
+}) => {
   return (
     <div className="post">
       <PostHeader owner={owner} />
@@ -28,7 +31,7 @@ const Post: React.FC<PropsType> = ({caption, comments, id, imageUrl, owner, publ
         alt={imageUrl}
       />
       <PostFooter />
-      <Comments caption={caption} comments={comments} owner={owner} />
+      <Comments caption={caption} comments={comments} owner={owner} deleteComment={deleteComment} />
       <AddComment postId={id} addComment={addComment} />
     </div>
   )
