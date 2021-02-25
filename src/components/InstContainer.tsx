@@ -1,10 +1,10 @@
-import React/*, { useEffect }*/ from 'react'
+import React from 'react'
 import Feed from './Feed/Feed'
 import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
 import { PostType } from '../types/types'
-import { addComment, deleteComment, initRequestAndSetPosts } from '../redux/inst-reducer'
+import { addComment, addPost, deleteComment, initRequestAndSetPosts } from '../redux/inst-reducer'
 
 
 type MapStatePropsType = {
@@ -13,17 +13,18 @@ type MapStatePropsType = {
 }
 type MapDispatchPropsType = {
   addComment: (body: string, postId: number) => void
+  addPost: (caption: string, image: File) => void
   deleteComment: (commentId: number) => void
   initRequestAndSetPosts: () => void
 }
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
 const InstContainer: React.FC<PropsType> = ({
-  isInitializing, posts, addComment, deleteComment, initRequestAndSetPosts
+  isInitializing, posts, addComment, addPost, deleteComment, initRequestAndSetPosts
 }) => {
   return (
     <div>
-      <Header />
+      <Header addPost={addPost} />
       <Feed
         isInitializing={isInitializing}
         posts={posts}
@@ -45,6 +46,7 @@ const mapStateToProps = (state: RootState): MapStatePropsType => ({
 const mapDispatchToProps: MapDispatchPropsType = {
   // ...actions,
   addComment,
+  addPost,
   deleteComment,
   initRequestAndSetPosts,
 }

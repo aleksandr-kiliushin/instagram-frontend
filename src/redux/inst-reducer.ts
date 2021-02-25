@@ -40,6 +40,10 @@ export const addComment = (body: string, postId: number): ThunkType => async (di
 export const deleteComment = (commentId: number): ThunkType => async () => {
   await instApi.deleteComment(commentId)
 }
+export const addPost = (caption: string, image: File): ThunkType => async (dispatch, getState) => {
+  const ownerId = getState().inst.authId
+  await instApi.addPost(caption, image, ownerId)
+}
 export const initRequestAndSetPosts = (): ThunkType => async (dispatch) => {
   dispatch(actions.setIsInitializing(true))
   const data = await instApi.requestPosts()
