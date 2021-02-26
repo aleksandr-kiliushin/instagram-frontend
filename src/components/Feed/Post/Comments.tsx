@@ -1,7 +1,7 @@
 import React from 'react'
 import { Comment, User } from '../../../types/types'
 import './Post.css'
-import SimpleModal from '../../Common/Modal'
+import CommentModal from '../../Common/CommentModal'
 
 
 interface PropsType {
@@ -23,7 +23,7 @@ const Comments: React.FC<PropsType> = ({caption, comments, owner, deleteComment}
               <strong>{comment.author.username}</strong> {comment.body}
             </h4>
             <div className="post__comment_options">
-              <SimpleModal commentId={comment.id} deleteComment={deleteComment}/>
+              <CommentModal commentId={comment.id} deleteComment={deleteComment}/>
             </div>
           </div>
         ))

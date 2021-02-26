@@ -8,10 +8,20 @@ export const instApi = {
 		return response.data
 	},
 	async addPost(caption: string, image: File, ownerId: number) {
-		await instance.post('posts/', {
-			caption, image,
-			imageUrl: 'http://1.bp.blogspot.com/-1ztptPpWjac/VN6b6LpeFNI/AAAAAAACwFk/X33qntF2wh0/s1600/delete-300x300.jpg',
-			ownerId})
+    const formData = new FormData()
+    formData.append('caption', caption)
+    // @ts-ignore
+    formData.append('image', image)
+    // @ts-ignore
+    formData.append('ownerId', 2)
+    
+    await instance.post('http://localhost:8000/api/posts/',
+      formData,
+      {headers: {'content-type': 'multipart/form-data'}}
+    )
+	},
+	async deletePost(postId: number) {
+		await instance.delete(`posts/${postId}`)
 	},
 	async addComment(authorId: number, body: string, postId: number) {
 		await instance.post('comment/', {authorId, body, postId})

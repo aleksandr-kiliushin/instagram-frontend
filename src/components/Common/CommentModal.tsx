@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
       top: '50%',
       left: '50%',
       transform: `translate(-50%, -50%)`,
+      display: 'flex',
+      flexDirection: 'column',
     },
   }),
 )
@@ -26,7 +28,7 @@ interface PropsType {
   deleteComment: (commentId: number) => void
 }
 
-const SimpleModal: React.FC<PropsType> = ({commentId, deleteComment}) => {
+const CommentModal: React.FC<PropsType> = ({commentId, deleteComment}) => {
   const s = useStyles()  
   const [open, setOpen] = React.useState(false);
 
@@ -43,7 +45,7 @@ const SimpleModal: React.FC<PropsType> = ({commentId, deleteComment}) => {
 
   const body = (
     <div className={s.paper}>
-      <button>Report</button>
+      <button disabled>Report</button>
       <button onClick={handleDeleteComment}>Delete</button>
       <button onClick={handleClose}>Cancel</button>
     </div>
@@ -59,4 +61,4 @@ const SimpleModal: React.FC<PropsType> = ({commentId, deleteComment}) => {
   )
 }
 
-export default SimpleModal
+export default CommentModal

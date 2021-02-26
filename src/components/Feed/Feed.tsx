@@ -8,11 +8,12 @@ interface PropsType {
   posts: PostType[]
   addComment: (body: string, postId: number) => void
   deleteComment: (commenId: number) => void
+  deletePost: (postId: number) => void
   initRequestAndSetPosts: () => void
 }
 
 const Feed: React.FC<PropsType> = ({
-  isInitializing, posts, addComment, deleteComment, initRequestAndSetPosts
+  isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts
 }) => {
 
   useEffect(() => initRequestAndSetPosts(), [initRequestAndSetPosts])
@@ -24,12 +25,13 @@ const Feed: React.FC<PropsType> = ({
           caption={post.caption}
           comments={post.comments}
           id={post.id}
-          imageUrl={post.imageUrl}
+          image={post.image}
           key={post.id}
           owner={post.owner}
           published_at={post.published_at}
           addComment={addComment}
           deleteComment={deleteComment}
+          deletePost={deletePost}
         />
       ))}
     </div>
