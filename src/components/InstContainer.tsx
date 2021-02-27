@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
 import { PostType } from '../types/types'
 import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts } from '../redux/inst-reducer'
-import { tempAuthName, testHello } from '../redux/auth-reducer'
+import { tempAuthName, testHello, register } from '../redux/auth-reducer'
 
 
 type MapStatePropsType = {
@@ -21,15 +21,17 @@ type MapDispatchPropsType = {
   initRequestAndSetPosts: () => void
   tempAuthName: (authUsername: string, password: string) => void
   testHello: () => void
+  register: (username: string, password: string) => void
 }
 type Props = MapStatePropsType & MapDispatchPropsType
 
 const InstContainer: React.FC<Props> = ({
-  username, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName, testHello
+  username, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName,
+  testHello, register
 }) => {
   return (
     <div>
-      <Header addPost={addPost} username={username} tempAuthName={tempAuthName} testHello={testHello} />
+      <Header addPost={addPost} username={username} tempAuthName={tempAuthName} testHello={testHello} register={register} />
       <Feed
         isInitializing={isInitializing}
         posts={posts}
@@ -59,6 +61,7 @@ const mapDispatchToProps: MapDispatchPropsType = {
   initRequestAndSetPosts,
   tempAuthName,
   testHello,
+  register,
 }
 
 

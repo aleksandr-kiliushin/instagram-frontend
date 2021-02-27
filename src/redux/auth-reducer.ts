@@ -42,6 +42,9 @@ export const tempAuthName = (authUsername: string, password: string): ThunkType 
     dispatch(actions.setAuthUserData(authUserData.id, authUserData.username))
   }
 }
+export const register = (username: string, password: string): ThunkType => async () => {
+  await authApi.register(username, password)
+}
 export const testHello = (): ThunkType => async () => {
   await authApi.testHello()
 }
