@@ -4,7 +4,6 @@ import {instApi} from '../api/inst-api'
 
 
 const initialState: InstState = {
-  authId: 2,
   isInitializing: false,
   posts: [],
 }
@@ -34,14 +33,14 @@ export const actions = {
 
 
 export const addComment = (body: string, postId: number): ThunkType => async (dispatch, getState) => {
-  const authorId = getState().inst.authId
+  const authorId = getState().auth.authUser.id
   await instApi.addComment(authorId, body, postId)
 }
 export const deleteComment = (commentId: number): ThunkType => async () => {
   await instApi.deleteComment(commentId)
 }
 export const addPost = (caption: string, images: FileList): ThunkType => async (dispatch, getState) => {
-  const ownerId = getState().inst.authId
+  const ownerId = getState().auth.authUser.id
   await instApi.addPost(caption, images, ownerId)
 }
 export const deletePost = (postId: number): ThunkType => async () => {

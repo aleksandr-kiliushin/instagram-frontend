@@ -8,6 +8,7 @@ import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts 
 
 
 type MapStatePropsType = {
+  username: string
   isInitializing: boolean
   posts: PostType[]
 }
@@ -21,11 +22,11 @@ type MapDispatchPropsType = {
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
 const InstContainer: React.FC<PropsType> = ({
-  isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts
+  username, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts
 }) => {
   return (
     <div>
-      <Header addPost={addPost} />
+      <Header addPost={addPost} username={username} />
       <Feed
         isInitializing={isInitializing}
         posts={posts}
@@ -40,6 +41,7 @@ const InstContainer: React.FC<PropsType> = ({
 }
 
 const mapStateToProps = (state: RootState): MapStatePropsType => ({
+  username: state.auth.authUser.username,
   isInitializing: state.inst.isInitializing,
   posts: state.inst.posts,
 })

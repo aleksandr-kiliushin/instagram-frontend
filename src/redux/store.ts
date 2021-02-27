@@ -2,9 +2,11 @@ import {createStore, combineReducers, applyMiddleware, compose, Action} from 're
 import instReducer from './inst-reducer'
 import thunkMw from 'redux-thunk'
 import { ThunkAction } from 'redux-thunk'
+import authReducer from './auth-reducer'
 
 const rootReducer = combineReducers({
   inst: instReducer,
+  auth: authReducer
 })
 
 // @ts-ignore

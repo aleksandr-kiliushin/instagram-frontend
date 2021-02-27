@@ -21,7 +21,15 @@ export interface PostType {
 }
 
 export interface InstState {
-  authId        : number
   isInitializing: boolean
   posts         : PostType[]
+}
+
+
+
+
+// auth
+
+export interface AuthState {
+  authUser: User
 }
