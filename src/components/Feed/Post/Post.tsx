@@ -5,6 +5,7 @@ import AddComment from './AddComment'
 import PostFooter from './PostFooter'
 import PostHeader from './PostHeader'
 import './Post.css'
+import PostCarousel from './PostCarousel'
 
 
 type PropsType = {
@@ -25,7 +26,7 @@ const Post: React.FC<PropsType> = ({
   return (
     <div className="post">
       <PostHeader owner={owner} postId={id} deletePost={deletePost} />
-      {images.map(image => <img alt={image} className="post__image" key={image} src={image} />)}
+      <PostCarousel images={images} />
       <PostFooter />
       <Comments caption={caption} comments={comments} owner={owner} deleteComment={deleteComment} />
       <AddComment postId={id} addComment={addComment} />
