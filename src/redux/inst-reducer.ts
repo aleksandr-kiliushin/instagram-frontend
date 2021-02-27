@@ -40,9 +40,9 @@ export const addComment = (body: string, postId: number): ThunkType => async (di
 export const deleteComment = (commentId: number): ThunkType => async () => {
   await instApi.deleteComment(commentId)
 }
-export const addPost = (caption: string, image: File): ThunkType => async (dispatch, getState) => {
+export const addPost = (caption: string, images: FileList): ThunkType => async (dispatch, getState) => {
   const ownerId = getState().inst.authId
-  await instApi.addPost(caption, image, ownerId)
+  await instApi.addPost(caption, images, ownerId)
 }
 export const deletePost = (postId: number): ThunkType => async () => {
   await instApi.deletePost(postId)

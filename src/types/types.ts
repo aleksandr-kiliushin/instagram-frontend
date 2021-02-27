@@ -15,7 +15,7 @@ export interface PostType {
   caption: string
   comments: Comment[]
   id: number
-  image: string
+  images: string[]
   owner: User
   published_at: string
 }

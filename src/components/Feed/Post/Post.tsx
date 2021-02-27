@@ -11,7 +11,7 @@ type PropsType = {
   caption: PostType['caption']
   comments: PostType['comments']
   id: PostType['id']
-  image: PostType['image']
+  images: PostType['images']
   owner: PostType['owner']
   published_at: PostType['published_at']
   addComment: (body: string, postId: number) => void
@@ -20,16 +20,19 @@ type PropsType = {
 }
 
 const Post: React.FC<PropsType> = ({
-  caption, comments, id, image, owner, published_at, addComment, deleteComment, deletePost
+  caption, comments, id, images, owner, published_at, addComment, deleteComment, deletePost
 }) => {
   return (
     <div className="post">
       <PostHeader owner={owner} postId={id} deletePost={deletePost} />
-      <img
+      {
+        images.map((image) => <img className="post__image" src={image} alt={image}/>)
+      }
+      {/* <img
         className="post__image"
-        src={image}
-        alt={image}
-      />
+        src={images}
+        alt={images}
+      /> */}
       <PostFooter />
       <Comments caption={caption} comments={comments} owner={owner} deleteComment={deleteComment} />
       <AddComment postId={id} addComment={addComment} />

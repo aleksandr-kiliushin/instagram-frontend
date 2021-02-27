@@ -14,24 +14,24 @@ const useStyles = makeStyles({
 })
 
 interface PropsType {
-  addPost: (caption: string, image: File) => void
+  addPost: (caption: string, images: FileList) => void
 }
 
 const Header: React.FC<PropsType> = ({addPost}) => {
   const s = useStyles()
 
   const [caption, setCaption] = useState('')
-  const [image, setImage] = useState<File>()
+  const [images, setImages] = useState<FileList>()
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const image = e.target.files
-    if (!image) return
-    setImage(image[0])
+    const inputedImages = e.target.files
+    if (!inputedImages) return
+    setImages(inputedImages)
   }
 
   const onCommit = () => {
-    if (!image) return
-    addPost(caption, image)
+    if (!images) return
+    addPost(caption, images)
   }
 
   return (
@@ -44,7 +44,7 @@ const Header: React.FC<PropsType> = ({addPost}) => {
         />
         <div>
           <input type="text" name="caption" value={caption} onChange={(e) => setCaption(e.target.value)} />
-          <input type="file" name="files" onChange={onImageChange} />
+          <input multiple name="images" onChange={onImageChange} type="file" />
           <button onClick={onCommit}>Send</button>
         </div>
       </div>

@@ -7,18 +7,26 @@ export const instApi = {
 		const response = await instance.get<PostType[]>('posts/')
 		return response.data
 	},
-	async addPost(caption: string, image: File, ownerId: number) {
-    const formData = new FormData()
-    formData.append('caption', caption)
-    // @ts-ignore
-    formData.append('image', image)
-    // @ts-ignore
-    formData.append('ownerId', 2)
+	async addPost(caption: string, images: FileList, ownerId: number) {
+  //   const formData = new FormData()
+  //   formData.append('caption', caption)
+  //   // @ts-ignore
+	// 	// images.forEach(image => {
+	// 	// 	formData.append('images', image)
+	// 	// })
+  //   formData.append('images', images)
+  //   // @ts-ignore
+  //   formData.append('ownerId', ownerId)
+
+	// 	const x = formData
     
-    await instance.post('http://localhost:8000/api/posts/',
-      formData,
-      {headers: {'content-type': 'multipart/form-data'}}
-    )
+  //   await instance.post('http://localhost:8000/api/posts/',
+  //     formData,
+  //     {headers: {'content-type': 'multipart/form-data'}}
+  //   )
+	// },
+	// async addPost(caption: string, images: FileList, ownerId: number) {
+	// 	await instance.post('comment/', {authorId, body, postId})
 	},
 	async deletePost(postId: number) {
 		await instance.delete(`posts/${postId}`)

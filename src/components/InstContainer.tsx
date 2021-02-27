@@ -13,7 +13,7 @@ type MapStatePropsType = {
 }
 type MapDispatchPropsType = {
   addComment: (body: string, postId: number) => void
-  addPost: (caption: string, image: File) => void
+  addPost: (caption: string, images: FileList) => void
   deleteComment: (commentId: number) => void
   deletePost: (postId: number) => void
   initRequestAndSetPosts: () => void
