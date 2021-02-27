@@ -17,9 +17,11 @@ const useStyles = makeStyles({
 interface Props {
   username: string
   addPost: (caption: string, images: FileList) => void
+  tempAuthName: (authUsername: string, password: string) => void
+  testHello: () => void
 }
 
-const Header: React.FC<Props> = ({username, addPost}) => {
+const Header: React.FC<Props> = ({username, addPost, tempAuthName, testHello}) => {
   const s = useStyles()
 
   const [caption, setCaption] = useState('')
@@ -36,6 +38,18 @@ const Header: React.FC<Props> = ({username, addPost}) => {
     addPost(caption, images)
   }
 
+
+  // new
+  const [authUsername, setAuthUsername] = useState('oaiyui')
+  const [password, setPassword] = useState('oaiyuipassword')
+  const onLogin = () => {
+    tempAuthName(authUsername, password)
+  }
+
+  //end new
+
+
+
   return (
     <div className={s.header}>
       <img
@@ -49,6 +63,16 @@ const Header: React.FC<Props> = ({username, addPost}) => {
         <button onClick={onCommit}>Send</button>
       </div>
       <div><p>{username}</p></div>
+
+      {/* new */}
+      <div>
+        <input value={authUsername} onChange={(e) => setAuthUsername(e.target.value)} />
+        <input value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button onClick={onLogin}>login</button>
+        <button onClick={() => localStorage.setItem('token', '')}>Logout</button>
+        <button onClick={() => testHello()}>Check auth ability</button>
+      </div>
+      {/* end new */}
     </div>
   )
 }

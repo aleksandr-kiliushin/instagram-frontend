@@ -52,7 +52,7 @@ const PostModal: React.FC<PropsType> = ({postId, deletePost}) => {
       <button disabled>Share to..</button>
       <button disabled>Copy link</button>
       <button disabled>Embed</button>
-      <button>Cancel</button>
+      <button onClick={handleDeletePost}>Cancel</button>
     </div>
   )
 

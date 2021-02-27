@@ -1,12 +1,12 @@
 import { AuthState } from './../types/types';
-import { authApi } from './../api/authApi'
+import { authApi } from '../api/auth-api'
 import { BaseThunkType, InferActions } from './store'
 
 
 const initialState: AuthState = {
   authUser: {
-    id: 45,
-    username: 'fwfwfwfeUESRFF',
+    id: 0,
+    username: '',
   },
 }
 
@@ -14,8 +14,14 @@ const authReducer = (state: AuthState = initialState, action: Actions): AuthStat
 
   switch (action.type) {
 
-    case 'FAKE': {
-      return state
+    case 'SET_AUTH_USER_DATA': {
+      return {
+        ...state,
+        authUser: {
+          id: action.id,
+          username: action.username,
+        }
+      }
     }
 
     default:
@@ -24,11 +30,20 @@ const authReducer = (state: AuthState = initialState, action: Actions): AuthStat
 }
 
 export const actions = {
-  fake: (fake: boolean) => ({type: 'FAKE', fake} as const),
+  setAuthUserData: (id: number, username: string) => ({type: 'SET_AUTH_USER_DATA', id, username} as const),
 }
 
-export const fake = (fake: number): ThunkType => async () => {
-  await authApi.fake(fake)
+
+
+export const tempAuthName = (authUsername: string, password: string): ThunkType => async (dispatch) => {
+  const status = await authApi.tempAuthName(authUsername, password)
+  if (status === 200) {
+    const authUserData = await authApi.getUserData(authUsername)
+    dispatch(actions.setAuthUserData(authUserData.id, authUserData.username))
+  }
+}
+export const testHello = (): ThunkType => async () => {
+  await authApi.testHello()
 }
 
 export default authReducer
