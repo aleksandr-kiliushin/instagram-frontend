@@ -2,10 +2,9 @@ import React from 'react'
 import { PostType } from '../../../types/types'
 import Comments from './Comments'
 import AddComment from './AddComment'
-import PostFooter from './PostFooter'
 import PostHeader from './PostHeader'
 import './Post.css'
-import PostCarousel from './PostCarousel'
+import PostContent from './PostContent'
 
 
 type PropsType = {
@@ -29,13 +28,12 @@ const Post: React.FC<PropsType> = ({
   follow
 }) => {
   return (
-    <div className="post">
+    <article className="post postNarrow640 postNarrow735">
       <PostHeader owner={owner} postId={id} deletePost={deletePost} follow={follow} />
-      <PostCarousel images={images} />
-      <PostFooter total_likes={total_likes} like={like} postId={id} is_liked={is_liked} />
+      <PostContent images={images} total_likes={total_likes} like={like} id={id} is_liked={is_liked} />
       <Comments caption={caption} comments={comments} owner={owner} deleteComment={deleteComment} />
       <AddComment postId={id} addComment={addComment} />
-    </div>
+    </article>
   )
 }
 

@@ -1,4 +1,4 @@
-import { AuthState, User } from './../types/types';
+import { User } from './../types/types';
 import { authApi } from '../api/auth-api'
 import { BaseThunkType, InferActions } from './store'
 
@@ -7,15 +7,12 @@ const initialState: AuthState = {
   authUser: {
     id: 0,
     is_followed: false,
-    profile: {
-      avatar: '',
-      bio: '',
-    },
+    profile: {avatar: '', bio: ''},
     username: '',
   },
 }
 
-const authReducer = (state: AuthState = initialState, action: Actions): AuthState => {
+export default function authReducer(state: AuthState = initialState, action: Actions): AuthState {
 
   switch (action.type) {
 
@@ -58,9 +55,6 @@ export const updateUserData = (avatar: File, bio: string): ThunkType => async (d
   const username = getState().auth.authUser.username
   await authApi.updateUserData(avatar, bio, username)
 }
-export const testHello = (): ThunkType => async () => {
-  await authApi.testHello()
-}
 export const like = (postId: number): ThunkType => async (dispatch, getState) => {
   const userId = getState().auth.authUser.id
   await authApi.like(postId, userId)
@@ -70,12 +64,11 @@ export const follow = (followedUserId: number): ThunkType => async (dispatch, ge
   await authApi.follow(followedUserId, userId)
 }
 
-export default authReducer
-
-
-
-
 
 // types
 type Actions = InferActions<typeof actions>
 type ThunkType = BaseThunkType<Actions>
+
+interface AuthState {
+  authUser: User
+}

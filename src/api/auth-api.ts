@@ -25,10 +25,6 @@ export const authApi = {
 	async register(username: string, password: string) {
 		await instance.post('register/', {username, password})
 	},
-	async testHello() {
-		const response = await instance.get('hello/')
-		console.log(response)
-	},
 	async like(postId: number, userId: number) {
 		await instance.post(`posts/${postId}/like/`, {userId})
 	},

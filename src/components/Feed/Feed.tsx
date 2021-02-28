@@ -26,7 +26,7 @@ const Feed: React.FC<PropsType> = ({
   }, [initRequestAndSetPosts, authUser.id])
 
   const postsJsx = (
-    <div>
+    <div className="feed">
       {posts.map((post) => (
         <Post
           caption={post.caption}

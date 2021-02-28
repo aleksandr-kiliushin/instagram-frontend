@@ -4,8 +4,8 @@ import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
 import { PostType, User } from '../types/types'
-import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts } from '../redux/inst-reducer'
-import { tempAuthName, testHello, register, updateUserData, like, follow } from '../redux/auth-reducer'
+import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts } from '../redux/feed-reducer'
+import { tempAuthName, register, updateUserData, like, follow } from '../redux/auth-reducer'
 
 
 type MapStatePropsType = {
@@ -20,7 +20,6 @@ type MapDispatchPropsType = {
   deletePost: (postId: number) => void
   initRequestAndSetPosts: () => void
   tempAuthName: (authUsername: string, password: string) => void
-  testHello: () => void
   register: (username: string, password: string) => void
   updateUserData: (avatar: File, bio: string) => void
   like: (postId: number) => void
@@ -30,7 +29,7 @@ type Props = MapStatePropsType & MapDispatchPropsType
 
 const InstContainer: React.FC<Props> = ({
   authUser, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName,
-  testHello, register, updateUserData, like, follow
+  register, updateUserData, like, follow
 }) => {
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const InstContainer: React.FC<Props> = ({
 
   return (
     <div>
-      <Header addPost={addPost} authUser={authUser} tempAuthName={tempAuthName} testHello={testHello} register={register} 
+      <Header addPost={addPost} authUser={authUser} tempAuthName={tempAuthName} register={register} 
       updateUserData={updateUserData} />
       <Feed
         isInitializing={isInitializing}
@@ -62,8 +61,8 @@ const InstContainer: React.FC<Props> = ({
 
 const mapStateToProps = (state: RootState): MapStatePropsType => ({
   authUser: state.auth.authUser,
-  isInitializing: state.inst.isInitializing,
-  posts: state.inst.posts,
+  isInitializing: state.feed.isInitializing,
+  posts: state.feed.posts,
 })
 
 
@@ -75,7 +74,6 @@ const mapDispatchToProps: MapDispatchPropsType = {
   deletePost,
   initRequestAndSetPosts,
   tempAuthName,
-  testHello,
   register,
   updateUserData,
   like,

@@ -1,0 +1,39 @@
+.headerOuter {
+  background-color: white;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  height: 54px;
+  padding: 0 20px;
+}
+
+.header {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header__buttonsPane {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  height: 22px;
+  margin: 16px 0px 16px auto;
+  width: 190px;
+}
+
+.header__buttonsPane_button {
+  height: 22px;
+  width: 22px;
+}
+
+.header__logo {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  padding: 12.5px 0;
+}
+
+
+.searchContainer {
+  pointer-events:none;
+  margin: 7px auto;
+}

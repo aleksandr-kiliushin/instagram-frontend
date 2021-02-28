@@ -33,12 +33,3 @@ export interface InstState {
   isInitializing: boolean
   posts         : PostType[]
 }
-
-
-
-
-// auth
-
-export interface AuthState {
-  authUser: User
-}

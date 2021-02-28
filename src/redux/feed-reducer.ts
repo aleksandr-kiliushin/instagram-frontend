@@ -1,5 +1,5 @@
 import { BaseThunkType, InferActions } from './store';
-import {InstState, PostType} from './../types/types'
+import {InstState, PostType} from '../types/types'
 import {instApi} from '../api/inst-api'
 
 
@@ -8,7 +8,7 @@ const initialState: InstState = {
   posts: [],
 }
 
-const instReducer = (state: InstState = initialState, action: Actions): InstState => {
+export default function feedReducer(state: InstState = initialState, action: Actions): InstState {
 
   switch (action.type) {
 
@@ -53,9 +53,6 @@ export const initRequestAndSetPosts = (): ThunkType => async (dispatch, getState
   dispatch(actions.setIsInitializing(false))
   dispatch(actions.setPosts(data))
 }
-
-export default instReducer
-
 
 
 // types
