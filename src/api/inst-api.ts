@@ -1,5 +1,5 @@
-import { PostType } from '../types/types';
-import { instance } from './api';
+import { PostType } from '../types/types'
+import { instance } from './api'
 
 
 export const instApi = {

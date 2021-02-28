@@ -1,5 +1,11 @@
+export interface UserProfile {
+  avatar: string
+  bio: string
+}
+
 export interface User {
   id: number
+  profile: UserProfile
   username: string
 }
 
@@ -18,6 +24,7 @@ export interface PostType {
   images: string[]
   owner: User
   published_at: string
+  total_likes: number
 }
 
 export interface InstState {

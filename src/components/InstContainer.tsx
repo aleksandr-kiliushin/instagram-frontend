@@ -3,13 +3,13 @@ import Feed from './Feed/Feed'
 import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
-import { PostType } from '../types/types'
+import { PostType, User } from '../types/types'
 import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts } from '../redux/inst-reducer'
-import { tempAuthName, testHello, register } from '../redux/auth-reducer'
+import { tempAuthName, testHello, register, updateUserData, like } from '../redux/auth-reducer'
 
 
 type MapStatePropsType = {
-  username: string
+  authUser: User
   isInitializing: boolean
   posts: PostType[]
 }
@@ -22,16 +22,19 @@ type MapDispatchPropsType = {
   tempAuthName: (authUsername: string, password: string) => void
   testHello: () => void
   register: (username: string, password: string) => void
+  updateUserData: (avatar: File, bio: string) => void
+  like: (postId: number) => void
 }
 type Props = MapStatePropsType & MapDispatchPropsType
 
 const InstContainer: React.FC<Props> = ({
-  username, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName,
-  testHello, register
+  authUser, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName,
+  testHello, register, updateUserData, like
 }) => {
   return (
     <div>
-      <Header addPost={addPost} username={username} tempAuthName={tempAuthName} testHello={testHello} register={register} />
+      <Header addPost={addPost} authUser={authUser} tempAuthName={tempAuthName} testHello={testHello} register={register} 
+      updateUserData={updateUserData} />
       <Feed
         isInitializing={isInitializing}
         posts={posts}
@@ -40,13 +43,14 @@ const InstContainer: React.FC<Props> = ({
         deleteComment={deleteComment}
         deletePost={deletePost}
         initRequestAndSetPosts={initRequestAndSetPosts}
+        like={like}
       />
     </div>
   )
 }
 
 const mapStateToProps = (state: RootState): MapStatePropsType => ({
-  username: state.auth.authUser.username,
+  authUser: state.auth.authUser,
   isInitializing: state.inst.isInitializing,
   posts: state.inst.posts,
 })
@@ -62,6 +66,8 @@ const mapDispatchToProps: MapDispatchPropsType = {
   tempAuthName,
   testHello,
   register,
+  updateUserData,
+  like,
 }
 
 
