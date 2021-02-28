@@ -12,20 +12,23 @@ import './Post.css'
 interface Props {
   total_likes: PostType['total_likes']
   postId: PostType['id']
+  is_liked: PostType['is_liked']
   like: (postId: number) => void  
 }
 
-const PostFooter: React.FC<Props> = ({total_likes, like, postId}) => {
-  const [isLike, setIsLike] = useState(false)
+const PostFooter: React.FC<Props> = ({total_likes, like, postId, is_liked}) => {
+  const [isLiked, setIsLiked] = useState(is_liked)
 
   const onLike = () => {
-    // setIsLike(prevIsLike => !prevIsLike)
+    if (false) {
+      setIsLiked(prevIsLiked => !prevIsLiked)
+    }
     like(postId)
   }
 
   return (
     <div className="post__footer">
-      {isLike ? <FavoriteIcon onClick={onLike} color="secondary" /> : <FavoriteBorderIcon onClick={onLike} />}
+      {isLiked ? <FavoriteIcon onClick={onLike} color="secondary" /> : <FavoriteBorderIcon onClick={onLike} />}
       <ModeCommentOutlinedIcon />
       <SendOutlinedIcon />
       <strong>likes</strong>{total_likes}

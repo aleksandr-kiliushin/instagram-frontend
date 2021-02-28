@@ -31,6 +31,11 @@ const InstContainer: React.FC<Props> = ({
   authUser, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName,
   testHello, register, updateUserData, like
 }) => {
+
+  if (authUser.id === 0) {
+    tempAuthName('user7', 'user7password')
+  }
+
   return (
     <div>
       <Header addPost={addPost} authUser={authUser} tempAuthName={tempAuthName} testHello={testHello} register={register} 
@@ -38,6 +43,7 @@ const InstContainer: React.FC<Props> = ({
       <Feed
         isInitializing={isInitializing}
         posts={posts}
+        authUser={authUser}
 
         addComment={addComment}
         deleteComment={deleteComment}

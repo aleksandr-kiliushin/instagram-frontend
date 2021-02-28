@@ -42,7 +42,6 @@ export const actions = {
 }
 
 
-
 export const tempAuthName = (authUsername: string, password: string): ThunkType => async (dispatch) => {
   const status = await authApi.tempAuthName(authUsername, password)
   if (status === 200) {

@@ -46,9 +46,10 @@ export const addPost = (caption: string, images: FileList): ThunkType => async (
 export const deletePost = (postId: number): ThunkType => async () => {
   await instApi.deletePost(postId)
 }
-export const initRequestAndSetPosts = (): ThunkType => async (dispatch) => {
+export const initRequestAndSetPosts = (): ThunkType => async (dispatch, getState) => {
+  const authUserId = getState().auth.authUser.id
   dispatch(actions.setIsInitializing(true))
-  const data = await instApi.requestPosts()
+  const data = await instApi.requestPosts(authUserId)
   dispatch(actions.setIsInitializing(false))
   dispatch(actions.setPosts(data))
 }

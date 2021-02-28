@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import {CircularProgress} from '@material-ui/core'
 import Post from './Post/Post'
-import {PostType} from './../../types/types'
+import {PostType, User} from './../../types/types'
 
 interface PropsType {
   isInitializing: boolean
   posts: PostType[]
+  authUser: User
   addComment: (body: string, postId: number) => void
   deleteComment: (commenId: number) => void
   deletePost: (postId: number) => void
@@ -14,10 +15,14 @@ interface PropsType {
 }
 
 const Feed: React.FC<PropsType> = ({
-  isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts, like
+  isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts, like, authUser
 }) => {
 
-  useEffect(() => initRequestAndSetPosts(), [initRequestAndSetPosts])
+  useEffect(() => {
+    if (authUser.id !== 0) {
+      initRequestAndSetPosts()
+    }
+  }, [initRequestAndSetPosts, authUser.id])
 
   const postsJsx = (
     <div>
@@ -26,6 +31,7 @@ const Feed: React.FC<PropsType> = ({
           caption={post.caption}
           comments={post.comments}
           id={post.id}
+          is_liked={post.is_liked}
           images={post.images}
           key={post.id}
           owner={post.owner}
