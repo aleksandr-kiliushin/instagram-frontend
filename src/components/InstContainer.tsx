@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Feed from './Feed/Feed'
 import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
 import { PostType, User } from '../types/types'
 import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts } from '../redux/inst-reducer'
-import { tempAuthName, testHello, register, updateUserData, like } from '../redux/auth-reducer'
+import { tempAuthName, testHello, register, updateUserData, like, follow } from '../redux/auth-reducer'
 
 
 type MapStatePropsType = {
@@ -24,17 +24,21 @@ type MapDispatchPropsType = {
   register: (username: string, password: string) => void
   updateUserData: (avatar: File, bio: string) => void
   like: (postId: number) => void
+  follow: (followed_user_id: number) => void
 }
 type Props = MapStatePropsType & MapDispatchPropsType
 
 const InstContainer: React.FC<Props> = ({
   authUser, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, tempAuthName,
-  testHello, register, updateUserData, like
+  testHello, register, updateUserData, like, follow
 }) => {
 
-  if (authUser.id === 0) {
-    tempAuthName('user7', 'user7password')
-  }
+  useEffect(() => {
+    if (authUser.id === 0) {
+      tempAuthName('user7', 'user7password')
+    }
+  }, [authUser.id, tempAuthName])
+
 
   return (
     <div>
@@ -50,6 +54,7 @@ const InstContainer: React.FC<Props> = ({
         deletePost={deletePost}
         initRequestAndSetPosts={initRequestAndSetPosts}
         like={like}
+        follow={follow}
       />
     </div>
   )
@@ -74,6 +79,7 @@ const mapDispatchToProps: MapDispatchPropsType = {
   register,
   updateUserData,
   like,
+  follow,
 }
 
 

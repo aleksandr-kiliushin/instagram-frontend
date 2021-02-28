@@ -20,15 +20,17 @@ type PropsType = {
   addComment: (body: string, postId: number) => void
   deleteComment: (commentId: number) => void
   deletePost: (postId: number) => void
-  like: (postId: number) => void  
+  like: (postId: number) => void
+  follow: (followed_user_id: number) => void
 }
 
 const Post: React.FC<PropsType> = ({
-  caption, comments, id, images, owner, published_at, total_likes, addComment, deleteComment, deletePost, like, is_liked
+  caption, comments, id, images, owner, published_at, total_likes, addComment, deleteComment, deletePost, like, is_liked,
+  follow
 }) => {
   return (
     <div className="post">
-      <PostHeader owner={owner} postId={id} deletePost={deletePost} />
+      <PostHeader owner={owner} postId={id} deletePost={deletePost} follow={follow} />
       <PostCarousel images={images} />
       <PostFooter total_likes={total_likes} like={like} postId={id} is_liked={is_liked} />
       <Comments caption={caption} comments={comments} owner={owner} deleteComment={deleteComment} />

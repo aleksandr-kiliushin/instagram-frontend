@@ -4,7 +4,7 @@ import { instance } from './api'
 
 export const instApi = {
 	async requestPosts(userId: number) {
-		const response = await instance.get<PostType[]>('posts/', {params: {userId}})
+		const response = await instance.get<PostType[]>('posts/', {params: {userId: userId}})
 		return response.data
 	},
 	async addPost(caption: string, images: FileList, ownerId: number) {

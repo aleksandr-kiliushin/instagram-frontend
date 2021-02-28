@@ -5,6 +5,7 @@ export interface UserProfile {
 
 export interface User {
   id: number
+  is_followed: boolean
   profile: UserProfile
   username: string
 }

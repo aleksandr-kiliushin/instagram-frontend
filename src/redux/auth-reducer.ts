@@ -6,6 +6,7 @@ import { BaseThunkType, InferActions } from './store'
 const initialState: AuthState = {
   authUser: {
     id: 0,
+    is_followed: false,
     profile: {
       avatar: '',
       bio: '',
@@ -23,6 +24,7 @@ const authReducer = (state: AuthState = initialState, action: Actions): AuthStat
         ...state,
         authUser: {
           id: action.userData.id,
+          is_followed: false,
           profile: {
             avatar: action.userData.profile.avatar,
             bio: action.userData.profile.bio,
@@ -63,8 +65,14 @@ export const like = (postId: number): ThunkType => async (dispatch, getState) =>
   const userId = getState().auth.authUser.id
   await authApi.like(postId, userId)
 }
+export const follow = (followedUserId: number): ThunkType => async (dispatch, getState) => {
+  const userId = getState().auth.authUser.id
+  await authApi.follow(followedUserId, userId)
+}
 
 export default authReducer
+
+
 
 
 

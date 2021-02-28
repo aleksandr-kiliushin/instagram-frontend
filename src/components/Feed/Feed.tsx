@@ -12,10 +12,11 @@ interface PropsType {
   deletePost: (postId: number) => void
   initRequestAndSetPosts: () => void
   like: (postId: number) => void
+  follow: (followed_user_id: number) => void
 }
 
 const Feed: React.FC<PropsType> = ({
-  isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts, like, authUser
+  isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts, like, authUser, follow
 }) => {
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Feed: React.FC<PropsType> = ({
           deleteComment={deleteComment}
           deletePost={deletePost}
           like={like}
+          follow={follow}
         />
       ))}
     </div>

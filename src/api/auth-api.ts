@@ -4,7 +4,7 @@ import { instance } from './api';
 
 export const authApi = {
 	async getUserData(authUsername: string) {
-		const response = await instance.get<User>(`${authUsername}/`)
+		const response = await instance.get<User>(`users/${authUsername}/`)
 		return response.data
 	},
 	async updateUserData(avatar: File, bio: string, username: string) {
@@ -31,5 +31,8 @@ export const authApi = {
 	},
 	async like(postId: number, userId: number) {
 		await instance.post(`posts/${postId}/like/`, {userId})
+	},
+	async follow(followedUserId: number, followerId: number) {
+		await instance.post('follow/', {followedUserId, followerId})
 	},
 }
