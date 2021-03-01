@@ -70,7 +70,7 @@ const Header: React.FC<Props> = ({authUser, addPost, tempAuthName, register, upd
       <div className="header">
         <img
           className="header__logo"
-          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+          src="http://localhost:8000/media/static/header_logo.png"
           alt="instagramLogo"
         />
 
