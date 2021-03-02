@@ -3,6 +3,9 @@ import { instance } from './api';
 
 
 export const authApi = {
+	async getUserFromToken() {
+
+	},
 	async getUserData(authUsername: string) {
 		const response = await instance.get<User>(`users/${authUsername}/`)
 		return response.data

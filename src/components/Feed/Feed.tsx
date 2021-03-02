@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {CircularProgress} from '@material-ui/core'
 import Post from './Post/Post'
 import {PostType, User} from './../../types/types'
@@ -18,12 +18,6 @@ interface PropsType {
 const Feed: React.FC<PropsType> = ({
   isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts, like, authUser, follow
 }) => {
-
-  useEffect(() => {
-    if (authUser.id !== 0) {
-      initRequestAndSetPosts()
-    }
-  }, [initRequestAndSetPosts, authUser.id])
 
   const postsJsx = (
     <div className="feed">

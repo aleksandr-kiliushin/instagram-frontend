@@ -5,7 +5,7 @@ import { BaseThunkType, InferActions } from './store'
 
 const initialState: AuthState = {
   authUser: {
-    id: 0,
+    id: 11,
     is_followed: false,
     profile: {avatar: '', bio: ''},
     username: '',
