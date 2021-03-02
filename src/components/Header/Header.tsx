@@ -5,8 +5,6 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded'
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined'
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded'
 import Search from './Search'
-import '../../App.css'
-import './Header.css'
 
 
 interface Props {
@@ -78,12 +76,12 @@ const Header: React.FC<Props> = ({authUser, addPost, tempAuthName, register, upd
           <Search />
         </div>
 
-        <div className="header__buttonsPane">
-          <HomeIcon className="header__buttonsPane_button" />
-          <SendRoundedIcon className="header__buttonsPane_button" />
-          <ExploreOutlinedIcon className="header__buttonsPane_button" />
-          <FavoriteBorderRoundedIcon className="header__buttonsPane_button" />
-          <div className="roundContainer header__buttonsPane_button">
+        <div className="header__btnsPane">
+          <HomeIcon className="header__btnsPane__btn" />
+          <SendRoundedIcon className="header__btnsPane__btn" />
+          <ExploreOutlinedIcon className="header__btnsPane__btn" />
+          <FavoriteBorderRoundedIcon className="header__btnsPane__btn" />
+          <div className="roundContainer header__btnsPane__btn">
             <img alt="" src={authUser.profile.avatar} />
           </div>
         </div>

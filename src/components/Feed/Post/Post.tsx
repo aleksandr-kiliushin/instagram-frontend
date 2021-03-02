@@ -1,7 +1,7 @@
 import React from 'react'
 import { PostType } from '../../../types/types'
 import PostHeader from './PostHeader'
-import './Post.css'
+// import './Post.scss'
 import PostCarousel from './PostCarousel'
 import PostFooter from './PostFooter'
 

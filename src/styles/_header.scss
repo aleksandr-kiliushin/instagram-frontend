@@ -1,17 +1,18 @@
+@import './variables';
+
 .headerOuter {
   background-color: white;
-  border-bottom: 1px solid rgb(219, 219, 219);
+  border-bottom: $border;
   height: 54px;
   padding: 0 20px;
 }
-
 .header {
   display: flex;
   max-width: 600px;
   margin: 0 auto;
 }
 
-.header__buttonsPane {
+.header__btnsPane {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -20,7 +21,7 @@
   width: 190px;
 }
 
-.header__buttonsPane_button {
+.header__btnsPane__btn {
   height: 22px;
   width: 22px;
 }
@@ -32,8 +33,7 @@
   padding: 12.5px 0;
 }
 
-
 .searchContainer {
-  pointer-events:none;
+  pointer-events: none;
   margin: 7px auto;
 }

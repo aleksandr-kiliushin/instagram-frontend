@@ -2,8 +2,8 @@
 import React from 'react'
 import { User } from '../../../types/types'
 import PostModal from '../../Common/PostModal'
-import './Post.css'
-import '../../../App.css'
+// import './Post.scss'
+// import '../../../App.scss'
 
 interface PropsType {
   owner: User

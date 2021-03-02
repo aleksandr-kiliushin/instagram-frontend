@@ -5,7 +5,7 @@ import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import { PostType } from '../../../types/types'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import './Post.css'
+// import './Post.scss'
 import CommentModal from '../../Common/CommentModal'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
@@ -44,7 +44,7 @@ const PostFooter: React.FC<Props> = ({total_likes, like, is_liked, caption, comm
   return (
     <div className="post__footer">
 
-      <section className="post__footer__buttons">
+      <section className="post__footer__btns">
         <span>
           <button>
             {isLiked ? <FavoriteIcon onClick={onLike} color="secondary" /> : <FavoriteBorderIcon onClick={onLike} />}
@@ -60,7 +60,7 @@ const PostFooter: React.FC<Props> = ({total_likes, like, is_liked, caption, comm
             <SendOutlinedIcon />            
           </button>
         </span>
-        <span className="post__footer__buttons__bookmark">
+        <span className="post__footer__btns__bookmark">
           <button>
             <BookmarkBorderOutlinedIcon />            
           </button>
@@ -100,9 +100,7 @@ const PostFooter: React.FC<Props> = ({total_likes, like, is_liked, caption, comm
 
         {
           comments.map((comment) => (
-
-
-            <div className="post__footer__comments__caption">
+            <div className="post__footer__comments__caption" key={comment.id}>
               <div className="post__footer__comments__entireComment">
     
                 <span className="post__footer__comments__commentAuthor"><p>{comment.author.username}</p></span>&nbsp;
