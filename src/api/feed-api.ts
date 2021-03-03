@@ -2,7 +2,7 @@ import { PostType } from '../types/types'
 import { instance } from './api'
 
 
-export const instApi = {
+export const feedApi = {
 	async requestPosts() {
 		const response = await instance.get<PostType[]>('posts/')
 		return response.data

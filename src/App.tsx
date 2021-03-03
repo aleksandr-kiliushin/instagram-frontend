@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import InstContainer from './components/InstContainer'
+// import InstContainer from './components/InstContainer'
 import {connect} from 'react-redux'
 import { RootState } from './redux/store'
-import {} from './redux/auth-reducer'
+import {requestAndSetToken} from './redux/auth-reducer'
 
 
-const App: React.FC<Props> = () => {
+const App: React.FC<Props> = ({requestAndSetToken}) => {
 
   // const [token, setToken] = useState('')
 
@@ -21,8 +21,11 @@ const App: React.FC<Props> = () => {
   // })
 
 
-  // const [login, setLogin] = useState('')
-  // const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('user7')
+  const [password, setPassword] = useState('user7password')
+  const onLogin = () => {
+    requestAndSetToken(username, password)
+  }
 
 
   // const whenTokenIs = <div>Hello. Logging in because you token is in localStorage: {token}.</div>
@@ -37,19 +40,27 @@ const App: React.FC<Props> = () => {
 
   return (
     <div className="app">
-      <InstContainer />
+      <div>
+        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+        <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
+        <button onClick={onLogin}>Log in</button>
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state: RootState): MapStatePropsType => ({})
-const mapDispatchToProps: MapDispatchPropsType = {}
+const mapDispatchToProps: MapDispatchPropsType = {
+  requestAndSetToken,
+}
 
 export default connect
   <MapStatePropsType, MapDispatchPropsType, {}, RootState>
   (mapStateToProps, mapDispatchToProps)(App)
 
 type MapStatePropsType = {}
-type MapDispatchPropsType = {}
+type MapDispatchPropsType = {
+  requestAndSetToken: (username: string, password: string) => void
+}
 type Props = MapStatePropsType & MapDispatchPropsType
 

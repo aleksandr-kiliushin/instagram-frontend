@@ -8,14 +8,14 @@ import Search from './Search'
 
 
 interface Props {
-  authUser: User
+  authUser: {avatar: string, id: number, username: string}
   addPost: (caption: string, images: FileList) => void
-  tempAuthName: (authUsername: string, password: string) => void
+  requestAndSetToken: (authUsername: string, password: string) => void
   register: (username: string, password: string) => void
   updateUserData: (avatar: File, bio: string) => void
 }
 
-const Header: React.FC<Props> = ({authUser, addPost, tempAuthName, register, updateUserData}) => {
+const Header: React.FC<Props> = ({authUser, addPost, requestAndSetToken, register, updateUserData}) => {
 
   const [caption, setCaption] = useState('')
   const [images, setImages] = useState<FileList>()
@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({authUser, addPost, tempAuthName, register, upd
   const [authUsername, setAuthUsername] = useState('')
   const [authPassword, setAuthPassword] = useState('')
   const onLogin = () => {
-    tempAuthName(authUsername, authPassword)
+    requestAndSetToken(authUsername, authPassword)
   }
   // registration
   const [regUsername, setRegUsername] = useState('')
@@ -82,7 +82,7 @@ const Header: React.FC<Props> = ({authUser, addPost, tempAuthName, register, upd
           <ExploreOutlinedIcon className="header__btnsPane__btn" />
           <FavoriteBorderRoundedIcon className="header__btnsPane__btn" />
           <div className="roundContainer header__btnsPane__btn">
-            <img alt="" src={authUser.profile.avatar} />
+            <img alt="" src={authUser.avatar} />
           </div>
         </div>
 

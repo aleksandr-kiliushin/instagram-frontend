@@ -33,3 +33,9 @@ export interface InstState {
   isInitializing: boolean
   posts         : PostType[]
 }
+
+export interface CurrentUser {
+  avatar: string
+  id: number
+  username: string
+}

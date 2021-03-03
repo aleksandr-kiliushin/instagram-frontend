@@ -6,7 +6,7 @@ import {PostType, User} from './../../types/types'
 interface PropsType {
   isInitializing: boolean
   posts: PostType[]
-  authUser: User
+  authUser: {avatar: string, id: number, username: string}
   addComment: (body: string, postId: number) => void
   deleteComment: (commenId: number) => void
   deletePost: (postId: number) => void

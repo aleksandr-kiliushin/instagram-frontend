@@ -1,8 +1,23 @@
+import { CurrentUser } from './../types/types';
 import { User } from '../types/types';
 import { instance } from './api';
 
 
+interface CurrentUserRes extends CurrentUser {
+	token: string
+}
+
+
 export const authApi = {
+	async requestAndSetToken(username: string, password: string) {
+		const response = await instance.post<CurrentUserRes>('api-token-auth/', {username, password})
+		localStorage.setItem('token', response.data.token)
+		return response
+	},
+
+
+
+	// old
 	async getUserFromToken() {
 
 	},
@@ -19,11 +34,6 @@ export const authApi = {
 			formData,
       {headers: {'content-type': 'multipart/form-data'}}
     )
-	},
-	async tempAuthName(authUsername: string, password: string) {
-		const response = await instance.post('api-token-auth/', {username: authUsername, password})
-		localStorage.setItem('token', response.data.token)
-		return response.status
 	},
 	async register(username: string, password: string) {
 		await instance.post('register/', {username, password})
