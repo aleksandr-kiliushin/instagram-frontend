@@ -1,30 +1,16 @@
 import React from 'react'
-// import Feed from './Feed/Feed'
 import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
 import { CurUser } from '../types/types'
-// import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, requestPosts } from '../redux/feed-reducer'
-// import { requestAndSetToken} from '../redux/auth-reducer'
+import {logout} from '../redux/auth-reducer'
 
 
-const InstContainer: React.FC<Props> = ({curUser}) => {
+const InstContainer: React.FC<Props> = ({curUser, logout}) => {
 
   return (
     <div>
-      <Header curUser={curUser}/>
-      {/* <Feed
-        isInitializing={isInitializing}
-        posts={posts}
-        authUser={authUser}
-
-        addComment={addComment}
-        deleteComment={deleteComment}
-        deletePost={deletePost}
-        initRequestAndSetPosts={initRequestAndSetPosts}
-        like={like}
-        follow={follow}
-      /> */}
+      <Header curUser={curUser} logout={logout}/>
     </div>
   )
 }
@@ -35,7 +21,7 @@ const mapStateToProps = (state: RootState): MapStatePropsType => ({
 
 
 const mapDispatchToProps: MapDispatchPropsType = {
-  
+  logout,
 }
 
 
@@ -46,11 +32,12 @@ export default connect
 
 
 
-
 // types
 
 type MapStatePropsType = {
   curUser: CurUser
 }
-type MapDispatchPropsType = {}
+type MapDispatchPropsType = {
+  logout: () => void
+}
 type Props = MapStatePropsType & MapDispatchPropsType

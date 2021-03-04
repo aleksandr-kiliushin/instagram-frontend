@@ -1,0 +1,9 @@
+.accWindow {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

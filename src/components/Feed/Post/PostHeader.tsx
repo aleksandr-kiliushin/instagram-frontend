@@ -1,7 +1,7 @@
 // import Avatar from '@material-ui/core/Avatar'
 import React from 'react'
 import { User } from '../../../types/types'
-import PostModal from '../../Common/PostModal'
+// import PostModal from '../../Common/PostModal'
 // import './Post.scss'
 // import '../../../App.scss'
 
@@ -21,12 +21,12 @@ const PostHeader: React.FC<PropsType> = ({owner, postId, deletePost, follow}) =>
   return (
     <div className="post__header">
       <div className="roundContainer post__header__avatarContainer">
-        <img alt="" src={(owner.id === 11 || owner.id === 12) ? owner.profile.avatar : ""}/>
+        <img alt="" src={owner.profile.avatar}/>
       </div>
       <div className="post__header__username">
         {owner.username}
       </div>
-      <PostModal postId={postId} deletePost={deletePost} />
+      {/* <PostModal postId={postId} deletePost={deletePost} /> */}
     </div>
   )
 }

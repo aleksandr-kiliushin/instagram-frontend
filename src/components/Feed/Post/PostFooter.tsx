@@ -6,7 +6,7 @@ import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutline
 import { PostType } from '../../../types/types'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 // import './Post.scss'
-import CommentModal from '../../Common/CommentModal'
+// import CommentModal from '../../Common/CommentModal'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
 interface Props {
@@ -111,9 +111,9 @@ const PostFooter: React.FC<Props> = ({total_likes, like, is_liked, caption, comm
                 </span>
     
               </div>
-              <div>
+              {/* <div>
                 <CommentModal commentId={comment.id} deleteComment={deleteComment}/>
-              </div>
+              </div> */}
             </div>
           ))
         }

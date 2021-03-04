@@ -10,9 +10,14 @@ interface CurUserRes extends CurUser {
 
 export const authApi = {
 	async requestAndSetToken(username: string, password: string) {
-		const response = await instance.post<CurUserRes>('api-token-auth/', {username, password})
-		localStorage.setItem('token', response.data.token)
-		return response
+
+		try {
+			const response = await instance.post<CurUserRes>('api-token-auth/', {username, password})
+			localStorage.setItem('token', response.data.token)
+			return response
+		} catch (e) {
+			return null
+		}
 	},
 
 

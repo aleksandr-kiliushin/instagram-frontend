@@ -27,7 +27,7 @@ const Post: React.FC<PropsType> = ({
   follow
 }) => {
   return (
-    <article className="post postNarrow640 postNarrow735">
+    <article className="post">
       <PostHeader owner={owner} postId={id} deletePost={deletePost} follow={follow} />
       <PostCarousel images={images} />
       <PostFooter total_likes={total_likes} like={like} postId={id} is_liked={is_liked} caption={caption}
