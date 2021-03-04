@@ -1,12 +1,14 @@
-import { CurrentUser } from './../types/types';
+import { CurUser } from './../types/types';
 import { authApi } from '../api/auth-api'
 import { BaseThunkType, InferActions } from './store'
 
 
 const initialState: AuthState = {
-  avatar: '',
-  id: 0,
-  username: '',
+  curUser: {
+    avatar: 'http://localhost:8000/media/static/unauthorized_user_avatar.png',
+    id: 0,
+    username: '',
+  }
 }
 
 export default function authReducer(state: AuthState = initialState, action: Actions): AuthState {
@@ -14,7 +16,10 @@ export default function authReducer(state: AuthState = initialState, action: Act
   switch (action.type) {
 
     case 'auth/SET_AUTH_USER_DATA': {
-      return {avatar: action.avatar, id: action.id, username: action.username}
+      return {
+        ...state,
+        curUser: {avatar: action.avatar, id: action.id, username: action.username},
+      }
     }
 
     default:
@@ -23,11 +28,11 @@ export default function authReducer(state: AuthState = initialState, action: Act
 }
 
 export const actions = {
-  setUserData: (userData: CurrentUser) => ({
+  setUserData: (curUser: CurUser) => ({
     type: 'auth/SET_AUTH_USER_DATA',
-    avatar: userData.avatar,
-    id: userData.id,
-    username: userData.username
+    avatar: curUser.avatar,
+    id: curUser.id,
+    username: curUser.username
   } as const),
 }
 
@@ -40,21 +45,21 @@ export const requestAndSetToken = (username: string, password: string): ThunkTyp
 }
 
 
-export const register = (username: string, password: string): ThunkType => async () => {
-  await authApi.register(username, password)
-}
-export const updateUserData = (avatar: File, bio: string): ThunkType => async (dispatch, getState) => {
+// export const register = (username: string, password: string): ThunkType => async () => {
+  // await authApi.register(username, password)
+// }
+// export const updateUserData = (avatar: File, bio: string): ThunkType => async (dispatch, getState) => {
   // const username = getState().auth.authUser.username
-  await authApi.updateUserData(avatar, bio, 'username')
-}
-export const like = (postId: number): ThunkType => async (dispatch, getState) => {
+  // await authApi.updateUserData(avatar, bio, 'username')
+// }
+// export const like = (postId: number): ThunkType => async (dispatch, getState) => {
   // const userId = getState().auth.authUser.id
-  await authApi.like(postId, 11)
-}
-export const follow = (followedUserId: number): ThunkType => async (dispatch, getState) => {
+  // await authApi.like(postId, 11)
+// }
+// export const follow = (followedUserId: number): ThunkType => async (dispatch, getState) => {
   // const userId = getState().auth.authUser.id
-  await authApi.follow(followedUserId, 11)
-}
+  // await authApi.follow(followedUserId, 11)
+// }
 
 
 // types
@@ -62,7 +67,5 @@ type Actions = InferActions<typeof actions>
 type ThunkType = BaseThunkType<Actions>
 
 interface AuthState {
-  avatar: string
-  id: number
-  username: string
+  curUser: CurUser
 }

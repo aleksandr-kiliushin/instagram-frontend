@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-// import InstContainer from './components/InstContainer'
-import {connect} from 'react-redux'
-import { RootState } from './redux/store'
-import {requestAndSetToken} from './redux/auth-reducer'
+import React from 'react'
+import InstContainer from './components/InstContainer'
+// import {connect} from 'react-redux'
+// import { RootState } from './redux/store'
+// import {requestAndSetToken} from './redux/auth-reducer'
 
 
-const App: React.FC<Props> = ({requestAndSetToken}) => {
+const App: React.FC = () => {
 
   // const [token, setToken] = useState('')
 
@@ -21,11 +21,11 @@ const App: React.FC<Props> = ({requestAndSetToken}) => {
   // })
 
 
-  const [username, setUsername] = useState('user7')
-  const [password, setPassword] = useState('user7password')
-  const onLogin = () => {
-    requestAndSetToken(username, password)
-  }
+  // const [username, setUsername] = useState('user7')
+  // const [password, setPassword] = useState('user7password')
+  // const onLogin = () => {
+  //   requestAndSetToken(username, password)
+  // }
 
 
   // const whenTokenIs = <div>Hello. Logging in because you token is in localStorage: {token}.</div>
@@ -37,30 +37,27 @@ const App: React.FC<Props> = ({requestAndSetToken}) => {
   
   // return token ? whenTokenIs : whenTokenIsNot
 
-
   return (
     <div className="app">
-      <div>
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
-        <button onClick={onLogin}>Log in</button>
-      </div>
+      <InstContainer />
     </div>
   )
 }
 
-const mapStateToProps = (state: RootState): MapStatePropsType => ({})
-const mapDispatchToProps: MapDispatchPropsType = {
-  requestAndSetToken,
-}
+export default App
 
-export default connect
-  <MapStatePropsType, MapDispatchPropsType, {}, RootState>
-  (mapStateToProps, mapDispatchToProps)(App)
+// const mapStateToProps = (state: RootState): MapStatePropsType => ({})
+// const mapDispatchToProps: MapDispatchPropsType = {
+  // requestAndSetToken,
+// }
 
-type MapStatePropsType = {}
-type MapDispatchPropsType = {
-  requestAndSetToken: (username: string, password: string) => void
-}
-type Props = MapStatePropsType & MapDispatchPropsType
+// export default connect
+//   <MapStatePropsType, MapDispatchPropsType, {}, RootState>
+//   (mapStateToProps, mapDispatchToProps)(App)
+
+// type MapStatePropsType = {}
+// type MapDispatchPropsType = {
+  // requestAndSetToken: (username: string, password: string) => void
+// }
+// type Props = MapStatePropsType & MapDispatchPropsType
 

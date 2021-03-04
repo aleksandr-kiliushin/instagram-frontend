@@ -49,41 +49,43 @@ export default function Search() {
   }, [open]);
 
   return (
-    <Autocomplete
-      id="asynchronous-demo"
-      style={{ width: 200 }}
-      open={open}
-      onOpen={() => {
-        setOpen(true);
-      }}
-      onClose={() => {
-        setOpen(false);
-      }}
+    <div className="header__search">
+      <Autocomplete
+        id="asynchronous-demo"
+        style={{ width: 200 }}
+        open={open}
+        onOpen={() => {
+          setOpen(true);
+        }}
+        onClose={() => {
+          setOpen(false);
+        }}
 
-      // @ts-ignore
-      getOptionSelected={(option, value) => option.name === value.name}
-      // @ts-ignore
-      getOptionLabel={(option) => option.name}
-      options={options}
-      loading={loading}
-      // @ts-ignore
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Search"
-          size="small"
-          variant="outlined"
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                {params.InputProps.endAdornment}
-              </React.Fragment>
-            ),
-          }}
-        />
-      )}
-    />
+        // @ts-ignore
+        getOptionSelected={(option, value) => option.name === value.name}
+        // @ts-ignore
+        getOptionLabel={(option) => option.name}
+        options={options}
+        loading={loading}
+        // @ts-ignore
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search"
+            size="small"
+            variant="outlined"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }}
+          />
+        )}
+      />
+    </div>
   )
 }

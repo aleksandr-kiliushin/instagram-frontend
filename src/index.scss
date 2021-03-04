@@ -27,6 +27,7 @@ code {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  border: $border;
   img {
     height: inherit;
     // width: initial;

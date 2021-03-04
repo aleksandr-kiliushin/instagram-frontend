@@ -64,7 +64,7 @@
     background-position: -130px -98px;
     height: 30px;
     width: 30px;
-    background-image: url($urlBeginning + 'media/static/source_icons.png');
+    background-image: url($staticImgPath + 'source_icons.png');
   }
 }
 .post__imageChevronRight {
@@ -73,7 +73,7 @@
     background-position: -162px -98px;
     height: 30px;
     width: 30px;
-    background-image: url($urlBeginning + 'media/static/source_icons.png');
+    background-image: url($staticImgPath + 'source_icons.png');
   }
 }
 

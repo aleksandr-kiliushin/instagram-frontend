@@ -1,3 +1,17 @@
+export interface CurUser {
+  avatar: string
+  id: number
+  username: string
+}
+
+
+
+
+
+
+
+// old
+
 export interface UserProfile {
   avatar: string
   bio: string
@@ -11,11 +25,11 @@ export interface User {
 }
 
 export interface Comment {
-  id:       number
+  id: number
   added_at: string
-  body:     string
-  author:   User
-  post:     number
+  body: string
+  author: User
+  post: number
 }
 
 export interface PostType {
@@ -31,11 +45,6 @@ export interface PostType {
 
 export interface InstState {
   isInitializing: boolean
-  posts         : PostType[]
+  posts: PostType[]
 }
 
-export interface CurrentUser {
-  avatar: string
-  id: number
-  username: string
-}

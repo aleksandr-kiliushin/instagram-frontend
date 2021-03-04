@@ -1,6 +1,6 @@
 import { BaseThunkType, InferActions } from './store';
 import {InstState, PostType} from '../types/types'
-import {feedApi} from '../api/feed-api'
+// import {feedApi} from '../api/feed-api'
 
 
 const initialState: InstState = {
@@ -32,31 +32,31 @@ export const actions = {
 
 
 
-export const addComment = (body: string, postId: number): ThunkType => async (dispatch, getState) => {
-  const authorId = getState().auth.id
-  await feedApi.addComment(authorId, body, postId)
-}
-export const deleteComment = (commentId: number): ThunkType => async () => {
-  await feedApi.deleteComment(commentId)
-}
-export const addPost = (caption: string, images: FileList): ThunkType => async (dispatch, getState) => {
-  const ownerId = getState().auth.id
-  await feedApi.addPost(caption, images, ownerId)
-}
-export const deletePost = (postId: number): ThunkType => async () => {
-  await feedApi.deletePost(postId)
-}
-export const requestPosts = (): ThunkType => async (dispatch) => {
-  const data = await feedApi.requestPosts()
-  dispatch(actions.setPosts(data))
-}
-export const initRequestAndSetPosts = (): ThunkType => async (dispatch/*, getState*/) => {
+// export const addComment = (body: string, postId: number): ThunkType => async (dispatch, getState) => {
+  // const authorId = getState().auth.id
+//   await feedApi.addComment(11, body, postId)
+// }
+// export const deleteComment = (commentId: number): ThunkType => async () => {
+//   await feedApi.deleteComment(commentId)
+// }
+// export const addPost = (caption: string, images: FileList): ThunkType => async (dispatch, getState) => {
+  // const ownerId = getState().auth.id
+  // await feedApi.addPost(caption, images, 11)
+// }
+// export const deletePost = (postId: number): ThunkType => async () => {
+//   await feedApi.deletePost(postId)
+// }
+// export const requestPosts = (): ThunkType => async (dispatch) => {
+//   const data = await feedApi.requestPosts()
+//   dispatch(actions.setPosts(data))
+// }
+// export const initRequestAndSetPosts = (): ThunkType => async (dispatch/*, getState*/) => {
   // const authUserId = getState().auth.authUser.id // do not use
-  dispatch(actions.setIsInitializing(true))
-  const data = await feedApi.requestPosts()
-  dispatch(actions.setIsInitializing(false))
-  dispatch(actions.setPosts(data))
-}
+//   dispatch(actions.setIsInitializing(true))
+//   const data = await feedApi.requestPosts()
+//   dispatch(actions.setIsInitializing(false))
+//   dispatch(actions.setPosts(data))
+// }
 
 
 // types

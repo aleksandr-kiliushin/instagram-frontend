@@ -1,27 +1,19 @@
-import React, { useEffect } from 'react'
-import Feed from './Feed/Feed'
+import React from 'react'
+// import Feed from './Feed/Feed'
 import Header from './Header/Header'
 import {connect} from 'react-redux'
 import { RootState } from '../redux/store'
-import { PostType } from '../types/types'
-import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, requestPosts } from '../redux/feed-reducer'
-import { requestAndSetToken, register, updateUserData, like, follow } from '../redux/auth-reducer'
+import { CurUser } from '../types/types'
+// import { addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, requestPosts } from '../redux/feed-reducer'
+// import { requestAndSetToken} from '../redux/auth-reducer'
 
 
-const InstContainer: React.FC<Props> = ({
-  authUser, isInitializing, posts, addComment, addPost, deleteComment, deletePost, initRequestAndSetPosts, requestAndSetToken,
-  register, updateUserData, like, follow, requestPosts
-}) => {
-
-  useEffect(() => {
-    requestPosts()
-  }, [requestPosts])
+const InstContainer: React.FC<Props> = ({curUser}) => {
 
   return (
     <div>
-      <Header addPost={addPost} authUser={authUser} requestAndSetToken={requestAndSetToken} register={register} 
-      updateUserData={updateUserData} />
-      <Feed
+      <Header curUser={curUser}/>
+      {/* <Feed
         isInitializing={isInitializing}
         posts={posts}
         authUser={authUser}
@@ -32,30 +24,18 @@ const InstContainer: React.FC<Props> = ({
         initRequestAndSetPosts={initRequestAndSetPosts}
         like={like}
         follow={follow}
-      />
+      /> */}
     </div>
   )
 }
 
 const mapStateToProps = (state: RootState): MapStatePropsType => ({
-  authUser: state.auth,
-  isInitializing: state.feed.isInitializing,
-  posts: state.feed.posts,
+  curUser: state.auth.curUser,
 })
 
 
 const mapDispatchToProps: MapDispatchPropsType = {
-  addComment,
-  addPost,
-  deleteComment,
-  deletePost,
-  initRequestAndSetPosts,
-  requestAndSetToken,
-  register,
-  updateUserData,
-  like,
-  follow,
-  requestPosts,
+  
 }
 
 
@@ -70,22 +50,7 @@ export default connect
 // types
 
 type MapStatePropsType = {
-  // authUser: User
-  authUser: {avatar: string, id: number, username: string}
-  isInitializing: boolean
-  posts: PostType[]
+  curUser: CurUser
 }
-type MapDispatchPropsType = {
-  addComment: (body: string, postId: number) => void
-  addPost: (caption: string, images: FileList) => void
-  deleteComment: (commentId: number) => void
-  deletePost: (postId: number) => void
-  initRequestAndSetPosts: () => void
-  requestAndSetToken: (authUsername: string, password: string) => void
-  register: (username: string, password: string) => void
-  updateUserData: (avatar: File, bio: string) => void
-  like: (postId: number) => void
-  follow: (followed_user_id: number) => void
-  requestPosts: () => void
-}
+type MapDispatchPropsType = {}
 type Props = MapStatePropsType & MapDispatchPropsType
