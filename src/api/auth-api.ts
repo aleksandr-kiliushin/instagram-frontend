@@ -1,23 +1,26 @@
+import { AxiosResponse } from 'axios';
 import { CurUser } from './../types/types';
-// import { User } from '../types/types';
 import { instance } from './api';
 
 
-interface CurUserRes extends CurUser {
+interface SuccessRes<T> extends AxiosResponse<T> {
+	data: T
+	status: 200
+}
+interface FailRes extends AxiosResponse {
+	data: {msg: string}
+	status: 202
+}
+interface CurUserResData extends CurUser {
 	token: string
 }
+type CustomAsiosRes = SuccessRes<CurUserResData> | FailRes
 
 
 export const authApi = {
 	async requestAndSetToken(username: string, password: string) {
-
-		try {
-			const response = await instance.post<CurUserRes>('api-token-auth/', {username, password})
-			localStorage.setItem('token', response.data.token)
-			return response
-		} catch (e) {
-			return null
-		}
+		const response: CustomAsiosRes = await instance.post('api-token-auth/', {username, password})
+		return response
 	},
 
 

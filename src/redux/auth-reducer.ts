@@ -26,7 +26,7 @@ export default function authReducer(state: AuthState = initialState, action: Act
     case 'auth/SET_ERR_MSG': {
       return {
         ...state,
-        errMsg: action.errMsg,
+        errMsg: action.msg,
       }
     }
 
@@ -42,16 +42,17 @@ export const actions = {
     id: curUser.id,
     username: curUser.username
   } as const),
-  setErrMsg: (errMsg: string) => ({type: 'auth/SET_ERR_MSG', errMsg} as const),
+  setErrMsg: (msg: string) => ({type: 'auth/SET_ERR_MSG', msg} as const),
 }
 
 
 export const login = (username: string, password: string): ThunkType => async (dispatch) => {
   const response = await authApi.requestAndSetToken(username, password)
-  if (response) {
+  if (response.status === 200) {
+		localStorage.setItem('token', response.data.token)
     dispatch(actions.setUserData(response.data))
   } else {
-    dispatch(actions.setErrMsg('Username or password is incorrect.'))
+    dispatch(actions.setErrMsg(response.data.msg))
   }
 }
 export const logout = (): ThunkType => async (dispatch) => {

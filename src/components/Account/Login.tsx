@@ -3,21 +3,31 @@ import HeaderLogo from '../Header/HeaderLogo'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { RootState } from '../../redux/store'
-import { login } from '../../redux/auth-reducer'
+import { login, actions } from '../../redux/auth-reducer'
 
 
-const Login: React.FC<Props> = ({errMsg, id, login}) => {
+const Login: React.FC<Props> = ({errMsg, id, login, setErrMsg}) => {
+  
+  const history = useHistory()
 
   const [username, setUsername] = useState('user7')
   const [password, setPassword] = useState('user7password')
-  const history = useHistory()
   const onLogin = () => {
     login(username, password)
   }
   useEffect(() => {
-    // use snackbar from material ui.
     if (id) history.push('/')
   }, [history, id])
+
+
+  useEffect(() => {
+    if (errMsg) {
+      setTimeout(() => {
+        setErrMsg('')
+      }, 5000);
+    }
+  }, [errMsg, setErrMsg])
+
 
   return (
     <div className="accWindow">
@@ -28,33 +38,36 @@ const Login: React.FC<Props> = ({errMsg, id, login}) => {
       <button onClick={onLogin}>Log in</button>
       <button disabled>Forgot password?</button>
       <p>Don't have an account?</p>
-      <button disabled>Sign up</button>
+      <button onClick={() => history.push('/register')}>Sign up</button>
     </div>
   )
 }
 
-const mapStateToProps = (state: RootState): MapStatePropsType => ({
+const mapStateToProps = (state: RootState): MapStateProps => ({
   errMsg: state.auth.errMsg,
   id: state.auth.curUser.id,
 })
 
-const mapDispatchToProps: MapDispatchPropsType = {
+const {setErrMsg} = {...actions}
+const mapDispatchToProps: MapDispatchProps = {
+  setErrMsg, 
   login,
 }
 
 export default connect
-  <MapStatePropsType, MapDispatchPropsType, {}, RootState>
+  <MapStateProps, MapDispatchProps, {}, RootState>
   (mapStateToProps, mapDispatchToProps)(Login)
 
 
 
 // types
 
-type MapStatePropsType = {
+type MapStateProps = {
   errMsg: string
   id: number
 }
-type MapDispatchPropsType = {
+type MapDispatchProps = {
   login: (username: string, password: string) => void
+  setErrMsg: (msg: string) => void
 }
-type Props = MapStatePropsType & MapDispatchPropsType
+type Props = MapStateProps & MapDispatchProps
