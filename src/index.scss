@@ -30,10 +30,17 @@ code {
   border: $border;
   img {
     height: inherit;
-    // width: initial;
-    // max-width: none;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
+}
+
+.preloader {
+  height: 60px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
 }

@@ -1,15 +1,20 @@
-import { CurUser } from './../types/types';
+import { CurUser } from './../types/types'
 import { authApi } from '../api/auth-api'
 import { BaseThunkType, InferActions } from './store'
 
 
+export const initCurUserState: CurUser = {
+  avatar: 'http://localhost:8000/media/static/unauthorized_user_avatar.png',
+  id: 0,
+  username: '',
+}
+
+
 const initialState: AuthState = {
-  curUser: {
-    avatar: 'http://localhost:8000/media/static/unauthorized_user_avatar.png',
-    id: 0,
-    username: '',
-  },
+  curUser: initCurUserState,
   errMsg: '',
+  isInitialized: false,
+  redirectTo: '',
 }
 
 export default function authReducer(state: AuthState = initialState, action: Actions): AuthState {
@@ -24,10 +29,15 @@ export default function authReducer(state: AuthState = initialState, action: Act
     }
 
     case 'auth/SET_ERR_MSG': {
-      return {
-        ...state,
-        errMsg: action.msg,
-      }
+      return {...state, errMsg: action.msg}
+    }
+
+    case 'auth/SET_REDIRECT_TO': {
+      return {...state, redirectTo: action.to}
+    }
+
+    case 'auth/SET_IS_INITIALIZED': {
+      return {...state, isInitialized: action.is}
     }
 
     default:
@@ -36,18 +46,27 @@ export default function authReducer(state: AuthState = initialState, action: Act
 }
 
 export const actions = {
-  setUserData: (curUser: CurUser) => ({
-    type: 'auth/SET_USER_DATA',
-    avatar: curUser.avatar,
-    id: curUser.id,
-    username: curUser.username
-  } as const),
   setErrMsg: (msg: string) => ({type: 'auth/SET_ERR_MSG', msg} as const),
+  setIsInitialized: (is: boolean) => ({type: 'auth/SET_IS_INITIALIZED', is} as const),
+  setRedirectTo: (to: string) => ({type: 'auth/SET_REDIRECT_TO', to} as const),
+  setUserData: (data: CurUser) => ({
+    type: 'auth/SET_USER_DATA',
+    avatar: data.avatar,
+    id: data.id,
+    username: data.username
+  } as const),
 }
 
 
+export const initAuth = (): ThunkType => async (dispatch) => {
+  const response = await authApi.initAuth()
+  if (response.status === 200) {
+    dispatch(actions.setUserData(response.data))
+  }
+  dispatch(actions.setIsInitialized(true))
+}
 export const login = (username: string, password: string): ThunkType => async (dispatch) => {
-  const response = await authApi.requestAndSetToken(username, password)
+  const response = await authApi.login(username, password)
   if (response.status === 200) {
 		localStorage.setItem('token', response.data.token)
     dispatch(actions.setUserData(response.data))
@@ -55,27 +74,18 @@ export const login = (username: string, password: string): ThunkType => async (d
     dispatch(actions.setErrMsg(response.data.msg))
   }
 }
-export const logout = (): ThunkType => async (dispatch) => {
-  dispatch(actions.setUserData(initialState.curUser))
-  localStorage.removeItem('token')
+export const register = (username: string, password: string): ThunkType => async (dispatch) => {
+  const response = await authApi.register(username, password)
+  if (response.status === 200) {
+    dispatch(actions.setRedirectTo('/login'))
+  } else {
+    dispatch(actions.setErrMsg(response.data.msg))
+  }
+}
+export const resetCurUser = (): ThunkType => async (dispatch) => {
+  dispatch(actions.setUserData(initCurUserState))
 }
 
-
-// export const register = (username: string, password: string): ThunkType => async () => {
-  // await authApi.register(username, password)
-// }
-// export const updateUserData = (avatar: File, bio: string): ThunkType => async (dispatch, getState) => {
-  // const username = getState().auth.authUser.username
-  // await authApi.updateUserData(avatar, bio, 'username')
-// }
-// export const like = (postId: number): ThunkType => async (dispatch, getState) => {
-  // const userId = getState().auth.authUser.id
-  // await authApi.like(postId, 11)
-// }
-// export const follow = (followedUserId: number): ThunkType => async (dispatch, getState) => {
-  // const userId = getState().auth.authUser.id
-  // await authApi.follow(followedUserId, 11)
-// }
 
 
 // types
@@ -85,4 +95,6 @@ type ThunkType = BaseThunkType<Actions>
 interface AuthState {
   curUser: CurUser
   errMsg: string
+  isInitialized: boolean
+  redirectTo: string
 }

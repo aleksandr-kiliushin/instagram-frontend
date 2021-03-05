@@ -7,16 +7,17 @@ import { CurUser } from '../../types/types'
 
 interface Props {
   curUser: CurUser
-  logout: () => void
+  resetCurUser: () => void
 }
 
-const Header: React.FC<Props> = ({curUser, logout}) => {
+const Header: React.FC<Props> = ({curUser, resetCurUser}) => {
   return (
     <div className="header">
       <div>
         <HeaderLogo />
         <Search />
-        <HeaderBtnPane curUser={curUser} logout={logout} />
+        <HeaderBtnPane curUser={curUser}
+        resetCurUser={resetCurUser} />
       </div>
     </div>
   )

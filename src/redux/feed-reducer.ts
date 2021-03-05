@@ -31,7 +31,9 @@ export const actions = {
 }
 
 
-
+export const addComment = (): ThunkType => async () => {
+  console.log(123)
+}
 // export const addComment = (body: string, postId: number): ThunkType => async (dispatch, getState) => {
   // const authorId = getState().auth.id
 //   await feedApi.addComment(11, body, postId)

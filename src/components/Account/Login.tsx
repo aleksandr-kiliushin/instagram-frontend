@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import HeaderLogo from '../Header/HeaderLogo'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 import { RootState } from '../../redux/store'
-import { login, actions } from '../../redux/auth-reducer'
+import { actions, login } from '../../redux/auth-reducer'
 
 
 const Login: React.FC<Props> = ({errMsg, id, login, setErrMsg}) => {
   
   const history = useHistory()
 
-  const [username, setUsername] = useState('user7')
-  const [password, setPassword] = useState('user7password')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const onLogin = () => {
     login(username, password)
   }
@@ -24,21 +25,25 @@ const Login: React.FC<Props> = ({errMsg, id, login, setErrMsg}) => {
     if (errMsg) {
       setTimeout(() => {
         setErrMsg('')
-      }, 5000);
+      }, 5000)
     }
   }, [errMsg, setErrMsg])
 
 
   return (
-    <div className="accWindow">
-      <HeaderLogo />
-      <input onChange={e => setUsername(e.target.value)} type="text" value={username}/>
-      <input onChange={e => setPassword(e.target.value)} type="text" value={password}/>
-      {errMsg ? <p style={{color: 'red'}}>{errMsg}</p> : null}
-      <button onClick={onLogin}>Log in</button>
-      <button disabled>Forgot password?</button>
+    <div className="acc">
+      <h1>Instagram</h1>
+
+      <TextField label="Username" onChange={e => setUsername(e.target.value)} type="text" value={username} />
+      <TextField label="Password" onChange={e => setPassword(e.target.value)} type="password" value={password} />
+      <Button onClick={onLogin}>Log in</Button>
+
+      <div className="err">
+        {errMsg ? <p>{errMsg}</p> : null}
+      </div>
+
       <p>Don't have an account?</p>
-      <button onClick={() => history.push('/register')}>Sign up</button>
+      <Button onClick={() => history.push('/register')}>Sign up</Button>
     </div>
   )
 }
@@ -50,7 +55,7 @@ const mapStateToProps = (state: RootState): MapStateProps => ({
 
 const {setErrMsg} = {...actions}
 const mapDispatchToProps: MapDispatchProps = {
-  setErrMsg, 
+  setErrMsg,
   login,
 }
 

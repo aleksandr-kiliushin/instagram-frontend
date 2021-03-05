@@ -5,7 +5,6 @@ export const instance = axios.create({
 	baseURL: 'http://localhost:8000/api/',
 	headers: {
 		// 'Authorization': `Token ${localStorage.getItem('token')}`,
-		// 'token': localStorage.getItem('token'),
-		// 'token': 'fe55593b0029e0cd9c26eb0971c22cd35aec4c0a',
+		'Authorization': localStorage.getItem('token'),
 	}
 })

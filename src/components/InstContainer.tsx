@@ -1,16 +1,15 @@
 import React from 'react'
 import Header from './Header/Header'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { RootState } from '../redux/store'
 import { CurUser } from '../types/types'
-import {logout} from '../redux/auth-reducer'
+import { resetCurUser } from '../redux/auth-reducer'
 
 
-const InstContainer: React.FC<Props> = ({curUser, logout}) => {
-
+const InstContainer: React.FC<Props> = ({curUser, resetCurUser}) => {
   return (
     <div>
-      <Header curUser={curUser} logout={logout}/>
+      <Header curUser={curUser} resetCurUser={resetCurUser} />
     </div>
   )
 }
@@ -19,9 +18,9 @@ const mapStateToProps = (state: RootState): MapStatePropsType => ({
   curUser: state.auth.curUser,
 })
 
-
+// const {} = {...actions}
 const mapDispatchToProps: MapDispatchPropsType = {
-  logout,
+  resetCurUser,
 }
 
 
@@ -38,6 +37,6 @@ type MapStatePropsType = {
   curUser: CurUser
 }
 type MapDispatchPropsType = {
-  logout: () => void
+  resetCurUser: () => void
 }
 type Props = MapStatePropsType & MapDispatchPropsType

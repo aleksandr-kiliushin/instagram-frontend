@@ -3,10 +3,10 @@ import feedReducer from './feed-reducer'
 import thunkMw from 'redux-thunk'
 import { ThunkAction } from 'redux-thunk'
 import authReducer from './auth-reducer'
-import appReducer from './app-reducer'
+// import appReducer from './app-reducer'
 
 const rootReducer = combineReducers({
-  app: appReducer,
+  // app: appReducer,
   auth: authReducer,
   feed: feedReducer,
 })
