@@ -9,9 +9,18 @@ import { Notice } from '../../types/types'
 import AccNotice from './AccNotice'
 
 
-const Login: React.FC<Props> = ({notice, id, login, setNotice}) => {
+const Login: React.FC<Props> = ({id, login, notice, redirectTo, setNotice, setRedirectTo}) => {
+
+
+  useEffect(() => {
+    if (redirectTo) {
+      setRedirectTo(null)
+    }
+  }, [redirectTo, setRedirectTo])
+
   
   const history = useHistory()
+  
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -31,7 +40,9 @@ const Login: React.FC<Props> = ({notice, id, login, setNotice}) => {
 
   const onLogin = () => login(username, password)
   useEffect(() => {
-    if (id) history.push('/')
+    if (id) {
+      history.push('/')
+    }
   }, [history, id])
 
 
@@ -52,14 +63,16 @@ const Login: React.FC<Props> = ({notice, id, login, setNotice}) => {
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
-  notice: state.auth.notice,
   id: state.auth.curUser.id,
+  notice: state.auth.notice,
+  redirectTo: state.auth.redirectTo,
 })
 
-const {setNotice} = {...actions}
+const {setNotice, setRedirectTo} = {...actions}
 const mapDispatchToProps: MapDispatchProps = {
-  setNotice,
   login,
+  setNotice,
+  setRedirectTo,
 }
 
 export default connect
@@ -71,11 +84,13 @@ export default connect
 // types
 
 type MapStateProps = {
-  notice: Notice
   id: number
+  notice: Notice
+  redirectTo: string | null
 }
 type MapDispatchProps = {
   login: (username: string, password: string) => void
   setNotice: (notice: Notice) => void
+  setRedirectTo: (to: string | null) => void
 }
 type Props = MapStateProps & MapDispatchProps

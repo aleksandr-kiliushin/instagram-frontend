@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import InstContainer from './components/InstContainer'
 import Login from './components/Account/Login'
 import Register from './components/Account/Register'
+import Header from './components/Header/Header'
 import { RootState } from './redux/store'
 import { connect } from 'react-redux'
 import { initAuth } from './redux/auth-reducer'
@@ -24,7 +24,7 @@ const App: React.FC<Props> = ({initAuth, isInitialized}) => {
     <Router>
       <div className="app">
         <Switch>
-          <Route exact path="/" component={InstContainer} />
+          <Route exact path="/" component={Header} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
         </Switch>
