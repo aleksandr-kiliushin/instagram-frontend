@@ -1,22 +1,22 @@
-import { BaseThunkType, InferActions } from './store';
-import {InstState, PostType} from '../types/types'
-// import {feedApi} from '../api/feed-api'
+import { FeedState, PostType } from '../types/types'
+import { BaseThunkType, InferActions } from './store'
+import { feedApi } from '../api/feed-api'
 
 
-const initialState: InstState = {
-  isInitializing: false,
+const initialState: FeedState = {
+  isLoading: false,
   posts: [],
 }
 
-export default function feedReducer(state: InstState = initialState, action: Actions): InstState {
+export default function feedReducer(state: FeedState = initialState, action: Actions): FeedState {
 
   switch (action.type) {
 
-    case 'SET_IS_INITIALIZING': {
-      return {...state, isInitializing: action.isInitializing}
-    }
+    // case 'SET_IS_LOADING': {
+    //   return {...state, isLoading: action.isLoading}
+    // }
 
-    case 'SET_INIT_POSTS': {
+    case 'SET_POSTS': {
       return {...state, posts: action.posts}
     }
 
@@ -26,14 +26,29 @@ export default function feedReducer(state: InstState = initialState, action: Act
 }
 
 export const actions = {
-  setIsInitializing: (isInitializing: boolean) => ({type: 'SET_IS_INITIALIZING', isInitializing} as const),
-  setPosts: (posts: PostType[]) => ({type: 'SET_INIT_POSTS', posts} as const),
+  // setIsLoading: (isLoading: boolean) => ({type: 'SET_IS_LOADING', isLoading} as const),
+  setPosts: (posts: PostType[]) => ({type: 'SET_POSTS', posts} as const),
 }
 
 
-export const addComment = (): ThunkType => async () => {
-  console.log(123)
+export const reqAndSetPosts = (): ThunkType => async (dispatch) => {
+  const response = await feedApi.requestPosts()
+  if (response.status === 200) {
+    dispatch(actions.setPosts(response.data))
+  }
 }
+export const addPost = (caption: string, images: FileList): ThunkType => async () => {
+  const response = await feedApi.addPost(caption, images)
+  if (response.status === 202) {
+    alert('Error during publishing post.')
+  }
+}
+
+// Old.
+
+// export const addComment = (): ThunkType => async () => {
+//   console.log(123)
+// }
 // export const addComment = (body: string, postId: number): ThunkType => async (dispatch, getState) => {
   // const authorId = getState().auth.id
 //   await feedApi.addComment(11, body, postId)

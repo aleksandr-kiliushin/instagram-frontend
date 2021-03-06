@@ -20,7 +20,7 @@ const Login: React.FC<Props> = ({id, login, notice, redirectTo, setNotice, setRe
 
   
   const history = useHistory()
-  
+
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -30,11 +30,11 @@ const Login: React.FC<Props> = ({id, login, notice, redirectTo, setNotice, setRe
   useEffect(() => {
     if (username && password) {
       setIsDisabled(false)
+      setNotice(null)
     }
     else {
       setIsDisabled(true)
     }
-    setNotice(null)
   }, [password, setIsDisabled, setNotice, username])
 
 

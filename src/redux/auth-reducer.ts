@@ -1,11 +1,12 @@
-import { AuthState, CurUser, Notice } from './../types/types'
+import { AuthState, User, Notice } from './../types/types'
 import { authApi } from '../api/auth-api'
 import { BaseThunkType, InferActions } from './store'
 
 
-export const initCurUserState: CurUser = {
+export const initCurUserState: User = {
   avatar: 'http://localhost:8000/media/static/unauthorized_user_avatar.png',
   id: 0,
+  is_followed: false,
   username: '',
 }
 
@@ -24,11 +25,11 @@ export default function authReducer(state: AuthState = initialState, action: Act
     case 'auth/SET_USER_DATA': {
       return {
         ...state,
-        curUser: {avatar: action.avatar, id: action.id, username: action.username},
+        curUser: {...action},
       }
     }
 
-    case 'auth/SET_ERR_MSG': {
+    case 'auth/SET_NOTICE': {
       return {
         ...state,
         notice: action.notice ? {...action.notice} : null
@@ -49,13 +50,14 @@ export default function authReducer(state: AuthState = initialState, action: Act
 }
 
 export const actions = {
-  setNotice: (notice: Notice) => ({type: 'auth/SET_ERR_MSG', notice} as const),
+  setNotice: (notice: Notice) => ({type: 'auth/SET_NOTICE', notice} as const),
   setIsInitialized: (is: boolean) => ({type: 'auth/SET_IS_INITIALIZED', is} as const),
   setRedirectTo: (to: string | null) => ({type: 'auth/SET_REDIRECT_TO', to} as const),
-  setUserData: (data: CurUser) => ({
+  setUserData: (data: User) => ({
     type: 'auth/SET_USER_DATA',
     avatar: data.avatar,
     id: data.id,
+    is_followed: data.is_followed,
     username: data.username,
   } as const),
 }

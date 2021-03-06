@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
-// import './Post.css'
 
-interface PropsType {
-  postId: number
-  addComment: (body: string, postId: number) => void
-}
 
 const AddComment: React.FC<PropsType> = ({postId, addComment}) => {
   const [body, setBody] = useState('')
@@ -23,3 +18,12 @@ const AddComment: React.FC<PropsType> = ({postId, addComment}) => {
 }
 
 export default AddComment
+
+
+
+// types
+
+interface PropsType {
+  postId: number
+  addComment: (body: string, postId: number) => void
+}

@@ -1,81 +1,65 @@
-// import React, { useEffect, useState } from 'react'
+// import { Button } from '@material-ui/core'
+// import React from 'react'
 // import { connect } from 'react-redux'
-// import { useHistory } from 'react-router-dom'
-// import TextField from '@material-ui/core/TextField'
-// import Button from '@material-ui/core/Button'
 // import { RootState } from '../../redux/store'
-// import { actions, login } from '../../redux/auth-reducer'
-// import { Notice } from '../../types/types'
+// import { CurUser } from '../../types/types'
+// import Header from '../Header/Header'
 
 
-// const Login: React.FC<Props> = ({notice, id, login, setNotice}) => {
-  
-//   const history = useHistory()
-
-//   const [username, setUsername] = useState('')
-//   const [password, setPassword] = useState('')
-
-
-//   const [isDisabled, setIsDisabled] = useState(true)
-//   useEffect(() => {
-//     if (username && password) {
-//       setIsDisabled(false)
-//     }
-//     else {
-//       setIsDisabled(true)
-//     }
-//     setNotice(null)
-//   }, [password, setIsDisabled, setNotice, username])
-
-
-//   const onLogin = () => login(username, password)
-//   useEffect(() => {
-//     if (id) history.push('/')
-//   }, [history, id])
-
-
+// const Profile: React.FC<Props> = ({curUser}) => {
 //   return (
-//     <div className="acc">
-//       <h1>Instagram</h1>
+//     <>
+//       <Header />
+//       <div className="profile">
 
-//       <TextField label="Username" onChange={e => setUsername(e.target.value)} type="text" value={username} />
-//       <TextField label="Password" onChange={e => setPassword(e.target.value)} type="password" value={password} />
-//       <Button disabled={isDisabled} onClick={onLogin}>Log in</Button>
 
-//       <AccNotice notice={notice} />
+//         <div className="profile__header">
 
-//       <p>Don't have an account?</p>
-//       <Button onClick={() => history.push('/register')}>Sign up</Button>
-//     </div>
+//           <div className="profile__header__avatar roundContainer">
+//             <img src={curUser.avatar} alt=""/>
+//           </div>
+
+//           <div className="profile__header__dataPane">
+//             <div>
+//               <h2>{curUser.username}</h2>
+//               <Button color="primary">Follow</Button>
+//             </div>
+//             <div>
+//             </div>
+//           </div>
+
+//         </div>
+
+
+//         <div className="profile__posts">
+//           posts
+//         </div>
+
+//       </div>
+//     </>
 //   )
 // }
 
 // const mapStateToProps = (state: RootState): MapStateProps => ({
-//   notice: state.auth.notice,
-//   id: state.auth.curUser.id,
+//   curUser: state.auth.curUser,
 // })
 
-// const {setNotice} = {...actions}
+// // const {setNotice} = {...actions}
 // const mapDispatchToProps: MapDispatchProps = {
-//   setNotice,
-//   login,
 // }
 
 // export default connect
 //   <MapStateProps, MapDispatchProps, {}, RootState>
-//   (mapStateToProps, mapDispatchToProps)(Login)
+//   (mapStateToProps, mapDispatchToProps)(Profile)
 
 
 
 // // types
 
 // type MapStateProps = {
-//   notice: Notice
-//   id: number
+//   curUser: CurUser
 // }
 // type MapDispatchProps = {
-//   login: (username: string, password: string) => void
-//   setNotice: (notice: Notice) => void
 // }
 // type Props = MapStateProps & MapDispatchProps
 

@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import { PostType } from '../../../types/types'
+import { PostType } from '../../../../types/types'
 
-interface Props {
-  images: PostType['images']
-}
 
 const PostCarousel: React.FC<Props> = ({images}) => {
   const [imageIndex, setImageIndex] = useState(0)
@@ -36,3 +33,9 @@ const PostCarousel: React.FC<Props> = ({images}) => {
 }
 
 export default PostCarousel
+
+
+
+interface Props {
+  images: PostType['images']
+}

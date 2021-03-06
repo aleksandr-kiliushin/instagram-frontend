@@ -18,7 +18,7 @@ const Register: React.FC<Props> = ({notice, redirectTo, register, setNotice, set
   const [password2, setPassword2] = useState('')
 
 
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isDisabled, setIsDisabled] = useState(false)
 
 
   useEffect(() => {

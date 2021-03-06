@@ -1,12 +1,13 @@
 export interface AuthState {
-  curUser: CurUser
+  curUser: User
   notice: Notice
   isInitialized: boolean
   redirectTo: string | null
 }
-export interface CurUser {
+export interface User {
   avatar: string
   id: number
+  is_followed: boolean
   username: string
 }
 export type Notice = {
@@ -15,45 +16,59 @@ export type Notice = {
 } | null
 
 
-
-
-
+export interface FeedState {
+  isLoading: boolean
+  posts: PostType[]
+}
+export interface PostType {
+  caption: string
+  comments: CommentType[]
+  id: number
+  images: string[]
+  is_liked: boolean
+  owner: User
+  total_likes: number
+}
+export interface CommentType {
+  author: User
+  body: string
+}
 
 // old
 
-export interface UserProfile {
-  avatar: string
-  bio: string
-}
+// export interface UserProfile {
+//   avatar: string
+//   bio: string
+// }
 
-export interface User {
-  id: number
-  is_followed: boolean
-  profile: UserProfile
-  username: string
-}
+// export interface User {
+//   id: number
+//   is_followed: boolean
+//   profile: UserProfile
+//   username: string
+// }
 
-export interface Comment {
-  id: number
-  added_at: string
-  body: string
-  author: User
-  post: number
-}
+// export interface Comment {
+//   id: number
+//   added_at: string
+//   body: string
+//   author: User
+//   post: number
+// }
 
-export interface PostType {
-  caption: string
-  comments: Comment[]
-  id: number
-  is_liked: boolean
-  images: string[]
-  owner: User
-  published_at: string
-  total_likes: number
-}
+// export interface PostType {
+//   caption: string
+//   comments: Comment[]
+//   id: number
+//   is_liked: boolean
+//   images: string[]
+//   owner: User
+//   published_at: string
+//   total_likes: number
+// }
 
-export interface InstState {
-  isInitializing: boolean
-  posts: PostType[]
-}
+// export interface InstState {
+//   isInitializing: boolean
+//   posts: PostType[]
+// }
 

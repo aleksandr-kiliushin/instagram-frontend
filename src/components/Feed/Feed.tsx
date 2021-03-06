@@ -1,48 +1,44 @@
 import React from 'react'
-import {CircularProgress} from '@material-ui/core'
-import Post from './Post/Post'
-import {PostType, User} from './../../types/types'
+import { connect } from 'react-redux'
+import { reqAndSetPosts } from '../../redux/feed-reducer'
+import { RootState } from '../../redux/store'
+import { PostType } from '../../types/types'
+import Header from './Header/Header'
+import PostList from './PostList/PostList'
 
-interface PropsType {
-  isInitializing: boolean
-  posts: PostType[]
-  authUser: {avatar: string, id: number, username: string}
-  addComment: (body: string, postId: number) => void
-  deleteComment: (commenId: number) => void
-  deletePost: (postId: number) => void
-  initRequestAndSetPosts: () => void
-  like: (postId: number) => void
-  follow: (followed_user_id: number) => void
-}
 
-const Feed: React.FC<PropsType> = ({
-  isInitializing, posts, addComment, deleteComment, deletePost, initRequestAndSetPosts, like, authUser, follow
-}) => {
-
-  const postsJsx = (
-    <div className="feed">
-      {posts.map((post) => (
-        <Post
-          caption={post.caption}
-          comments={post.comments}
-          id={post.id}
-          is_liked={post.is_liked}
-          images={post.images}
-          key={post.id}
-          owner={post.owner}
-          published_at={post.published_at}
-          total_likes={post.total_likes}
-          addComment={addComment}
-          deleteComment={deleteComment}
-          deletePost={deletePost}
-          like={like}
-          follow={follow}
-        />
-      ))}
+const Feed: React.FC<Props> = ({posts, reqAndSetPosts}) => {
+  return (
+    <div>
+      <Header />
+      <PostList posts={posts} reqAndSetPosts={reqAndSetPosts} />
     </div>
   )
-
-  return isInitializing ? <CircularProgress /> : postsJsx
 }
 
-export default Feed
+const mapStateToProps = (state: RootState): MapStateProps => ({
+  posts: state.feed.posts,
+})
+
+// const {} = {...actions}
+const mapDispatchToProps: MapDispatchProps = {
+  reqAndSetPosts,
+}
+
+
+export default connect
+  <MapStateProps, MapDispatchProps, {}, RootState>
+  (mapStateToProps, mapDispatchToProps)(Feed)
+
+
+
+
+// types
+
+type MapStateProps = {
+  posts: PostType[]
+}
+type MapDispatchProps = {
+  reqAndSetPosts: () => void
+}
+type Props = MapStateProps & MapDispatchProps
