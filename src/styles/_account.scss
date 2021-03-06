@@ -21,13 +21,18 @@
     white-space: nowrap;
     background-position: 0 -130px;
   }
-  .err {
-    color: rgb(182, 0, 0);
+  .acc_notice {
     height: 45px;
     display: flex;
     > p {
       margin: auto;
     }
+  }
+  .err {
+    color: rgb(180, 0, 0);
+  }
+  .suc {
+    color: rgb(0, 180, 0);
   }
   > p {
     color: rgba($color: black, $alpha: 0.6);

@@ -1,4 +1,4 @@
-import { CurUser } from './../types/types'
+import { AuthState, CurUser, Notice } from './../types/types'
 import { authApi } from '../api/auth-api'
 import { BaseThunkType, InferActions } from './store'
 
@@ -12,9 +12,9 @@ export const initCurUserState: CurUser = {
 
 const initialState: AuthState = {
   curUser: initCurUserState,
-  errMsg: '',
+  notice: null,
   isInitialized: false,
-  redirectTo: '',
+  redirectTo: null,
 }
 
 export default function authReducer(state: AuthState = initialState, action: Actions): AuthState {
@@ -29,7 +29,10 @@ export default function authReducer(state: AuthState = initialState, action: Act
     }
 
     case 'auth/SET_ERR_MSG': {
-      return {...state, errMsg: action.msg}
+      return {
+        ...state,
+        notice: action.notice ? {...action.notice} : null
+      }
     }
 
     case 'auth/SET_REDIRECT_TO': {
@@ -46,14 +49,14 @@ export default function authReducer(state: AuthState = initialState, action: Act
 }
 
 export const actions = {
-  setErrMsg: (msg: string) => ({type: 'auth/SET_ERR_MSG', msg} as const),
+  setNotice: (notice: Notice) => ({type: 'auth/SET_ERR_MSG', notice} as const),
   setIsInitialized: (is: boolean) => ({type: 'auth/SET_IS_INITIALIZED', is} as const),
-  setRedirectTo: (to: string) => ({type: 'auth/SET_REDIRECT_TO', to} as const),
+  setRedirectTo: (to: string | null) => ({type: 'auth/SET_REDIRECT_TO', to} as const),
   setUserData: (data: CurUser) => ({
     type: 'auth/SET_USER_DATA',
     avatar: data.avatar,
     id: data.id,
-    username: data.username
+    username: data.username,
   } as const),
 }
 
@@ -70,16 +73,18 @@ export const login = (username: string, password: string): ThunkType => async (d
   if (response.status === 200) {
 		localStorage.setItem('token', response.data.token)
     dispatch(actions.setUserData(response.data))
+    dispatch(actions.setRedirectTo('/'))
   } else {
-    dispatch(actions.setErrMsg(response.data.msg))
+    dispatch(actions.setNotice({body: response.data.msg, kind: 'err'}))
   }
 }
 export const register = (username: string, password: string): ThunkType => async (dispatch) => {
   const response = await authApi.register(username, password)
   if (response.status === 200) {
     dispatch(actions.setRedirectTo('/login'))
+    dispatch(actions.setNotice({body: response.data.msg, kind: 'suc'}))
   } else {
-    dispatch(actions.setErrMsg(response.data.msg))
+    dispatch(actions.setNotice({body: response.data.msg, kind: 'err'}))
   }
 }
 export const resetCurUser = (): ThunkType => async (dispatch) => {
@@ -91,10 +96,3 @@ export const resetCurUser = (): ThunkType => async (dispatch) => {
 // types
 type Actions = InferActions<typeof actions>
 type ThunkType = BaseThunkType<Actions>
-
-interface AuthState {
-  curUser: CurUser
-  errMsg: string
-  isInitialized: boolean
-  redirectTo: string
-}

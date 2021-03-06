@@ -2,49 +2,48 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useHistory } from 'react-router'
-import Alert from '@material-ui/lab/Alert'
 import { actions, register } from '../../redux/auth-reducer'
-import { Button, createStyles, IconButton, makeStyles, TextField, Theme } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
+import { Button, TextField } from '@material-ui/core'
+import { Notice } from '../../types/types'
+import AccNotice from './AccNotice'
 
 
-
-import Collapse from '@material-ui/core/Collapse'
-
-
-const Register: React.FC<Props> = ({errMsg, redirectTo, register, setErrMsg, setRedirectTo}) => {
+const Register: React.FC<Props> = ({notice, redirectTo, register, setNotice, setRedirectTo}) => {
 
   const history = useHistory()
+
 
   const [username, setUsername] = useState('')
   const [password1, setPassword1] = useState('')
   const [password2, setPassword2] = useState('')
-  
-  const onRegister = () => {
+
+
+  const [isDisabled, setIsDisabled] = useState(true)
+
+
+  useEffect(() => {
     if (username && password1 && password2) {
       if (password1 === password2) {
-        register(username, password1)
+        setIsDisabled(false)
+        setNotice(null)
       } else {
-        setErrMsg('Passwords don\'t match.')
+        setIsDisabled(true)
+        setNotice({body: 'Passwords don\'t match.', kind: 'err'})
       }
     } else {
-      setErrMsg('Each field is required.')
+      setIsDisabled(true)
     }
+  }, [username, password1, password2, setIsDisabled, setNotice])
+
+  
+  const onRegister = () => {
+    register(username, password1)
   }
 
 
   useEffect(() => {
-    if (errMsg) {
-      setTimeout(() => {
-        setErrMsg('')
-      }, 5000)
-    }
-  }, [errMsg, setErrMsg])
-
-
-  useEffect(() => {
     if (redirectTo) {
-      setRedirectTo('')
+      setRedirectTo(null)
       history.push(redirectTo)
     }
   }, [history, redirectTo, setRedirectTo])
@@ -58,29 +57,26 @@ const Register: React.FC<Props> = ({errMsg, redirectTo, register, setErrMsg, set
 
       <TextField label="Password" onChange={e => setPassword1(e.target.value)} type="password" value={password1}/>
       <TextField label="Confirm password" onChange={e => setPassword2(e.target.value)} type="password" value={password2}/>
-      <Button onClick={onRegister}>Register</Button>
+      <Button disabled={isDisabled} onClick={onRegister}>Register</Button>
 
-      <div className="err">
-        {errMsg ? <p>{errMsg}</p> : null}
-      </div>
+      <AccNotice notice={notice} />
 
       <p>Already have an accout?</p>
       <Button onClick={() => history.push('/login')}>Sign in</Button>
 
-      <TransitionAlerts />
     </div>
   )
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
-  errMsg: state.auth.errMsg,
+  notice: state.auth.notice,
   redirectTo: state.auth.redirectTo,
 })
 
-const {setErrMsg, setRedirectTo} = {...actions}
+const {setNotice, setRedirectTo} = {...actions}
 const mapDispatchToProps: MapDispatchProps = {
   register,
-  setErrMsg,
+  setNotice,
   setRedirectTo,
 }
 
@@ -93,66 +89,12 @@ export default connect
 // types
 
 type MapStateProps = {
-  errMsg: string
-  redirectTo: string
+  notice: Notice
+  redirectTo: string | null
 }
 type MapDispatchProps = {
   register: (username: string, password: string) => void
-  setErrMsg: (msg: string) => void
-  setRedirectTo: (to: string) => void
+  setNotice: (notice: Notice) => void
+  setRedirectTo: (to: string | null) => void
 }
 type Props = MapStateProps & MapDispatchProps
-
-
-
-
-
-
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-  }),
-);
-
-function TransitionAlerts() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-
-  return (
-    <div className={classes.root}>
-      <Collapse in={open}>
-        <Alert
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          Close me!
-        </Alert>
-      </Collapse>
-      <Button
-        disabled={open}
-        variant="outlined"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Re-open
-      </Button>
-    </div>
-  );
-}

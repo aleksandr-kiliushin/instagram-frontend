@@ -27,7 +27,7 @@ export const authApi = {
 		return response
 	},
 	async register(username: string, password: string) {
-		const response: CustomAxiosRes<{}> = await instance.post('register/', {username, password})
+		const response: CustomAxiosRes<{msg: string}> = await instance.post('register/', {username, password})
 		return response
 	},
 }

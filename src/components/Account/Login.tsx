@@ -5,29 +5,34 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { RootState } from '../../redux/store'
 import { actions, login } from '../../redux/auth-reducer'
+import { Notice } from '../../types/types'
+import AccNotice from './AccNotice'
 
 
-const Login: React.FC<Props> = ({errMsg, id, login, setErrMsg}) => {
+const Login: React.FC<Props> = ({notice, id, login, setNotice}) => {
   
   const history = useHistory()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const onLogin = () => {
-    login(username, password)
-  }
+
+
+  const [isDisabled, setIsDisabled] = useState(true)
+  useEffect(() => {
+    if (username && password) {
+      setIsDisabled(false)
+    }
+    else {
+      setIsDisabled(true)
+    }
+    setNotice(null)
+  }, [password, setIsDisabled, setNotice, username])
+
+
+  const onLogin = () => login(username, password)
   useEffect(() => {
     if (id) history.push('/')
   }, [history, id])
-
-
-  useEffect(() => {
-    if (errMsg) {
-      setTimeout(() => {
-        setErrMsg('')
-      }, 5000)
-    }
-  }, [errMsg, setErrMsg])
 
 
   return (
@@ -36,11 +41,9 @@ const Login: React.FC<Props> = ({errMsg, id, login, setErrMsg}) => {
 
       <TextField label="Username" onChange={e => setUsername(e.target.value)} type="text" value={username} />
       <TextField label="Password" onChange={e => setPassword(e.target.value)} type="password" value={password} />
-      <Button onClick={onLogin}>Log in</Button>
+      <Button disabled={isDisabled} onClick={onLogin}>Log in</Button>
 
-      <div className="err">
-        {errMsg ? <p>{errMsg}</p> : null}
-      </div>
+      <AccNotice notice={notice} />
 
       <p>Don't have an account?</p>
       <Button onClick={() => history.push('/register')}>Sign up</Button>
@@ -49,13 +52,13 @@ const Login: React.FC<Props> = ({errMsg, id, login, setErrMsg}) => {
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
-  errMsg: state.auth.errMsg,
+  notice: state.auth.notice,
   id: state.auth.curUser.id,
 })
 
-const {setErrMsg} = {...actions}
+const {setNotice} = {...actions}
 const mapDispatchToProps: MapDispatchProps = {
-  setErrMsg,
+  setNotice,
   login,
 }
 
@@ -68,11 +71,11 @@ export default connect
 // types
 
 type MapStateProps = {
-  errMsg: string
+  notice: Notice
   id: number
 }
 type MapDispatchProps = {
   login: (username: string, password: string) => void
-  setErrMsg: (msg: string) => void
+  setNotice: (notice: Notice) => void
 }
 type Props = MapStateProps & MapDispatchProps

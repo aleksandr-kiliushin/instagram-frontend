@@ -1,9 +1,18 @@
+export interface AuthState {
+  curUser: CurUser
+  notice: Notice
+  isInitialized: boolean
+  redirectTo: string | null
+}
 export interface CurUser {
   avatar: string
   id: number
   username: string
 }
-
+export type Notice = {
+  body: string
+  kind: 'err' | 'suc'
+} | null
 
 
 
