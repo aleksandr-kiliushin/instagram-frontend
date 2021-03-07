@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useHistory } from 'react-router'
-import { actions, register } from '../../redux/auth-reducer'
+import { actions, register } from '../../redux/user-reducer'
 import { Button, TextField } from '@material-ui/core'
 import { Notice } from '../../types/types'
 import AccNotice from './AccNotice'
@@ -69,8 +69,8 @@ const Register: React.FC<Props> = ({notice, redirectTo, register, setNotice, set
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
-  notice: state.auth.notice,
-  redirectTo: state.auth.redirectTo,
+  notice: state.user.notice,
+  redirectTo: state.user.redirectTo,
 })
 
 const {setNotice, setRedirectTo} = {...actions}

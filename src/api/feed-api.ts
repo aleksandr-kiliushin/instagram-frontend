@@ -1,12 +1,8 @@
 import { PostType } from '../types/types'
-import { instance, CustomAxiosRes } from './api'
+import instance, { CustomAxiosRes } from './api'
 
 
 export const feedApi = {
-	async requestPosts() {
-		const response: CustomAxiosRes<PostType[]> = await instance.get('posts/')
-		return response
-	},
 	async addPost(caption: string, images: FileList) {
     const formData = new FormData()
     formData.append('caption', caption)
@@ -16,6 +12,14 @@ export const feedApi = {
     const response: CustomAxiosRes<{msg: string}> = await instance.post(
 			'posts/', formData, {headers: {'content-type': 'multipart/form-data'}}
 		)
+		return response
+	},
+	async deletePost(id: number) {
+		const response: CustomAxiosRes<{msg: string}> = await instance.delete(`posts/${id}/`)
+		return response
+	},
+	async requestPosts() {
+		const response: CustomAxiosRes<PostType[]> = await instance.get('posts/')
 		return response
 	},
 	// async deletePost(postId: number) {

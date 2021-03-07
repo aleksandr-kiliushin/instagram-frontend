@@ -1,17 +1,9 @@
 import React from 'react'
-import { User } from '../../../../types/types'
-import CommonModal from '../../../Common/CommonModal'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import { PostType, UserType } from '../../../../types/types'
+import PostModal from './PostModal'
 
 
-const PostHeader: React.FC<PropsType> = ({owner, postId}) => {
-
-  const options: {text: string, cb: () => void}[] = [
-    {text: 'Unfollow', cb: () => alert('Unfollowed.')},
-    {text: 'Delete post', cb: () => alert('Post has been deleted.')},
-  ]
-  
-
+const PostHeader: React.FC<PropsType> = ({curUserId, deletePost, follow, owner, postId, unfollow}) => {
   return (
     <div className="post__header">
       <div className="roundContainer post__header__avatarContainer">
@@ -20,7 +12,15 @@ const PostHeader: React.FC<PropsType> = ({owner, postId}) => {
       <div className="post__header__username">
         {owner.username}
       </div>
-      <CommonModal appearance={<MoreHorizIcon />} options={options} />
+      <PostModal
+        curUserId={curUserId}
+        deletePost={deletePost}
+        follow={follow}
+        isFollowed={owner.is_followed}
+        ownerId={owner.id}
+        postId={postId}
+        unfollow={unfollow}
+      />
     </div>
   )
 }
@@ -31,6 +31,10 @@ export default PostHeader
 
 
 interface PropsType {
-  owner: User
-  postId: number
+  curUserId: UserType['id']
+  deletePost: (id: PostType['id']) => void
+  follow: (id: UserType['id']) => void
+  owner: UserType
+  postId: PostType['id']
+  unfollow: (id: UserType['id']) => void
 }

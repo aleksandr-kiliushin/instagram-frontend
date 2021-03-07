@@ -37,36 +37,24 @@ const AddPostModal: React.FC<Props> = ({addPost}) => {
         <div className="modalOuter">
           <div className="modal">
 
-            {/* <TextField
-              inputProps={{style: {marginLeft: 50, marginRight: 5}}}
-              label="Post caption"
-              multiline
-              name="caption"
-              onChange={(e) => setCaption(e.target.value)}
-              rows={4}
-              value={caption}
-            /> */}
-
-          <div>
-            <textarea
-              className="modal__textarea"
-              onChange={(e) => setCaption(e.target.value)}
-              placeholder="Post caption"
-              rows={5}
-              value={caption}
-            />
-          </div>
-
-            {/* <input name="caption"   /> */}
+            <div>
+              <textarea
+                className="modal__textarea"
+                onChange={(e) => setCaption(e.target.value)}
+                placeholder="Post caption"
+                rows={5}
+                value={caption}
+              />
+            </div>
 
             <button>
-              <label htmlFor="test">
+              <label htmlFor="imageInput">
                 <div className="pointer">Select images</div>
-                <input onChange={onImageChange} type="file" id="test" />
+                <input id="imageInput" multiple onChange={onImageChange} type="file" />
               </label>
             </button>
 
-            <button onClick={onCommit} className="suc">Publish</button>
+            <button onClick={onCommit}>Publish</button>
             <button onClick={handleClose} className="err">Cancel</button>
           </div>
         </div>

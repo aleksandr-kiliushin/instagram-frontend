@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { RootState } from '../../redux/store'
-import { actions, login } from '../../redux/auth-reducer'
+import { actions, login } from '../../redux/user-reducer'
 import { Notice } from '../../types/types'
 import AccNotice from './AccNotice'
 
@@ -63,9 +63,9 @@ const Login: React.FC<Props> = ({id, login, notice, redirectTo, setNotice, setRe
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
-  id: state.auth.curUser.id,
-  notice: state.auth.notice,
-  redirectTo: state.auth.redirectTo,
+  id: state.user.curUser.id,
+  notice: state.user.notice,
+  redirectTo: state.user.redirectTo,
 })
 
 const {setNotice, setRedirectTo} = {...actions}

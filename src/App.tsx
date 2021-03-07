@@ -4,8 +4,9 @@ import Login from './components/Account/Login'
 import Register from './components/Account/Register'
 import { RootState } from './redux/store'
 import { connect } from 'react-redux'
-import { initAuth } from './redux/auth-reducer'
+import { initAuth } from './redux/user-reducer'
 import Feed from './components/Feed/Feed'
+import Users from './components/Users/Users'
 
 
 const App: React.FC<Props> = ({initAuth, isInitialized}) => {
@@ -27,6 +28,7 @@ const App: React.FC<Props> = ({initAuth, isInitialized}) => {
           <Route exact path="/" component={Feed} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/users" component={Users} />
         </Switch>
       </div>
     </Router>
@@ -34,7 +36,7 @@ const App: React.FC<Props> = ({initAuth, isInitialized}) => {
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
-  isInitialized: state.auth.isInitialized,
+  isInitialized: state.user.isInitialized,
 })
 
 // const {} = {...actions}

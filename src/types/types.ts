@@ -1,10 +1,11 @@
-export interface AuthState {
-  curUser: User
-  notice: Notice
+export interface UserState {
+  curUser: UserType
   isInitialized: boolean
+  notice: Notice
   redirectTo: string | null
+  users: UserType[]
 }
-export interface User {
+export interface UserType {
   avatar: string
   id: number
   is_followed: boolean
@@ -26,11 +27,11 @@ export interface PostType {
   id: number
   images: string[]
   is_liked: boolean
-  owner: User
+  owner: UserType
   total_likes: number
 }
 export interface CommentType {
-  author: User
+  author: UserType
   body: string
 }
 

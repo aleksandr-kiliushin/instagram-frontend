@@ -1,23 +1,33 @@
 import React from 'react'
-import { PostType } from '../../../../types/types'
+import { PostType, UserType } from '../../../../types/types'
 import PostHeader from './PostHeader'
 import PostCarousel from './PostCarousel'
 // import PostFooter from './PostFooter'
 
 
 const Post: React.FC<PropsType> = ({
-  // caption, comments,
-  postId,
+  curUserId,
+  deletePost,
+  follow,
   images,
   owner,
-  // total_likes, addComment, deleteComment, deletePost, like, is_liked, follow
+  postId,
+  unfollow,
 }) => {
   return (
     <article className="post">
-      <PostHeader owner={owner} postId={postId} />
+      <PostHeader
+        curUserId={curUserId}
+        deletePost={deletePost}
+        follow={follow}
+        owner={owner}
+        postId={postId}
+        unfollow={unfollow}
+      />
       <PostCarousel images={images} />
-      {/* <PostFooter total_likes={total_likes} like={like} postId={id} is_liked={is_liked} caption={caption}
-        comments={comments} owner={owner} deleteComment={deleteComment} addComment={addComment} /> */}
+      {/* <PostFooter
+      
+      /> */}
     </article>
   )
 }
@@ -26,14 +36,15 @@ export default Post
 
 
 
+
 // types
 
 type PropsType = {
-  // caption: PostType['caption']
-  // comments: PostType['comments']
+  curUserId: UserType['id']
+  deletePost: (id: PostType['id']) => void
+  follow: (id: UserType['id']) => void
   postId: PostType['id']
-  // is_liked: PostType['is_liked']
   images: PostType['images']
   owner: PostType['owner']
-  // total_likes: PostType['total_likes']
+  unfollow: (id: UserType['id']) => void
 }

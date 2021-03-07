@@ -31,18 +31,26 @@ export const actions = {
 }
 
 
-export const reqAndSetPosts = (): ThunkType => async (dispatch) => {
-  const response = await feedApi.requestPosts()
-  if (response.status === 200) {
-    dispatch(actions.setPosts(response.data))
-  }
-}
 export const addPost = (caption: string, images: FileList): ThunkType => async () => {
   const response = await feedApi.addPost(caption, images)
   if (response.status === 202) {
     alert('Error during publishing post.')
   }
 }
+export const deletePost = (id: number): ThunkType => async () => {
+  const response = await feedApi.deletePost(id)
+  if (response.status === 202) {
+    alert('Error during deleting post.')
+  }
+}
+export const reqAndSetPosts = (): ThunkType => async (dispatch) => {
+  const response = await feedApi.requestPosts()
+  if (response.status === 200) {
+    dispatch(actions.setPosts(response.data))
+  }
+}
+
+
 
 // Old.
 

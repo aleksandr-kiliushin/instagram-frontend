@@ -2,12 +2,12 @@ import {createStore, combineReducers, applyMiddleware, compose, Action} from 're
 import feedReducer from './feed-reducer'
 import thunkMw from 'redux-thunk'
 import { ThunkAction } from 'redux-thunk'
-import authReducer from './auth-reducer'
+import userReducer from './user-reducer'
 // import appReducer from './app-reducer'
 
 const rootReducer = combineReducers({
   // app: appReducer,
-  auth: authReducer,
+  user: userReducer,
   feed: feedReducer,
 })
 

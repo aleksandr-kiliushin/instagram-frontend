@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { PostType } from '../../../types/types'
+import { PostType, UserType } from '../../../types/types'
 import Post from './Post/Post'
 
 
-const PostList: React.FC<Props> = ({posts, reqAndSetPosts}) => {
+const PostList: React.FC<Props> = ({curUserId, follow, deletePost, posts, reqAndSetPosts, unfollow}) => {
 
   useEffect(() => {
     if (posts.length === 0) {
@@ -12,13 +12,17 @@ const PostList: React.FC<Props> = ({posts, reqAndSetPosts}) => {
   }, [posts, reqAndSetPosts])
 
   return (
-    <div className="feed">
+    <div className="content">
       {posts.map(post => (
         <Post
+          curUserId={curUserId}
+          deletePost={deletePost}
+          follow={follow}
           images={post.images}
           key={post.id}
-          postId={post.id}
           owner={post.owner}
+          postId={post.id}
+          unfollow={unfollow}
         />
       ))}
     </div>
@@ -27,8 +31,12 @@ const PostList: React.FC<Props> = ({posts, reqAndSetPosts}) => {
 
 
 interface Props {
+  curUserId: UserType['id']
+  deletePost: (id: PostType['id']) => void
+  follow: (id: UserType['id']) => void
   posts: PostType[]
   reqAndSetPosts: () => void
+  unfollow: (id: UserType['id']) => void
 }
 
 

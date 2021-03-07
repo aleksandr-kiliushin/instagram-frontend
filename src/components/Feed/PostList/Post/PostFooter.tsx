@@ -141,5 +141,5 @@
 
 // export default PostFooter
 
-const x = 432
+const x = 43
 export default x
