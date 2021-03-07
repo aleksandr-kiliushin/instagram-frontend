@@ -84,7 +84,7 @@
   position: relative;
 }
 
-.post__footer__btns {
+.post__footer__btnBar {
   padding: 0 16px;
   margin-top: 4px;
   display: flex;
@@ -126,13 +126,13 @@
   margin-top: 4px;
   display: block;
   margin-bottom: 4px;
-  p {
+  // p {
     color: rgba(var(--f52, 142, 142, 142), 1);
     font-size: 10px;
     letter-spacing: .2px;
     margin-bottom: 5px;
     text-transform: uppercase;
-  }
+  // }
 }
 
 .post__footer__comments {
@@ -220,7 +220,7 @@
 //   position: relative;
 // }
 
-.post__footer__addCommentOuter {
+.post__footer__addComment {
   border-top-color: rgb(239, 239, 239);
   border-top-style: solid;
   border-top-width: 1px;
@@ -242,93 +242,94 @@
   position: relative;
   text-size-adjust: 100%;
   width: auto;
-  form {
-    align-items: center;
-    color: rgb(142, 142, 142);
+  align-items: center;
+  color: rgb(142, 142, 142);
+  display: flex;
+  flex-shrink: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-weight: 400;
+  height: 40px;
+  line-height: 18px;
+  position: relative;
+  text-size-adjust: 100%;
+  width: 100%;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 1;
+  position: relative;
+  > textarea {
+    appearance: none;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-size: auto;
+    border-bottom-color: rgb(38, 38, 38);
+    color: rgb(38, 38, 38);
+    column-count: auto;
+    cursor: text;
     display: flex;
-    flex-shrink: 0;
+    flex-direction: column;
+    flex-grow: 1;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-stretch: 100%;
     font-style: normal;
     font-weight: 400;
-    height: 40px;
+    height: 18px;
+    letter-spacing: normal;
     line-height: 18px;
-    position: relative;
+    max-height: 80px;
+    overflow-wrap: break-word;
+    resize: none;
+    text-align: start;
+    text-indent: 0px;
+    text-rendering: auto;
+    text-shadow: none;
     text-size-adjust: 100%;
-    width: 100%;
-    flex-direction: row;
-    flex-grow: 1;
-    flex-shrink: 1;
+    text-transform: none;
+    white-space: pre-wrap;
+    width: auto;
+    word-spacing: 0px;
+    writing-mode: horizontal-tb;
+  }
+  > button {
+    align-items: flex-start;
+    appearance: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    box-sizing: border-box;
+    color: rgb(0, 149, 246);
+    cursor: pointer;
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-stretch: 100%;
+    font-weight: 600;
+    height: 18px;
+    letter-spacing: normal;
     position: relative;
-    textarea {
-      appearance: none;
-      background-attachment: scroll;
-      background-clip: border-box;
-      background-color: rgba(0, 0, 0, 0);
-      border: 0;
-      background-image: none;
-      background-origin: padding-box;
-      background-position-x: 0px;
-      background-position-y: 0px;
-      background-size: auto;
-      border-bottom-color: rgb(38, 38, 38);
-      color: rgb(38, 38, 38);
-      column-count: auto;
-      cursor: text;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      font-stretch: 100%;
-      font-style: normal;
-      font-weight: 400;
-      height: 18px;
-      letter-spacing: normal;
-      line-height: 18px;
-      max-height: 80px;
-      overflow-wrap: break-word;
-      resize: none;
-      text-align: start;
-      text-indent: 0px;
-      text-rendering: auto;
-      text-shadow: none;
-      text-size-adjust: 100%;
-      text-transform: none;
-      white-space: pre-wrap;
-      width: auto;
-      word-spacing: 0px;
-      writing-mode: horizontal-tb;
-    }
-    button {
-      align-items: flex-start;
-      appearance: none;
-      background-color: rgba(0, 0, 0, 0);
-      border: 0;
-      box-sizing: border-box;
-      color: rgb(0, 149, 246);
-      cursor: pointer;
-      display: block;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      font-stretch: 100%;
-      font-weight: 600;
-      height: 18px;
-      letter-spacing: normal;
-      position: relative;
-      text-align: center;
-      text-indent: 0px;
-      text-overflow: ellipsis;
-      text-rendering: auto;
-      text-shadow: none;
-      text-size-adjust: 100%;
-      text-transform: none;
-      user-select: none;
-      width: 27.1719px;
-      word-spacing: 0px;
-      writing-mode: horizontal-tb;
-    }
+    text-align: center;
+    text-indent: 0px;
+    text-overflow: ellipsis;
+    text-rendering: auto;
+    text-shadow: none;
+    text-size-adjust: 100%;
+    text-transform: none;
+    user-select: none;
+    width: 27.1719px;
+    word-spacing: 0px;
+    writing-mode: horizontal-tb;
+  }
+  > button:disabled, button[disabled] {
+    color: lightblue;
   }
 }
 

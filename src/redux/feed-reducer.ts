@@ -1,4 +1,4 @@
-import { FeedState, PostType } from '../types/types'
+import { CommentType, FeedState, PostType } from '../types/types'
 import { BaseThunkType, InferActions } from './store'
 import { feedApi } from '../api/feed-api'
 
@@ -31,13 +31,19 @@ export const actions = {
 }
 
 
-export const addPost = (caption: string, images: FileList): ThunkType => async () => {
+export const addPost = (caption: PostType['caption'], images: FileList): ThunkType => async () => {
   const response = await feedApi.addPost(caption, images)
   if (response.status === 202) {
     alert('Error during publishing post.')
   }
 }
-export const deletePost = (id: number): ThunkType => async () => {
+export const deleteComment = (id: CommentType['id']): ThunkType => async () => {
+  const response = await feedApi.deleteComment(id)
+  if (response.status === 202) {
+    alert('Error during deleting comment.')
+  }
+}
+export const deletePost = (id: PostType['id']): ThunkType => async () => {
   const response = await feedApi.deletePost(id)
   if (response.status === 202) {
     alert('Error during deleting post.')
@@ -49,40 +55,12 @@ export const reqAndSetPosts = (): ThunkType => async (dispatch) => {
     dispatch(actions.setPosts(response.data))
   }
 }
-
-
-
-// Old.
-
-// export const addComment = (): ThunkType => async () => {
-//   console.log(123)
-// }
-// export const addComment = (body: string, postId: number): ThunkType => async (dispatch, getState) => {
-  // const authorId = getState().auth.id
-//   await feedApi.addComment(11, body, postId)
-// }
-// export const deleteComment = (commentId: number): ThunkType => async () => {
-//   await feedApi.deleteComment(commentId)
-// }
-// export const addPost = (caption: string, images: FileList): ThunkType => async (dispatch, getState) => {
-  // const ownerId = getState().auth.id
-  // await feedApi.addPost(caption, images, 11)
-// }
-// export const deletePost = (postId: number): ThunkType => async () => {
-//   await feedApi.deletePost(postId)
-// }
-// export const requestPosts = (): ThunkType => async (dispatch) => {
-//   const data = await feedApi.requestPosts()
-//   dispatch(actions.setPosts(data))
-// }
-// export const initRequestAndSetPosts = (): ThunkType => async (dispatch/*, getState*/) => {
-  // const authUserId = getState().auth.authUser.id // do not use
-//   dispatch(actions.setIsInitializing(true))
-//   const data = await feedApi.requestPosts()
-//   dispatch(actions.setIsInitializing(false))
-//   dispatch(actions.setPosts(data))
-// }
-
+export const addComment = (body: CommentType['body'], postId: PostType['id']): ThunkType => async () => {
+  const response = await feedApi.addComment(body, postId)
+  if (response.status === 200) {
+    console.log('ok, comment added')    
+  }
+}
 
 // types
 type Actions = InferActions<typeof actions>

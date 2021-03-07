@@ -1,9 +1,13 @@
-import { PostType } from '../types/types'
+import { CommentType, PostType } from '../types/types'
 import instance, { CustomAxiosRes } from './api'
 
 
 export const feedApi = {
-	async addPost(caption: string, images: FileList) {
+	async addComment(body: CommentType['body'], postId: PostType['id']) {
+		const response: CustomAxiosRes<{msg: string}> = await instance.post(`comment/${postId}/`, {body})
+		return response
+	},
+	async addPost(caption: PostType['caption'], images: FileList) {
     const formData = new FormData()
     formData.append('caption', caption)
 		for (let i = 0; i < images.length; i++) {
@@ -14,17 +18,20 @@ export const feedApi = {
 		)
 		return response
 	},
-	async deletePost(id: number) {
+	async deleteComment(id: CommentType['id']) {
+		const response: CustomAxiosRes<{msg: string}> = await instance.delete(`comment/${id}/`)
+		return response
+	},
+	async deletePost(id: PostType['id']) {
 		const response: CustomAxiosRes<{msg: string}> = await instance.delete(`posts/${id}/`)
 		return response
 	},
 	async requestPosts() {
 		const response: CustomAxiosRes<PostType[]> = await instance.get('posts/')
 		return response
-	},
-	// async deletePost(postId: number) {
-	// 	await instance.delete(`posts/${postId}`)
-	// },
+	},	
+
+
 	// async addComment(authorId: number, body: string, postId: number) {
 	// 	await instance.post('comment/', {authorId, body, postId})
 	// },

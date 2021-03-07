@@ -1,87 +1,59 @@
-import React from 'react'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import { PostType, UserType } from '../../../../types/types'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import React, { useState } from 'react'
+import { CommentType, PostType, UserType } from '../../../../types/types'
+import AddCommentForm from './AddCommentForm'
+import Comment from './Comment'
+import PostFooterBtnBar from './PostFooterBtnBar'
 
 
-const PostFooter: React.FC<Props> = ({caption, comments, isLiked, like, ownerId, ownerUsername, postId, totalLikes}) => {
+const PostFooter: React.FC<Props> = ({
+  addComment, caption, comments, deleteComment, isLiked, like, ownerId, ownerUsername, postId, totalLikes
+}) => {
+
+
+  const [areVisibleAll, setAreVisibleAll] = useState(comments.length <= 2)
+
+  const resultComments = areVisibleAll ? comments : [comments[0], comments[1]]
+
 
   return (
     <div className="post__footer">
 
-      <section className="post__footer__btns">
-        <span>
-          <button onClick={() => like(postId)}>
-            {
-              isLiked
-                ? <FavoriteIcon color="secondary" fontSize="large" />
-                : <FavoriteBorderIcon fontSize="large" />
-            }
-          </button>
-        </span>
-      </section>
+
+      <PostFooterBtnBar isLiked={isLiked} like={like} postId={postId} />
+
 
       <section className="post__footer__likes">
         {totalLikes !== 0 ? <p>{totalLikes} like{totalLikes > 1 && 's'}</p> : null}
       </section>
 
 
-
       <div className="post__footer__comments">
 
+        <Comment authorUsername={ownerUsername} body={caption} commentId={null} deleteComment={deleteComment} />
 
-        <div className="post__footer__comments__item">
-
-          <div className="post__footer__comments__comment">
-            <span className="post__footer__comments__author">{ownerUsername}</span>&nbsp;
-            <span>{caption}</span>
-            <span className="post__footer__comments__more">...more</span>
-          </div>
-
-          <div>
-            <MoreHorizIcon />
-          </div>
-
-        </div>
-
-
-
-        <p className="post__footer__comments__viewAll">View all {5} comments</p>
-
-
-
-        {
-          comments.map(comment => (
-            <div className="post__footer__comments__item" key={comment.id}>
-              <div className="post__footer__comments__comment">
-                <span className="post__footer__comments__author">{comment.author.username}</span>&nbsp;
-                <span>{comment.body}</span>
-                <span className="post__footer__comments__more">...more</span>
-              </div>
-              <div>
-                <MoreHorizIcon />
-              </div>
-            </div>
-          ))
+        {!areVisibleAll &&
+          <p className="post__footer__comments__viewAll" onClick={() => setAreVisibleAll(true)}>
+            View all {comments.length} comments
+          </p>
         }
-        
+
+        {resultComments.map(comment => (
+          <Comment
+            authorUsername={comment.author.username}
+            body={comment.body}
+            commentId={comment.id}
+            deleteComment={deleteComment}
+            key={comment.id}
+          />
+        ))}
+
       </div>
-    
 
 
+      <div className="post__footer__datetime">5 hours ago</div>
 
 
-      {/* <div className="post__footer__datetime">
-        <p>5 hours ago</p>
-      </div> */}
-
-      {/* <div className="post__footer__addCommentOuter">
-        <form>
-          <textarea placeholder="Add a comment…" value={body} onChange={(e) => setBody(e.target.value)} />
-          <button onClick={onAddComment}>Post</button>
-        </form>
-      </div> */}
+      <AddCommentForm addComment={addComment} postId={postId} />
 
     </div>
   )
@@ -94,8 +66,10 @@ export default PostFooter
 
 // types
 interface Props {
+  addComment: (body: CommentType['body'], postId: PostType['id']) => void
   caption: PostType['caption']
-  comments: PostType['comments']
+  comments: CommentType[]
+  deleteComment: (id: CommentType['id']) => void
   isLiked: PostType['is_liked']
   like: (id: PostType['id']) => void
   ownerId: UserType['id']
