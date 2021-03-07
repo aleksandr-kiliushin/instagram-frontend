@@ -2,19 +2,20 @@ import React, { useState } from 'react'
 import { PostType } from '../../../../types/types'
 
 
-const PostCarousel: React.FC<Props> = ({images}) => {
+const PostCarousel: React.FC<Props> = ({images, isLiked, like, postId}) => {
+
   const [imageIndex, setImageIndex] = useState(0)
+  const onPrevImage = () => setImageIndex(prevIndex => prevIndex - 1)
+  const onNextImage = () => setImageIndex(prevIndex => prevIndex + 1)
 
-  const onPrevImage = () => {
-    setImageIndex(prevIndex => prevIndex - 1)
+
+  const onLike = () => {
+    if (!isLiked) like(postId)
   }
 
-  const onNextImage = () => {
-    setImageIndex(prevIndex => prevIndex + 1)
-  }
 
   return (
-    <div className="post__imageContainer">
+    <div className="post__imageContainer" onDoubleClick={onLike}>
       <img alt={images[imageIndex]} src={images[imageIndex]} />
       {
         imageIndex !== 0 &&
@@ -38,4 +39,7 @@ export default PostCarousel
 
 interface Props {
   images: PostType['images']
+  isLiked: PostType['is_liked']
+  like: (id: PostType['id']) => void
+  postId: PostType['id']
 }

@@ -4,7 +4,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { UserType, PostType } from '../../../../types/types';
 
 
-const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, ownerId, postId, unfollow}) => {
+const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, ownerId, postId}) => {
   
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true)
@@ -15,15 +15,11 @@ const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, 
     follow(ownerId)
     handleClose()
   }
-  const onUnfollow = () => {
-    unfollow(ownerId)
-    handleClose()
-  }
   let followBtn
   if (ownerId === curUserId) {
     followBtn = null
   } else if (isFollowed) {
-    followBtn = <button onClick={onUnfollow} style={{color: 'red'}}>Unfollow</button>
+    followBtn = <button onClick={onFollow} style={{color: 'red'}}>Unfollow</button>
   } else {
     followBtn = <button onClick={onFollow}>Follow</button>
   }
@@ -57,7 +53,6 @@ export default PostModal
 
 
 // types
-
 interface Props {
   curUserId: UserType['id']
   deletePost: (id: PostType['id']) => void
@@ -65,5 +60,4 @@ interface Props {
   isFollowed: UserType['is_followed']
   ownerId: UserType['id']
   postId: PostType['id']
-  unfollow: (id: UserType['id']) => void
 }

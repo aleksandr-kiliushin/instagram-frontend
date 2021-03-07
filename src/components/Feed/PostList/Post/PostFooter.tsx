@@ -1,145 +1,105 @@
-// import React, { useState } from 'react'
-// import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
-// import SendOutlinedIcon from '@material-ui/icons/SendOutlined'
-// import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'
-// import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined'
-// import { PostType } from '../../../types/types'
-// import FavoriteIcon from '@material-ui/icons/Favorite'
-// // import './Post.scss'
-// // import CommentModal from '../../Common/CommentModal'
-// import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-
-// interface Props {
-//   total_likes: PostType['total_likes']
-//   postId: PostType['id']
-//   is_liked: PostType['is_liked']
-//   caption: PostType['caption']
-//   comments: PostType['comments']
-//   owner: PostType['owner']
-//   like: (postId: number) => void
-//   deleteComment: (commentId: number) => void
-//   addComment: (body: string, postId: number) => void
-// }
-
-// const PostFooter: React.FC<Props> = ({total_likes, like, is_liked, caption, comments, owner, deleteComment, postId,
-//   addComment}) => {
-//   const [isLiked, setIsLiked] = useState(is_liked)
-
-//   const onLike = () => {
-//     if (false) {
-//       setIsLiked(prevIsLiked => !prevIsLiked)
-//     }
-//     like(postId)
-//   }
-  
-
-//   const [body, setBody] = useState('')
-
-//   const onAddComment = () => {
-//     addComment(body, postId)
-//     setBody('')
-//   }
+import React from 'react'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import { PostType, UserType } from '../../../../types/types'
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
 
-//   return (
-//     <div className="post__footer">
+const PostFooter: React.FC<Props> = ({caption, comments, isLiked, like, ownerId, ownerUsername, postId, totalLikes}) => {
 
-//       <section className="post__footer__btns">
-//         <span>
-//           <button>
-//             {isLiked ? <FavoriteIcon onClick={onLike} color="secondary" /> : <FavoriteBorderIcon onClick={onLike} />}
-//           </button>
-//         </span>
-//         <span>
-//           <button>
-//             <ModeCommentOutlinedIcon />
-//           </button>
-//         </span>
-//         <span>
-//           <button>
-//             <SendOutlinedIcon />            
-//           </button>
-//         </span>
-//         <span className="post__footer__btns__bookmark">
-//           <button>
-//             <BookmarkBorderOutlinedIcon />            
-//           </button>
-//         </span>
-//       </section>
+  return (
+    <div className="post__footer">
 
-//       <section className="post__footer__likes">
-//         <p>{total_likes} likes</p>
-//       </section>
+      <section className="post__footer__btns">
+        <span>
+          <button onClick={() => like(postId)}>
+            {
+              isLiked
+                ? <FavoriteIcon color="secondary" fontSize="large" />
+                : <FavoriteBorderIcon fontSize="large" />
+            }
+          </button>
+        </span>
+      </section>
+
+      <section className="post__footer__likes">
+        {totalLikes !== 0 ? <p>{totalLikes} like{totalLikes > 1 && 's'}</p> : null}
+      </section>
 
 
 
+      <div className="post__footer__comments">
+
+
+        <div className="post__footer__comments__item">
+
+          <div className="post__footer__comments__comment">
+            <span className="post__footer__comments__author">{ownerUsername}</span>&nbsp;
+            <span>{caption}</span>
+            <span className="post__footer__comments__more">...more</span>
+          </div>
+
+          <div>
+            <MoreHorizIcon />
+          </div>
+
+        </div>
 
 
 
-//       <div className="post__footer__comments">
+        <p className="post__footer__comments__viewAll">View all {5} comments</p>
 
-//         <div className="post__footer__comments__caption">
-//           <div className="post__footer__comments__entireComment">
 
-//             <span className="post__footer__comments__commentAuthor"><p>{owner.username}</p></span>&nbsp;
 
-//             <span>
-//               <span className="post__footer__comments__commentBody">{caption}</span>
-//               <span className="post__footer__comments__commentMore">...<button>more</button></span>
-//             </span>
-
-//           </div>
-//           <div>
-//             <MoreHorizIcon />
-//           </div>
-//         </div>
-
-//         <button className="post__footer__comments__viewAllCommentsBtn">
-//           <p>View all <span>5</span> comments</p>
-//         </button>
-
-//         {
-//           comments.map((comment) => (
-//             <div className="post__footer__comments__caption" key={comment.id}>
-//               <div className="post__footer__comments__entireComment">
-    
-//                 <span className="post__footer__comments__commentAuthor"><p>{comment.author.username}</p></span>&nbsp;
-    
-//                 <span>
-//                   <span className="post__footer__comments__commentBody">{comment.body}</span>
-//                   <span className="post__footer__comments__commentMore">...<button>more</button></span>
-//                 </span>
-    
-//               </div>
-//               {/* <div>
-//                 <CommentModal commentId={comment.id} deleteComment={deleteComment}/>
-//               </div> */}
-//             </div>
-//           ))
-//         }
-
-//       </div>
+        {
+          comments.map(comment => (
+            <div className="post__footer__comments__item" key={comment.id}>
+              <div className="post__footer__comments__comment">
+                <span className="post__footer__comments__author">{comment.author.username}</span>&nbsp;
+                <span>{comment.body}</span>
+                <span className="post__footer__comments__more">...more</span>
+              </div>
+              <div>
+                <MoreHorizIcon />
+              </div>
+            </div>
+          ))
+        }
+        
+      </div>
     
 
 
 
 
-//       <div className="post__footer__datetime">
-//         <p>5 hours ago</p>
-//       </div>
+      {/* <div className="post__footer__datetime">
+        <p>5 hours ago</p>
+      </div> */}
 
-//       <div className="post__footer__addCommentOuter">
-//         <form>
-//           <textarea placeholder="Add a comment…" value={body} onChange={(e) => setBody(e.target.value)} />
-//           <button onClick={onAddComment}>Post</button>
-//         </form>
-//       </div>
+      {/* <div className="post__footer__addCommentOuter">
+        <form>
+          <textarea placeholder="Add a comment…" value={body} onChange={(e) => setBody(e.target.value)} />
+          <button onClick={onAddComment}>Post</button>
+        </form>
+      </div> */}
 
-//     </div>
-//   )
-// }
+    </div>
+  )
+}
 
-// export default PostFooter
+export default PostFooter
 
-const x = 43
-export default x
+
+
+
+// types
+interface Props {
+  caption: PostType['caption']
+  comments: PostType['comments']
+  isLiked: PostType['is_liked']
+  like: (id: PostType['id']) => void
+  ownerId: UserType['id']
+  ownerUsername: UserType['username']
+  postId: PostType['id']
+  totalLikes: PostType['total_likes']
+}

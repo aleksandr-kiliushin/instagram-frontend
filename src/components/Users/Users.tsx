@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { follow, reqAndSetUsers, unfollow } from '../../redux/user-reducer'
+import { follow, reqAndSetUsers } from '../../redux/user-reducer'
 import { RootState } from '../../redux/store'
 import Header from '../Header/Header'
 import { UserType } from '../../types/types'
 import User from './User'
 
 
-const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, unfollow, users}) => {
+const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, users}) => {
 
   useEffect(() => {
     if (users.length === 0) {
@@ -21,7 +21,7 @@ const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, unfollow, us
       <Header />
       <div className="content">
         {users.map(user => (
-          <User curUserId={curUserId} follow={follow} key={user.id} unfollow={unfollow} user={user} />
+          <User curUserId={curUserId} follow={follow} key={user.id} user={user} />
         ))}
       </div>
     </div>
@@ -36,7 +36,6 @@ const mapStateToProps = (state: RootState): MapStateProps => ({
 const mapDispatchToProps: MapDispatchProps = {
   follow,
   reqAndSetUsers,
-  unfollow,
 }
 
 
@@ -56,6 +55,5 @@ type MapStateProps = {
 type MapDispatchProps = {
   follow: (id: UserType['id']) => void
   reqAndSetUsers: () => void
-  unfollow: (id: UserType['id']) => void
 }
 type Props = MapStateProps & MapDispatchProps

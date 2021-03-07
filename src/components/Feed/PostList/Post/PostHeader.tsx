@@ -3,7 +3,7 @@ import { PostType, UserType } from '../../../../types/types'
 import PostModal from './PostModal'
 
 
-const PostHeader: React.FC<PropsType> = ({curUserId, deletePost, follow, owner, postId, unfollow}) => {
+const PostHeader: React.FC<PropsType> = ({curUserId, deletePost, follow, owner, postId}) => {
   return (
     <div className="post__header">
       <div className="roundContainer post__header__avatarContainer">
@@ -19,7 +19,6 @@ const PostHeader: React.FC<PropsType> = ({curUserId, deletePost, follow, owner, 
         isFollowed={owner.is_followed}
         ownerId={owner.id}
         postId={postId}
-        unfollow={unfollow}
       />
     </div>
   )
@@ -36,5 +35,4 @@ interface PropsType {
   follow: (id: UserType['id']) => void
   owner: UserType
   postId: PostType['id']
-  unfollow: (id: UserType['id']) => void
 }

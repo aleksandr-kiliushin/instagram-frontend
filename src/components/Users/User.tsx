@@ -3,14 +3,11 @@ import { UserType } from '../../types/types'
 import { Button } from '@material-ui/core'
 
 
-const User: React.FC<Props> = ({curUserId, follow, unfollow, user}) => {
+const User: React.FC<Props> = ({curUserId, follow, user}) => {
 
 
   const onFollow = () => {
     follow(user.id)
-  }
-  const onUnfollow = () => {
-    unfollow(user.id)
   }
 
 
@@ -18,7 +15,7 @@ const User: React.FC<Props> = ({curUserId, follow, unfollow, user}) => {
   if (user.id === curUserId) {
     followBtn = null
   } else if (user.is_followed) {
-    followBtn = <Button color="secondary" onClick={onUnfollow}>Unfollow</Button>
+    followBtn = <Button color="secondary" onClick={onFollow}>Unfollow</Button>
   } else {
     followBtn = <Button color="primary" onClick={onFollow} >Follow</Button>
   }
@@ -44,10 +41,8 @@ export default User
 
 
 // types
-
 type Props = {
   curUserId: UserType['id']
   follow: (id: UserType['id']) => void
-  unfollow: (id: UserType['id']) => void
   user: UserType
 }

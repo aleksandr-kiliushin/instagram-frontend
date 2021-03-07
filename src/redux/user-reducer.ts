@@ -1,4 +1,4 @@
-import { UserState, UserType, Notice } from './../types/types'
+import { UserState, UserType, Notice, PostType } from './../types/types'
 import { userApi } from '../api/user-api'
 import { BaseThunkType, InferActions } from './store'
 
@@ -69,17 +69,17 @@ export const actions = {
 export const deleteAvatar = (): ThunkType => async () => {
   const response = await userApi.deleteAvatar()
   if (response.status === 200) {
-    alert('avatar deleted')
+    console.log('avatar deleted')
   } else {
-    alert('avatar NOT deleted')
+    console.log('avatar NOT deleted')
   }
 }
-export const follow = (id: number): ThunkType => async () => {
+export const follow = (id: UserType['id']): ThunkType => async () => {
   const response = await userApi.follow(id)
   if (response.status === 200) {
-    alert('ok, followed')
+    console.log('ok, followed / unfollowed')
   } else {
-    alert('error while following')
+    console.log('error while following / unfollowing')
   }
 }
 export const initAuth = (): ThunkType => async (dispatch) => {
@@ -89,7 +89,15 @@ export const initAuth = (): ThunkType => async (dispatch) => {
   }
   dispatch(actions.setIsInitialized(true))
 }
-export const login = (username: string, password: string): ThunkType => async (dispatch) => {
+export const like = (id: PostType['id']): ThunkType => async () => {
+  const response = await userApi.like(id)
+  if (response.status === 200) {
+    console.log('ok, liked / unliked')
+  } else {
+    console.log('liking failed')
+  }
+}
+export const login = (username: UserType['username'], password: string): ThunkType => async (dispatch) => {
   const response = await userApi.login(username, password)
   if (response.status === 200) {
 		localStorage.setItem('token', response.data.token)
@@ -99,7 +107,7 @@ export const login = (username: string, password: string): ThunkType => async (d
     dispatch(actions.setNotice({body: response.data.msg, kind: 'err'}))
   }
 }
-export const register = (username: string, password: string): ThunkType => async (dispatch) => {
+export const register = (username: UserType['username'], password: string): ThunkType => async (dispatch) => {
   const response = await userApi.register(username, password)
   if (response.status === 200) {
     dispatch(actions.setRedirectTo('/login'))
@@ -115,14 +123,6 @@ export const reqAndSetUsers = (): ThunkType => async (dispatch) => {
   const response = await userApi.reqUsers()
   if (response.status === 200) {
     dispatch(actions.setUsers(response.data))
-  }
-}
-export const unfollow = (id: number): ThunkType => async () => {
-  const response = await userApi.unfollow(id)
-  if (response.status === 200) {
-    alert('ok, unfollowed')
-  } else {
-    alert('error while unfollowing')
   }
 }
 export const updateAvatar = (avatar: File): ThunkType => async () => {
