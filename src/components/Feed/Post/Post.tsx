@@ -1,5 +1,5 @@
 import React from 'react'
-import { CommentType, PostType, UserType } from '../../../../types/types'
+import { CommentType, PostType, UserType } from '../../../types/types'
 import PostHeader from './PostHeader'
 import PostCarousel from './PostCarousel'
 import PostFooter from './PostFooter'
@@ -34,6 +34,7 @@ const Post: React.FC<PropsType> = ({
         addComment={addComment}
         caption={caption}
         comments={comments}
+        curUserId={curUserId}
         deleteComment={deleteComment}
         isLiked={isLiked}
         like={like}

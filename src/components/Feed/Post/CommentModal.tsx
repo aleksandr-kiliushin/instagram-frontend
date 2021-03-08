@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from '@material-ui/core/Modal'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import { CommentType } from '../../../../types/types';
+import { CommentType } from '../../../types/types';
 
 
 const CommentModal: React.FC<Props> = ({commentId, deleteComment}) => {

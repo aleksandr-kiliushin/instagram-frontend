@@ -26,16 +26,10 @@ export const feedApi = {
 		const response: CustomAxiosRes<{msg: string}> = await instance.delete(`posts/${id}/`)
 		return response
 	},
-	async requestPosts() {
-		const response: CustomAxiosRes<PostType[]> = await instance.get('posts/')
+	async reqPosts(startId: PostType['id']) {
+		const response: CustomAxiosRes<{posts: PostType[], are_posts_over: boolean}> = await instance.get(
+			`/posts?startId=${startId}`
+		)
 		return response
-	},	
-
-
-	// async addComment(authorId: number, body: string, postId: number) {
-	// 	await instance.post('comment/', {authorId, body, postId})
-	// },
-	// async deleteComment(commentId: number) {
-	// 	await instance.delete(`comment/${commentId}`)
-	// },
+	},
 }

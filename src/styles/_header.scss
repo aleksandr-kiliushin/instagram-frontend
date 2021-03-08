@@ -4,7 +4,10 @@
   background-color: white;
   border-bottom: $border;
   height: 54px;
-  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
   div {
     display: flex;
     max-width: 600px;
@@ -14,7 +17,7 @@
       max-height: 100%;
       max-width: 100%;
       object-fit: contain;
-      padding: 12.5px 0;
+      padding: 12.5px 0 12.5px 12.5px;
     }
     .header__search {
       pointer-events: none;
@@ -25,7 +28,7 @@
       display: flex;
       justify-content: space-between;
       height: 22px;
-      margin: 16px 0px 16px auto;
+      margin: 16px 16px 16px auto;
       width: 110px;
       div {
         cursor: pointer;

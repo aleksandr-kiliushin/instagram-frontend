@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { CommentType, UserType } from '../../../../types/types'
+import { CommentType, UserType } from '../../../types/types'
 import CommentModal from './CommentModal'
 
 
-const Comment: React.FC<Props> = ({authorUsername, body, commentId, deleteComment}) => {
+const Comment: React.FC<Props> = ({
+  authorId, authorUsername, body, commentId, curUserId, deleteComment, ownerId
+}) => {
 
   const maxLength = 120
 
@@ -27,10 +29,27 @@ const Comment: React.FC<Props> = ({authorUsername, body, commentId, deleteCommen
   }
 
 
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+
+  const onMouseCame = () => {
+    if (curUserId === authorId || curUserId === ownerId || curUserId === 1) {
+      setIsModalVisible(true)
+    }
+  }
+  const onMouseGone = () => {
+    setIsModalVisible(false)
+  }
+
+
   return (
     <div className="post__footer">
 
-      <div className="post__footer__comments__item">
+      <div
+        className="post__footer__comments__item" 
+        onMouseEnter={onMouseCame}
+        onMouseLeave={onMouseGone}
+      >
         
 
         <div className="post__footer__comments__comment">
@@ -51,9 +70,12 @@ const Comment: React.FC<Props> = ({authorUsername, body, commentId, deleteCommen
 
         </div>
 
-
-        <div className="pointer">
-          <CommentModal commentId={commentId} deleteComment={deleteComment} />
+        <div className="comment__modalBox">
+          {isModalVisible &&
+            <div className="pointer">
+              <CommentModal commentId={commentId} deleteComment={deleteComment} />
+            </div>
+          }
         </div>
 
       </div>
@@ -68,8 +90,11 @@ export default Comment
 
 // types
 interface Props {
+  authorId: UserType['id'] | null
   authorUsername: UserType['username']
   body: string
   commentId: CommentType['id'] | null
+  curUserId: UserType['id']
   deleteComment: (id: CommentType['id']) => void
+  ownerId: UserType['id'] | null
 }

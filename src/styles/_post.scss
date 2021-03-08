@@ -7,6 +7,16 @@
   margin-top: 10px;
   max-width: 600px;
 }
+@media (min-width: 640px) {
+  .post {
+    margin-bottom: 50px;
+  }
+}
+@media (max-width: 735px) {
+  .post {
+    margin-bottom: 15px;
+  }
+}
 
 .post__header {
   align-items: center;
@@ -109,7 +119,6 @@
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
-  // height: 18px;
   justify-content: flex-start;
   margin-bottom: 8px;
   padding: 0 16px;
@@ -126,13 +135,11 @@
   margin-top: 4px;
   display: block;
   margin-bottom: 4px;
-  // p {
-    color: rgba(var(--f52, 142, 142, 142), 1);
-    font-size: 10px;
-    letter-spacing: .2px;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  // }
+  color: rgba(var(--f52, 142, 142, 142), 1);
+  font-size: 10px;
+  letter-spacing: .2px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
 .post__footer__comments {
@@ -143,7 +150,7 @@
   flex-shrink: 1;
   font-size: 14px;
   justify-content: flex-start;
-  margin: 0 0 auto;
+  margin: 0 0 5px;
   min-height: 0;
   overflow: auto;
   padding: 0 16px;
@@ -173,52 +180,17 @@
   font-weight: 600;
 }
 
-.post__footer__comments__commentAuthor p {
-  color: rgb(38, 38, 38);
-  cursor: pointer;
-  display: inline;
-  font-size: 14px;
-  font-stretch: 100%;
-  font-weight: 600;
-  height: auto;
-  line-height: 18px;
-  margin-left: -5px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding-left: 5px;
-  text-overflow: ellipsis;
-  text-size-adjust: 100%;
-  white-space: nowrap;
-  width: auto;
-}
-
-// .post__footer__comments__body {
-//   color: rgb(38, 38, 38);
-//   display: inline;
-//   font-stretch: 100%;
-//   font-weight: 400;
-//   height: auto;
-//   line-height: 18px;
-//   overflow-wrap: break-word;
-//   text-size-adjust: 100%;
-//   width: auto;
-// }
-
 .post__footer__comments__more {
   color: rgb(142, 142, 142);
   cursor: pointer;
 }
 
-// .post__footer__comments__comment {
-//   align-items: flex-start;
-//   flex-grow: 1;
-//   flex-shrink: 1;
-//   font-weight: 600;
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   position: relative;
-// }
+.comment__modalBox {
+  width: 24px;
+  div {
+    height: 19px;
+  }
+}
 
 .post__footer__addComment {
   border-top-color: rgb(239, 239, 239);
@@ -333,14 +305,14 @@
   }
 }
 
-@media (min-width: 640px) {
-  .post {
-    margin-bottom: 60px;
-  }
-}
-
-@media (max-width: 735px) {
-  .post {
-    margin-bottom: 15px;
+.feed__followPeople {
+  left: 50%;
+  position: absolute;
+  top: 25%;
+  font-size: 18px;
+  transform: translate(-50%, -50%);
+  span {
+    color: rgb(0, 149, 246);
+    cursor: pointer;
   }
 }

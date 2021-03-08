@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useHistory } from 'react-router'
-import { actions, register } from '../../redux/user-reducer'
+import { actions, register } from '../../redux/actions'
 import { Button, TextField } from '@material-ui/core'
 import { Notice } from '../../types/types'
 import AccNotice from './AccNotice'
+import LetterLogo from './LetterLogo'
 
 
 const Register: React.FC<Props> = ({notice, redirectTo, register, setNotice, setRedirectTo}) => {
@@ -51,7 +52,7 @@ const Register: React.FC<Props> = ({notice, redirectTo, register, setNotice, set
   
   return (
     <div className="acc">
-      <h1>Instagram</h1>
+      <LetterLogo />
 
       <TextField label="Username" onChange={e => setUsername(e.target.value)} type="text" value={username}/>
 

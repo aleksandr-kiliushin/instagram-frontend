@@ -1,21 +1,22 @@
-import {createStore, combineReducers, applyMiddleware, compose, Action} from 'redux'
-import feedReducer from './feed-reducer'
+import { createStore, combineReducers, applyMiddleware, compose, Action } from 'redux'
+import { appReducer, feedReducer, userReducer} from './reducers'
 import thunkMw from 'redux-thunk'
 import { ThunkAction } from 'redux-thunk'
-import userReducer from './user-reducer'
-// import appReducer from './app-reducer'
+
 
 const rootReducer = combineReducers({
-  // app: appReducer,
+  app: appReducer,
   user: userReducer,
   feed: feedReducer,
 })
+
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMw)))
 
 export default store
+
 
 
 

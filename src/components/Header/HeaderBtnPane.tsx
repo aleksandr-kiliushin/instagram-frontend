@@ -6,21 +6,27 @@ import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined'
 import { useHistory } from 'react-router'
 
 
-const HeaderBtnPane: React.FC<Props> = ({addPost, curUser, deleteAvatar, resetCurUser, updateAvatar}) => {
+const HeaderBtnPane: React.FC<Props> = ({addPost, curUser, deleteAvatar, logout, updateAvatar}) => {
 
   const history = useHistory()
 
   return (
     <div className="header__btnPane">
-      <div><PeopleAltOutlinedIcon onClick={() => history.push('/users')}/></div>
+
+      <div>
+        <PeopleAltOutlinedIcon onClick={() => history.push('/users')}/>
+      </div>
+
       <AddPostModal addPost={addPost} />
+
       <ProfileModal
         avatar={curUser.avatar}
         deleteAvatar={deleteAvatar}
         updateAvatar={updateAvatar}
-        resetCurUser={resetCurUser}
+        logout={logout}
         userId={curUser.id}
       />
+      
     </div>
   )
 }
@@ -35,6 +41,6 @@ interface Props {
   addPost: (caption: string, images: FileList) => void
   curUser: UserType
   deleteAvatar: () => void
-  resetCurUser: () => void
+  logout: () => void
   updateAvatar: (avatar: File) => void
 }

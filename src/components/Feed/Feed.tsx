@@ -1,35 +1,52 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addComment, deleteComment, deletePost, reqAndSetPosts } from '../../redux/feed-reducer'
-import { follow, like } from '../../redux/user-reducer'
+import { addComment, deleteComment, deletePost, follow, like, reqAndSetPosts } from '../../redux/actions'
 import { RootState } from '../../redux/store'
-import { CommentType, PostType, UserType } from '../../types/types'
+import { CommentType, FeedState, PostType, UserType } from '../../types/types'
 import Header from '../Header/Header'
-import PostList from './PostList/PostList'
+import PostList from './Post/PostList'
 
 
 const Feed: React.FC<Props> = ({
-  addComment, curUserId, deleteComment, deletePost, follow, like, posts, reqAndSetPosts
+  addComment,
+  arePostsOver,
+  curUserId,
+  deleteComment,
+  deletePost,
+  follow,
+  isNoPostsRecieved,
+  isWaitingForNewPosts,
+  like,
+  posts,
+  reqAndSetPosts
 }) => {
   return (
     <div>
       <Header />
-      <PostList
-        addComment={addComment}
-        curUserId={curUserId}
-        deleteComment={deleteComment}
-        deletePost={deletePost}
-        follow={follow}
-        like={like}
-        posts={posts}
-        reqAndSetPosts={reqAndSetPosts}
-      />
+      <div className="content">
+        <PostList
+          addComment={addComment}
+          arePostsOver={arePostsOver}
+          curUserId={curUserId}
+          deleteComment={deleteComment}
+          deletePost={deletePost}
+          follow={follow}
+          isNoPostsRecieved={isNoPostsRecieved}
+          isWaitingForNewPosts={isWaitingForNewPosts}
+          like={like}
+          posts={posts}
+          reqAndSetPosts={reqAndSetPosts}
+        />
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
+  arePostsOver: state.feed.arePostsOver,
   curUserId: state.user.curUser.id,
+  isNoPostsRecieved: state.feed.isNoPostsRecieved,
+  isWaitingForNewPosts: state.feed.isWaitingForNewPosts,
   posts: state.feed.posts,
 })
 
@@ -53,7 +70,10 @@ export default connect
 
 // types
 type MapStateProps = {
+  arePostsOver: FeedState['arePostsOver']
   curUserId: UserType['id']
+  isNoPostsRecieved: FeedState['isNoPostsRecieved']
+  isWaitingForNewPosts: FeedState['isWaitingForNewPosts']
   posts: PostType[]
 }
 type MapDispatchProps = {

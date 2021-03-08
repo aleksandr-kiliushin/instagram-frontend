@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { CommentType, PostType, UserType } from '../../../../types/types'
+import { CommentType, PostType, UserType } from '../../../types/types'
 import AddCommentForm from './AddCommentForm'
 import Comment from './Comment'
 import PostFooterBtnBar from './PostFooterBtnBar'
 
 
 const PostFooter: React.FC<Props> = ({
-  addComment, caption, comments, deleteComment, isLiked, like, ownerId, ownerUsername, postId, totalLikes
+  addComment, caption, comments, curUserId, deleteComment, isLiked, like, ownerId, ownerUsername, postId, totalLikes
 }) => {
 
 
@@ -29,7 +29,15 @@ const PostFooter: React.FC<Props> = ({
 
       <div className="post__footer__comments">
 
-        <Comment authorUsername={ownerUsername} body={caption} commentId={null} deleteComment={deleteComment} />
+        <Comment
+          authorId={null}        
+          authorUsername={ownerUsername}
+          body={caption}
+          commentId={null}
+          curUserId={curUserId}
+          deleteComment={deleteComment}
+          ownerId={null}
+        />
 
         {!areVisibleAll &&
           <p className="post__footer__comments__viewAll" onClick={() => setAreVisibleAll(true)}>
@@ -39,18 +47,21 @@ const PostFooter: React.FC<Props> = ({
 
         {resultComments.map(comment => (
           <Comment
+            authorId={comment.author.id}
             authorUsername={comment.author.username}
             body={comment.body}
             commentId={comment.id}
+            curUserId={curUserId}
             deleteComment={deleteComment}
             key={comment.id}
+            ownerId={ownerId}
           />
         ))}
 
       </div>
 
 
-      <div className="post__footer__datetime">5 hours ago</div>
+      {/* <div className="post__footer__datetime">5 hours ago</div> */}
 
 
       <AddCommentForm addComment={addComment} postId={postId} />
@@ -69,6 +80,7 @@ interface Props {
   addComment: (body: CommentType['body'], postId: PostType['id']) => void
   caption: PostType['caption']
   comments: CommentType[]
+  curUserId: UserType['id']
   deleteComment: (id: CommentType['id']) => void
   isLiked: PostType['is_liked']
   like: (id: PostType['id']) => void

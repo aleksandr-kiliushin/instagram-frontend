@@ -4,11 +4,10 @@ import HeaderBtnPane from './HeaderBtnPane'
 import { connect } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { UserType } from '../../types/types'
-import { deleteAvatar, resetCurUser, updateAvatar } from '../../redux/user-reducer'
-import { addPost } from '../../redux/feed-reducer'
+import { addPost, deleteAvatar, logout, updateAvatar } from '../../redux/actions'
 
 
-const Header: React.FC<Props> = ({addPost, curUser, deleteAvatar, resetCurUser, updateAvatar}) => {
+const Header: React.FC<Props> = ({addPost, curUser, deleteAvatar, logout, updateAvatar}) => {
   return (
     <div className="header">
       <div>
@@ -17,7 +16,7 @@ const Header: React.FC<Props> = ({addPost, curUser, deleteAvatar, resetCurUser, 
           addPost={addPost}
           curUser={curUser}
           deleteAvatar={deleteAvatar}
-          resetCurUser={resetCurUser}
+          logout={logout}
           updateAvatar={updateAvatar}
         />
       </div>
@@ -32,7 +31,7 @@ const mapStateToProps = (state: RootState): MapStateProps => ({
 const mapDispatchToProps: MapDispatchProps = {
   addPost,
   deleteAvatar,
-  resetCurUser,
+  logout,
   updateAvatar,
 }
 
@@ -52,7 +51,7 @@ type MapStateProps = {
 type MapDispatchProps = {
   addPost: (caption: string, images: FileList) => void
   deleteAvatar: () => void
-  resetCurUser: () => void
+  logout: () => void
   updateAvatar: (avatar: File) => void
 }
 type Props = MapStateProps & MapDispatchProps

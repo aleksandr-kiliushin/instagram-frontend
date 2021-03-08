@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { CommentType, PostType } from '../../../../types/types'
+import { CommentType, PostType } from '../../../types/types'
+import loginRequired from '../../../utils/utils'
 
 
 const AddCommentForm: React.FC<PropsType> = ({addComment, postId}) => {
   const [body, setBody] = useState('')
 
-  const onAddComment = () => {
+  const onAddComment = () => loginRequired(() => {
     addComment(body, postId)
     setBody('')
-  }
+  })
 
   return (
     <div className="post__footer__addComment">

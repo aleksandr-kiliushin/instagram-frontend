@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { follow, reqAndSetUsers } from '../../redux/user-reducer'
+import { follow, reqAndSetUsers } from '../../redux/actions'
 import { RootState } from '../../redux/store'
 import Header from '../Header/Header'
 import { UserType } from '../../types/types'
 import User from './User'
+import { CircularProgress } from '@material-ui/core'
 
 
 const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, users}) => {
 
+
+  const [isLoading, setIsLoading] = useState(true)
+
+
   useEffect(() => {
     if (users.length === 0) {
       reqAndSetUsers()
+    } else {
+      setIsLoading(false)
     }
   }, [reqAndSetUsers, users])
 
@@ -20,9 +27,17 @@ const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, users}) => {
     <div>
       <Header />
       <div className="content">
+
         {users.map(user => (
           <User curUserId={curUserId} follow={follow} key={user.id} user={user} />
         ))}
+
+        {isLoading &&
+          <div className="content__preloader">
+            { <CircularProgress color="inherit"/>}
+          </div>
+        }
+        
       </div>
     </div>
   )
@@ -47,7 +62,6 @@ export default connect
 
 
 // types
-
 type MapStateProps = {
   curUserId: UserType['id']
   users: UserType[]

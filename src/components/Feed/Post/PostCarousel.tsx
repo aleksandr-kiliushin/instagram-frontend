@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PostType } from '../../../../types/types'
+import { PostType } from '../../../types/types'
 
 
 const PostCarousel: React.FC<Props> = ({images, isLiked, like, postId}) => {

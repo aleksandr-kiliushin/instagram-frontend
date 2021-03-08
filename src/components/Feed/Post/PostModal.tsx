@@ -1,7 +1,8 @@
 import React from 'react'
 import Modal from '@material-ui/core/Modal'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import { UserType, PostType } from '../../../../types/types';
+import { UserType, PostType } from '../../../types/types';
+import loginRequired from '../../../utils/utils';
 
 
 const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, ownerId, postId}) => {
@@ -12,7 +13,7 @@ const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, 
 
 
   const onFollow = () => {
-    follow(ownerId)
+    loginRequired(() => follow(ownerId))
     handleClose()
   }
   let followBtn
@@ -29,6 +30,10 @@ const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, 
     deletePost(postId)
     handleClose()
   }
+  let deleteBtn = null
+  if (curUserId === ownerId || curUserId === 1) {
+    deleteBtn = <button onClick={onDelete} style={{color: 'red'}}>Delete post</button>
+  }
 
 
   return (
@@ -38,7 +43,7 @@ const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, 
         <div className="modalOuter">
           <div className="modal">
             {followBtn}
-            {ownerId === curUserId && <button onClick={onDelete} style={{color: 'red'}}>Delete post</button>}
+            {deleteBtn}
             <button onClick={handleClose}>Cancel</button>
           </div>
         </div>

@@ -9,8 +9,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  > h1 {
-    margin: 22px auto 12px;
+  .acc__logo {
+    margin: 12.5px;
     background-repeat: no-repeat;
     background-position: 0 -130px;
     height: 51px;
@@ -20,6 +20,7 @@
     text-indent: 110%;
     white-space: nowrap;
     background-position: 0 -130px;
+    cursor: pointer;
   }
   .acc_notice {
     height: 45px;

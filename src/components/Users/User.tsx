@@ -1,13 +1,14 @@
 import React from 'react'
 import { UserType } from '../../types/types'
 import { Button } from '@material-ui/core'
+import loginRequired from '../../utils/utils'
 
 
 const User: React.FC<Props> = ({curUserId, follow, user}) => {
 
 
   const onFollow = () => {
-    follow(user.id)
+    loginRequired(() => follow(user.id))
   }
 
 

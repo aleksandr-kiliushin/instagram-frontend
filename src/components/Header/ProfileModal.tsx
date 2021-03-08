@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Modal from '@material-ui/core/Modal'
 import { UserType } from '../../types/types'
 import { useHistory } from 'react-router';
+import loginRequired from '../../utils/utils';
 
 
-const ProfileModal: React.FC<Props> = ({avatar, deleteAvatar, resetCurUser, updateAvatar, userId}) => {
+const ProfileModal: React.FC<Props> = ({avatar, deleteAvatar, logout, updateAvatar, userId}) => {
   
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true)
@@ -20,7 +21,7 @@ const ProfileModal: React.FC<Props> = ({avatar, deleteAvatar, resetCurUser, upda
   }
   const onCommit = () => {
     if (image) {
-      updateAvatar(image)
+      loginRequired(() => updateAvatar(image))
       handleClose()
     }
   }
@@ -32,15 +33,15 @@ const ProfileModal: React.FC<Props> = ({avatar, deleteAvatar, resetCurUser, upda
   const onLogout = () => setNeedLogout(true)
   useEffect(() => {
     if (needLogout) {
-      resetCurUser()
+      logout()
       history.push('/login')
       localStorage.removeItem('token')
     }
-  }, [history, needLogout, resetCurUser])
+  }, [history, logout, needLogout])
 
 
   const onDeleteAvatar = () => {
-    deleteAvatar()
+    loginRequired(() => deleteAvatar())
     handleClose()
   }
 
@@ -88,7 +89,7 @@ export default ProfileModal
 interface Props {
   avatar: UserType['avatar']
   deleteAvatar: () => void
-  resetCurUser: () => void
+  logout: () => void
   updateAvatar: (avatar: File) => void
   userId: UserType['id']
 }

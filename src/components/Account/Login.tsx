@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { RootState } from '../../redux/store'
-import { actions, login } from '../../redux/user-reducer'
+import { actions, login } from '../../redux/actions'
 import { Notice } from '../../types/types'
 import AccNotice from './AccNotice'
+import LetterLogo from './LetterLogo'
 
 
 const Login: React.FC<Props> = ({id, login, notice, redirectTo, setNotice, setRedirectTo}) => {
@@ -48,7 +49,7 @@ const Login: React.FC<Props> = ({id, login, notice, redirectTo, setNotice, setRe
 
   return (
     <div className="acc">
-      <h1>Instagram</h1>
+      <LetterLogo />
 
       <TextField label="Username" onChange={e => setUsername(e.target.value)} type="text" value={username} />
       <TextField label="Password" onChange={e => setPassword(e.target.value)} type="password" value={password} />
