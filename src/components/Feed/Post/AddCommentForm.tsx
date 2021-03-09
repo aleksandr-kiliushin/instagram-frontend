@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { CommentType, PostType } from '../../../types/types'
-import loginRequired from '../../../utils/utils'
+import { loginRequired } from '../../../utils/utils'
 
 
 const AddCommentForm: React.FC<PropsType> = ({addComment, postId}) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { PostType } from '../../../types/types'
-import loginRequired from '../../../utils/utils'
+import { loginRequired } from '../../../utils/utils'
 
 
 const PostFooterBtnBar: React.FC<Props> = ({isLiked, like, postId}) => {

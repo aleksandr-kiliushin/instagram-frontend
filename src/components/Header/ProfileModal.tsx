@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Modal from '@material-ui/core/Modal'
 import { UserType } from '../../types/types'
 import { useHistory } from 'react-router';
-import loginRequired from '../../utils/utils';
+import { loginRequired } from '../../utils/utils';
 
 
 const ProfileModal: React.FC<Props> = ({avatar, deleteAvatar, logout, updateAvatar, userId}) => {
   
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 

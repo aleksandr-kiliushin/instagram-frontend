@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router'
+import { url } from '../../utils/utils'
 
 
 const HeaderLogo: React.FC<Props> = () => {
@@ -11,7 +12,7 @@ const HeaderLogo: React.FC<Props> = () => {
       alt=""
       className="header__logo"
       onClick={() => history.push('/')}
-      src="http://localhost:8000/media/static/header_logo.png"
+      src={`${url}media/static/header_logo.png`}
     />
   )
 }

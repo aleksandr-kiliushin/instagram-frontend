@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Modal from '@material-ui/core/Modal'
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined'
-import loginRequired from '../../utils/utils';
+import { loginRequired } from '../../utils/utils';
 
 
 const AddPostModal: React.FC<Props> = ({addPost}) => {
   
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   const handleOpen = () => {
     loginRequired(() => setOpen(true))
   }

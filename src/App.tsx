@@ -9,6 +9,7 @@ import Feed from './components/Feed/Feed'
 import Users from './components/Users/Users'
 import { Alert } from '@material-ui/lab'
 import { AlertType } from './types/types'
+import { url } from './utils/utils'
 
 
 const App: React.FC<Props> = ({alert, initAuth, isInitialized, setAlert}) => {
@@ -30,7 +31,7 @@ const App: React.FC<Props> = ({alert, initAuth, isInitialized, setAlert}) => {
 
 
   if (!isInitialized) {
-    return <img className="app__preloader" src="http://localhost:8000/media/static/preloading.png" alt=""/>
+    return <img className="app__preloader" src={`${url}media/static/preloading.png`} alt=""/>
   }
 
 

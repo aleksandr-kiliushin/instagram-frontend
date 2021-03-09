@@ -4,6 +4,7 @@ import AddPostModal from './AddPostModal'
 import ProfileModal from './ProfileModal'
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined'
 import { useHistory } from 'react-router'
+import DisclaimerModal from './DisclaimerModal'
 
 
 const HeaderBtnPane: React.FC<Props> = ({addPost, curUser, deleteAvatar, logout, updateAvatar}) => {
@@ -12,6 +13,8 @@ const HeaderBtnPane: React.FC<Props> = ({addPost, curUser, deleteAvatar, logout,
 
   return (
     <div className="header__btnPane">
+
+      <DisclaimerModal />
 
       <div>
         <PeopleAltOutlinedIcon onClick={() => history.push('/users')}/>
@@ -35,8 +38,8 @@ export default HeaderBtnPane
 
 
 
-// types
 
+// types
 interface Props {
   addPost: (caption: string, images: FileList) => void
   curUser: UserType

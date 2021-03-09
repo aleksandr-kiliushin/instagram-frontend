@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PostType } from '../../../types/types'
-import loginRequired from '../../../utils/utils'
+import { loginRequired, url } from '../../../utils/utils'
 
 
 const PostCarousel: React.FC<Props> = ({images, isLiked, like, postId}) => {
@@ -44,7 +44,7 @@ const PostCarousel: React.FC<Props> = ({images, isLiked, like, postId}) => {
 
       {isCarouselLike &&
         <div className="post__carouselLike">
-          <img src="http://localhost:8000/media/static/like_heart.png" alt=""/>
+          <img src={`${url}media/static/like_heart.png`} alt=""/>
         </div>
       }
 

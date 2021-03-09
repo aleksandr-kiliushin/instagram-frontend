@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from '@material-ui/core/Modal'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import { UserType, PostType } from '../../../types/types';
-import loginRequired from '../../../utils/utils';
+import { loginRequired } from '../../../utils/utils';
 
 
 const PostModal: React.FC<Props> = ({curUserId, deletePost, follow, isFollowed, ownerId, postId}) => {
