@@ -91,7 +91,7 @@ interface Props {
   addComment: (body: CommentType['body'], postId: PostType['id']) => void
   arePostsOver: FeedState['arePostsOver']
   curUserId: UserType['id']
-  deleteComment: (id: CommentType['id']) => void
+  deleteComment: (commentId: CommentType['id'], postId: PostType['id']) => void
   deletePost: (id: PostType['id']) => void
   follow: (id: UserType['id']) => void
   isNoPostsRecieved: FeedState['isNoPostsRecieved']

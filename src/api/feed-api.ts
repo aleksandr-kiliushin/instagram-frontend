@@ -4,7 +4,7 @@ import instance, { CustomAxiosRes } from './api'
 
 export const feedApi = {
 	async addComment(body: CommentType['body'], postId: PostType['id']) {
-		const response: CustomAxiosRes<{msg: string}> = await instance.post(`comment/${postId}/`, {body})
+		const response: CustomAxiosRes<{comment: CommentType}> = await instance.post(`comment/${postId}/`, {body})
 		return response
 	},
 	async addPost(caption: PostType['caption'], images: FileList) {
@@ -13,13 +13,13 @@ export const feedApi = {
 		for (let i = 0; i < images.length; i++) {
 			formData.append('images', images[i])
 		}
-    const response: CustomAxiosRes<{msg: string}> = await instance.post(
+    const response: CustomAxiosRes<{post: PostType}> = await instance.post(
 			'posts/', formData, {headers: {'content-type': 'multipart/form-data'}}
 		)
 		return response
 	},
-	async deleteComment(id: CommentType['id']) {
-		const response: CustomAxiosRes<{msg: string}> = await instance.delete(`comment/${id}/`)
+	async deleteComment(commentId: CommentType['id']) {
+		const response: CustomAxiosRes<{msg: string}> = await instance.delete(`comment/${commentId}/`)
 		return response
 	},
 	async deletePost(id: PostType['id']) {

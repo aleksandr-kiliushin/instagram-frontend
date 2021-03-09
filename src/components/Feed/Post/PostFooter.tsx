@@ -37,6 +37,7 @@ const PostFooter: React.FC<Props> = ({
           curUserId={curUserId}
           deleteComment={deleteComment}
           ownerId={null}
+          postId={postId}
         />
 
         {!areVisibleAll &&
@@ -55,6 +56,7 @@ const PostFooter: React.FC<Props> = ({
             deleteComment={deleteComment}
             key={comment.id}
             ownerId={ownerId}
+            postId={postId}
           />
         ))}
 
@@ -81,7 +83,7 @@ interface Props {
   caption: PostType['caption']
   comments: CommentType[]
   curUserId: UserType['id']
-  deleteComment: (id: CommentType['id']) => void
+  deleteComment: (commentId: CommentType['id'], postId: PostType['id']) => void
   isLiked: PostType['is_liked']
   like: (id: PostType['id']) => void
   ownerId: UserType['id']

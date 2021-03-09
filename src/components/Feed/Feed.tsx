@@ -78,7 +78,7 @@ type MapStateProps = {
 }
 type MapDispatchProps = {
   addComment: (body: CommentType['body'], postId: PostType['id']) => void
-  deleteComment: (id: CommentType['id']) => void
+  deleteComment: (commentId: CommentType['id'], postId: PostType['id']) => void
   follow: (id: UserType['id']) => void
   deletePost: (id: PostType['id']) => void
   like: (id: PostType['id']) => void

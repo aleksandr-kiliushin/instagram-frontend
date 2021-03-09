@@ -22,6 +22,7 @@ export const initCurUserState: UserType = {
 }
 export const initUserState: UserState = {
   curUser: initCurUserState,
+  followingInProgress: [],
   isInitialized: false,
   notice: null,
   redirectTo: null,

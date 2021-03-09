@@ -26,6 +26,7 @@ const AddPostModal: React.FC<Props> = ({addPost}) => {
   const onCommit = () => {
     if (images) {
       addPost(caption, images)
+      setCaption('')
       handleClose()
     }
   }

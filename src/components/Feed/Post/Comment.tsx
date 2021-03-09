@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { CommentType, UserType } from '../../../types/types'
+import { CommentType, PostType, UserType } from '../../../types/types'
 import CommentModal from './CommentModal'
 
 
 const Comment: React.FC<Props> = ({
-  authorId, authorUsername, body, commentId, curUserId, deleteComment, ownerId
+  authorId, authorUsername, body, commentId, curUserId, deleteComment, ownerId, postId
 }) => {
 
   const maxLength = 120
@@ -43,42 +43,42 @@ const Comment: React.FC<Props> = ({
 
 
   return (
-    <div className="post__footer">
+    <div
+      className="post__footer__comments__item" 
+      onMouseEnter={onMouseCame}
+      onMouseLeave={onMouseGone}
+    >
+      
 
-      <div
-        className="post__footer__comments__item" 
-        onMouseEnter={onMouseCame}
-        onMouseLeave={onMouseGone}
-      >
-        
+      <div className="post__footer__comments__comment">
 
-        <div className="post__footer__comments__comment">
+        <span className="post__footer__comments__author">
+          {authorUsername}
+        </span>
 
-          <span className="post__footer__comments__author">
-            {authorUsername}
+        &nbsp;
+
+        <span>
+          {isSliced ? getSlicedBody(body) : body}
+        </span>
+
+        {isMoreShown &&
+          <span className="post__footer__comments__more" onClick={onMore}>
+            ...more
           </span>
-
-          &nbsp;
-
-          <span>
-            {isSliced ? getSlicedBody(body) : body}
-          </span>
-
-          {isMoreShown &&
-            <span className="post__footer__comments__more" onClick={onMore}>...more
-          </span>}
-
-        </div>
-
-        <div className="comment__modalBox">
-          {isModalVisible &&
-            <div className="pointer">
-              <CommentModal commentId={commentId} deleteComment={deleteComment} />
-            </div>
-          }
-        </div>
+        }
 
       </div>
+
+      <div className="comment__modalBox">
+        {isModalVisible &&
+        // {true &&
+          <div className="pointer">
+            <CommentModal commentId={commentId} deleteComment={deleteComment} postId={postId} />
+          </div>
+        }
+      </div>
+
     </div>
   )
 }
@@ -95,6 +95,7 @@ interface Props {
   body: string
   commentId: CommentType['id'] | null
   curUserId: UserType['id']
-  deleteComment: (id: CommentType['id']) => void
+  deleteComment: (commentId: CommentType['id'], postId: PostType['id']) => void
   ownerId: UserType['id'] | null
+  postId: PostType['id']
 }

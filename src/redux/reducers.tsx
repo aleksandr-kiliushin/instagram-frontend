@@ -22,6 +22,38 @@ export function feedReducer(state: FeedState = initFeedState, action: Actions): 
 
   switch (action.type) {
 
+    case 'feed/ADD_COMMENT': {
+      return {
+        ...state,
+        posts: state.posts.map(post => post.id !== action.postId
+          ? post
+          : {...post, comments: [...post.comments, action.comment]})
+      }
+    }
+
+    case 'feed/ADD_POST': {
+      return {
+        ...state,
+        posts: [action.post, ...state.posts]
+      }
+    }
+
+    case 'feed/DEL_COMMENT': {
+      return{
+        ...state,
+        posts: state.posts.map(post => post.id !== action.postId
+          ? post
+          : {...post, comments: post.comments.filter(comment => comment.id !== action.commentId)})
+      }
+    }
+
+    case 'feed/DEL_POST': {
+      return {
+        ...state,
+        posts: state.posts.filter(post => post.id !== action.id)
+      }
+    }
+
     case 'feed/RESET_FEED_STATE': {
       return {...initFeedState}
     }
@@ -36,6 +68,17 @@ export function feedReducer(state: FeedState = initFeedState, action: Actions): 
 
     case 'feed/SET_IS_WAITING_FOR_NEW_POSTS': {
       return {...state, isWaitingForNewPosts: action.is}
+    }
+
+    case 'feed/SET_LIKE': {
+      return {
+        ...state,
+        posts: state.posts.map(post => post.id !== action.id ? post : {
+          ...post,
+          is_liked: !post.is_liked,
+          total_likes: post.is_liked ? post.total_likes - 1 : post.total_likes + 1,
+        })
+      }
     }
 
     case 'feed/SET_POSTS': {
@@ -64,6 +107,22 @@ export function userReducer(state: UserState = initUserState, action: Actions): 
       return {
         ...state,
         curUser: {...state.curUser, avatar: action.url}
+      }
+    }
+
+    case 'user/SET_FOLLOWING_IN_PROGRESS': {
+      return {
+        ...state,
+        followingInProgress: state.followingInProgress.includes(action.id)
+          ? state.followingInProgress.filter(id => id !== action.id)
+          : [...state.followingInProgress, action.id]
+      }
+    }
+
+    case 'user/SET_IS_FOLLOWED' : {
+      return {
+        ...state,
+        users: state.users.map(user => user.id !== action.id ? user : {...user, is_followed: !user.is_followed})
       }
     }
 

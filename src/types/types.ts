@@ -34,6 +34,7 @@ export interface CommentType {
 // user
 export interface UserState {
   curUser: UserType
+  followingInProgress: UserType['id'][]
   isInitialized: boolean
   notice: Notice
   redirectTo: string | null

@@ -8,7 +8,7 @@ import User from './User'
 import { CircularProgress } from '@material-ui/core'
 
 
-const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, users}) => {
+const Users: React.FC<Props> = ({curUserId, follow, followingInProgress, reqAndSetUsers, users}) => {
 
 
   const [isLoading, setIsLoading] = useState(true)
@@ -29,7 +29,13 @@ const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, users}) => {
       <div className="content">
 
         {users.map(user => (
-          <User curUserId={curUserId} follow={follow} key={user.id} user={user} />
+          <User
+            curUserId={curUserId}
+            follow={follow}
+            followingInProgress={followingInProgress}
+            key={user.id}
+            user={user}
+          />
         ))}
 
         {isLoading &&
@@ -45,6 +51,7 @@ const Users: React.FC<Props> = ({curUserId, follow, reqAndSetUsers, users}) => {
 
 const mapStateToProps = (state: RootState): MapStateProps => ({
   curUserId: state.user.curUser.id,
+  followingInProgress: state.user.followingInProgress,
   users: state.user.users,
 })
 // const {} = {...actions}
@@ -64,6 +71,7 @@ export default connect
 // types
 type MapStateProps = {
   curUserId: UserType['id']
+  followingInProgress: UserType['id'][]
   users: UserType[]
 }
 type MapDispatchProps = {

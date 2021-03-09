@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import loginRequired from '../../utils/utils'
 
 
-const User: React.FC<Props> = ({curUserId, follow, user}) => {
+const User: React.FC<Props> = ({curUserId, follow, followingInProgress, user}) => {
 
 
   const onFollow = () => {
@@ -16,9 +16,13 @@ const User: React.FC<Props> = ({curUserId, follow, user}) => {
   if (user.id === curUserId) {
     followBtn = null
   } else if (user.is_followed) {
-    followBtn = <Button color="secondary" onClick={onFollow}>Unfollow</Button>
+    followBtn = (
+      <Button color="secondary" disabled={followingInProgress.includes(user.id)} onClick={onFollow}>Unfollow</Button>
+    )
   } else {
-    followBtn = <Button color="primary" onClick={onFollow} >Follow</Button>
+    followBtn = (
+      <Button color="primary" disabled={followingInProgress.includes(user.id)} onClick={onFollow} >Follow</Button>
+    )
   }
 
   return (
@@ -45,5 +49,6 @@ export default User
 type Props = {
   curUserId: UserType['id']
   follow: (id: UserType['id']) => void
+  followingInProgress: UserType['id'][]
   user: UserType
 }
