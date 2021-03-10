@@ -15,7 +15,7 @@ export const initFeedState: FeedState = {
 
 
 export const initCurUserState: UserType = {
-  avatar: 'https://oaiyui-instbackend.herokuapp.com/media/static/unauthorized_user_avatar.png',
+  avatar: 'https://alexander-kilyushin-instagram.herokuapp.com/media/static/unauthorized_user_avatar.png',
   id: 0,
   is_followed: false,
   username: '',

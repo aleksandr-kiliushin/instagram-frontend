@@ -14,4 +14,4 @@ export function loginRequired(func: Function) {
 }
 
 // export const url = 'http://localhost:8000/'
-export const url = 'https://oaiyui-instbackend.herokuapp.com/'
+export const url = 'https://alexander-kilyushin-instagram.herokuapp.com/'
