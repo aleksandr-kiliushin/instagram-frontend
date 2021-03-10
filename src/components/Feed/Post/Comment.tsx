@@ -71,8 +71,8 @@ const Comment: React.FC<Props> = ({
       </div>
 
       <div className="comment__modalBox">
+        {/* {true && */}
         {isModalVisible &&
-        // {true &&
           <div className="pointer">
             <CommentModal commentId={commentId} deleteComment={deleteComment} postId={postId} />
           </div>
