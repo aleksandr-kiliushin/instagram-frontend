@@ -1,0 +1,35 @@
+@import './variables';
+
+.acc {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  .acc__logo {
+    margin: 12.5px;
+    background-repeat: no-repeat;
+    background-position: 0 -130px;
+    height: 51px;
+    width: 175px;
+    background-image: url($sourceIconsPath);
+    overflow: hidden;
+    text-indent: 110%;
+    white-space: nowrap;
+    background-position: 0 -130px;
+    cursor: pointer;
+  }
+  .acc_notice {
+    height: 45px;
+    display: flex;
+    > p {
+      margin: auto;
+    }
+  }
+  > p {
+    color: rgba($color: black, $alpha: 0.6);
+  }
+}

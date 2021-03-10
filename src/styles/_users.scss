@@ -1,0 +1,26 @@
+@import './variables';
+
+// .userList_item {
+//   align-items: center;
+//   border-bottom: $border;
+//   display: flex;
+//   flex-direction: row;
+//   height: 60px;
+//   padding: 0 16px;
+// }
+
+// .userList_item_avatarContainer {
+//   height: 32px;
+//   width: 32px;
+//   border: $border;
+// }
+
+.post__header__username {
+  align-items: flex-start;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-weight: 600;
+  display: flex;
+  margin-left: 14px;
+  position: relative;
+}

@@ -1,0 +1,40 @@
+// .profile {
+//   padding: 20px;
+//   display: flex;
+//   flex-direction: column;
+//   max-width: 700px;
+//   margin: 0 auto;
+//   .profile__header {
+//     display: flex;
+//     .profile__header__avatar {
+//       height: 150px;
+//       width: 150px;
+//     }
+//     .profile__header__dataPane {
+//       display: flex;
+//       flex-direction: column;
+//       margin-left: 20px;
+//       > div {
+//         margin: 10px;
+//         display: flex;
+//         flex-direction: row;
+//         flex-shrink: 1;
+//         align-items: center;
+//         justify-content: center;
+//         vertical-align: baseline;
+//         > h2 {
+//           display: block;
+//           overflow: hidden;
+//           text-overflow: ellipsis;
+//           white-space: nowrap;
+//           font-weight: 300;
+//           font-size: 24px;
+//           margin-right: 20px;
+//         }
+//       }
+//     }
+//   }
+//   .profile__posts {
+//     background-color: rgb(97, 0, 97);
+//   }
+// }
