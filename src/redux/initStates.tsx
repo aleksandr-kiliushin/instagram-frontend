@@ -1,4 +1,5 @@
 import { AppState, FeedState, UserState, UserType } from "../types/types"
+import { url } from "../utils/utils"
 
 
 export const initAppState: AppState = {
@@ -15,7 +16,7 @@ export const initFeedState: FeedState = {
 
 
 export const initCurUserState: UserType = {
-  avatar: 'http://localhost:8000/media/static/unauthorized_user_avatar.png',
+  avatar: `${url}media/static/unauthorized_user_avatar.png`,
   id: 0,
   is_followed: false,
   username: '',

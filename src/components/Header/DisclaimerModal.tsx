@@ -30,6 +30,7 @@ export default function DisclaimerModal() {
               <br/>
               
               <p>Thank you for you visit.</p>
+              <br/>
               <p>This website is built for only training purposes and has no any relation
                 to <span className="disclaimer__link" onClick={() => setLink('https://www.instagram.com/')}>Instagram</span>.</p>
 
@@ -37,6 +38,7 @@ export default function DisclaimerModal() {
 
               <p>Feel free to publish posts, leave comments and so on.</p>
               <p>To check full features, please login.</p>
+              <p>Your account, posts and comments will be stored for 2 hours, and then will be deleted/</p>
 
               <br/>
 

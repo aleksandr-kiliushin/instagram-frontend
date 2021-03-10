@@ -5,8 +5,8 @@ const instance = axios.create()
 
 instance.interceptors.request.use(
   async (config) => {
-		// config.baseURL = 'https://oaiyui-instbackend.herokuapp.com/api/'
-		config.baseURL = 'http://localhost:8000/api/'
+		config.baseURL = 'https://oaiyui-instbackend.herokuapp.com/api/'
+		// config.baseURL = 'http://localhost:8000/api/'
     config.headers = {
       Authorization: localStorage.getItem('token'),
     }
