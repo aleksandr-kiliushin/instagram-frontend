@@ -29,7 +29,7 @@ export default function DisclaimerModal() {
 
               <br/>
               
-              <p>Thank you for you visit.</p>
+              <p>Thank you for your visit.</p>
               <br/>
               <p>This website is built for only training purposes and has no any relation
                 to <span className="disclaimer__link" onClick={() => setLink('https://www.instagram.com/')}>Instagram</span>.</p>
@@ -45,7 +45,7 @@ export default function DisclaimerModal() {
               <p>If you have any remarks, comments or suggestions, my contacts are here:</p>
               <p>- alexander.kilyushin@gmail.com</p>
               <p>- WhatsApp: +7-985-151-60-76</p>
-              <p>- <span className="disclaimer__link" onClick={() => setLink('https://github.com/oaiyui')}>Github</span></p>
+              <p>- <span className="disclaimer__link" onClick={() => setLink('https://github.com/alexander-kilyushin')}>Github</span></p>
 
               <br/>
 
