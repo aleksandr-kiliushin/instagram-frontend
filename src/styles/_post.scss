@@ -107,7 +107,6 @@
   display: flex;
   flex-direction: row;
   span button {
-    // padding: 6px;
     align-items: center;
     background: 0 0;
     border: 0;
@@ -115,12 +114,6 @@
     justify-content: center;
   }
 }
-
-// .post__footer__btns__bookmark {
-//   display: inline-block;
-//   margin-left: auto;
-//   margin-right: -10px;
-// }
 
 .post__footer__likes {
   display: flex;
@@ -154,61 +147,19 @@
   flex-direction: column;
   font-size: 14px;
   padding: 0 16px;
-
-
-  // margin: 0 0 auto;
-  // flex-grow: 1;
-  // flex-shrink: 1;
-  // min-height: 0;
-  // overflow: auto;
-  // align-items: stretch;
-  // position: relative;
-  // vertical-align: baseline;
-
-  // display: flex;
-  // flex: 0 0 auto;
-  // flex-direction: column;
-  // flex-grow: 1;
-  // flex-shrink: 1;
-  // justify-content: flex-start;
-  // margin: 0 0 5px;
-  // min-height: 0;
-  // overflow: auto;
-  // padding: 0 16px;
-  // position: relative;
-  // height: 150px;
 }
 
 .post__footer__comments__item {
   display: flex;
-  
-  
-  // align-items: center;
-  // align-content: stretch;
-  // align-items: center;
-  // flex: 0 0 auto;
-  // flex-direction: row;
-  // overflow-wrap: break-word;
-  // -webkit-box-flex: 1;
-  // flex: 1 1 auto;
-  // min-height: 0;
-  // min-width: 0;
-  // justify-content: flex-start;
 }
 
 .post__footer__comments__viewAll {
   color: rgb(142, 142, 142);
   cursor: pointer;
-
-
-  // display: inline-block;
 }
 
 .post__footer__comments__comment {
   flex-grow: 1;
-
-
-  // height: 24px;
 }
 
 .post__footer__comments__author {
