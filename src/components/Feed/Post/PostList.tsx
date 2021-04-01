@@ -34,7 +34,7 @@ const PostList: React.FC<Props> = ({
   useEffect(() => {
     const loadMore = () => {
       if (document.scrollingElement) {
-        if (window.innerHeight + document.documentElement.scrollTop === document.scrollingElement.scrollHeight) {
+        if (window.innerHeight + document.documentElement.scrollTop >= document.scrollingElement.scrollHeight - Math.E) {
           if (!isWaitingForNewPosts && !arePostsOver) {
             reqAndSetPosts()
           }
